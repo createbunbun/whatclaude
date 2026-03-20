@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AnthropicのAIアシスタント「Claude」について料金・端末・API・製品の違いを解説する非公式情報ガイドサイト。">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="AIアシスタント情報ガイド — Claudeを完全理解する">
+<meta property="og:description" content="AnthropicのAI「Claude」の料金・端末・API・製品情報を日本語で解説する非公式ガイド。">
+<meta property="og:type" content="website">
+<!-- 注意: og:image は実際の公開URLに合わせて設定してください -->
+<title>AIアシスタント情報ガイド — Claudeを完全理解する</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- 生成情報: 2026年3月20日 00:00 / updater v1.0.0 -->
+<style>
+/* =====================================================
+   CSS CUSTOM PROPERTIES — seasonal palette via JS
+   ===================================================== */
+:root {
+  --bg:#FAF7F5;--bg2:#F4EDE6;--bg3:#ECE0D5;--surface:#FFFFFF;
+  --border:#E6D8CE;--text:#3C2A1E;--text2:#7A5E50;--text3:#B09888;
+  --accent:#D97B6C;--accent2:#F0A882;--accent-bg:#FDF0EC;--season-bg:#FDE4DC;
+  --r-sm:10px;--r-md:16px;--r-lg:22px;--r-xl:32px;--r-full:9999px;
+  --sh:0 2px 12px rgba(80,40,20,.07);--sh-md:0 6px 28px rgba(80,40,20,.11);--sh-lg:0 14px 52px rgba(80,40,20,.15);
+  --font-h:'Nunito',sans-serif;--font-b:'Zen Maru Gothic',sans-serif;--ease:.24s ease;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;transition:background .6s,color .4s;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.016;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)'/%3E%3C/svg%3E");}
+#ambient{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 65% 50% at 15% 5%,var(--accent-bg) 0%,transparent 60%),radial-gradient(ellipse 55% 45% at 88% 92%,var(--season-bg) 0%,transparent 60%);opacity:.55;transition:opacity .8s;}
+#app{position:relative;z-index:1;min-height:100vh}
+
+/* ── DISCLAIMER BANNER ────────────────────────────── */
+#disclaimer{
+  background:#FFF8E1;border-bottom:2px solid #FFD54F;
+  padding:10px 2rem;text-align:center;
+  font-size:.78rem;color:#5D4037;line-height:1.6;
+  position:relative;z-index:600;
+}
+#disclaimer strong{color:#BF360C;}
+#disclaimer a{color:#BF360C;text-decoration:underline;}
+
+/* ── NAV ──────────────────────────────────────────── */
+#nav{
+  position:sticky;top:0;z-index:500;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2rem;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1.5px solid var(--border);box-shadow:var(--sh);
+  transition:background .4s,border-color .4s;
+}
+.nav-brand{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;text-decoration:none;}
+.nav-logo-text{font-family:var(--font-h);font-weight:700;font-size:1rem;color:var(--text);}
+.nav-logo-text em{font-style:normal;color:var(--accent);}
+.nav-logo-badge{
+  font-size:.58rem;font-weight:700;color:#BF360C;
+  background:#FFF8E1;border:1px solid #FFD54F;
+  padding:1px 6px;border-radius:var(--r-full);
+  white-space:nowrap;margin-left:4px;vertical-align:middle;
+}
+/* ロゴアイコンは文字のみ（Claudeのロゴは使用しない） */
+.nav-icon-circle{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-h);font-weight:800;font-size:14px;
+  box-shadow:0 3px 10px color-mix(in srgb,var(--accent) 40%,transparent);
+  transition:background .4s,box-shadow .4s;flex-shrink:0;
+}
+#nav-links{display:flex;gap:0;list-style:none;}
+#nav-links a{
+  padding:5px 11px;border-radius:var(--r-full);
+  font-family:var(--font-b);font-size:.8rem;font-weight:500;
+  color:var(--text2);cursor:pointer;user-select:none;
+  transition:background var(--ease),color var(--ease);white-space:nowrap;
+}
+#nav-links a:hover{background:var(--accent-bg);color:var(--accent);}
+#nav-links a.active{background:var(--accent);color:#fff;font-weight:700;}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.season-pill{
+  display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:var(--r-full);
+  background:var(--season-bg);border:1.5px solid var(--accent2);
+  font-size:.73rem;color:var(--text2);font-weight:500;
+  transition:background .6s,border-color .4s;white-space:nowrap;
+}
+@media(max-width:960px){#nav-links{display:none;}.season-pill{display:none;}}
+
+/* ── UPDATE BANNER ────────────────────────────────── */
+#update-banner{display:none;background:var(--accent-bg);border-bottom:1.5px solid var(--accent2);position:relative;z-index:100;}
+#update-banner.show{display:block;animation:slideDown .35s ease;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.banner-inner{max-width:1160px;margin:0 auto;padding:9px 2rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.banner-chip{display:inline-flex;align-items:center;gap:5px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:var(--r-full);font-family:var(--font-h);white-space:nowrap;}
+.banner-msg{font-size:.82rem;color:var(--text2);}
+.banner-dismiss{margin-left:auto;font-size:.73rem;color:var(--text3);cursor:pointer;padding:3px 8px;border-radius:8px;border:none;background:none;font-family:var(--font-b);transition:background var(--ease);}
+.banner-dismiss:hover{background:var(--bg2);color:var(--text);}
+
+/* ── TIMESTAMP BAR ────────────────────────────────── */
+#ts-bar{
+  text-align:center;padding:7px 2rem;
+  font-size:.74rem;color:var(--text3);
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);position:relative;z-index:1;
+  transition:background .4s;
+}
+#ts-bar strong{color:var(--text2);}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:5px;animation:pulse 2.5s ease infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.7)}}
+
+/* ── PAGES ────────────────────────────────────────── */
+.page{display:none;}
+.page.active{display:block;animation:fadeUp .32s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── PAGE HERO ────────────────────────────────────── */
+.page-hero{text-align:center;padding:5rem 2rem 2.5rem;position:relative;}
+.page-tag{display:inline-block;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:var(--accent-bg);border:1.5px solid var(--accent2);padding:3px 13px;border-radius:var(--r-full);margin-bottom:1.1rem;}
+.page-title{font-family:var(--font-h);font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;line-height:1.12;color:var(--text);letter-spacing:-.025em;margin-bottom:.8rem;}
+.page-desc{font-size:.95rem;color:var(--text2);max-width:460px;margin:0 auto;}
+
+/* ── MAIN ─────────────────────────────────────────── */
+main{max-width:1160px;margin:0 auto;padding:1.5rem 2rem 5rem;}
+.sec-tag{display:inline-block;font-family:var(--font-h);font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:var(--accent-bg);padding:2px 10px;border-radius:var(--r-full);margin-bottom:.55rem;}
+.sec-title{font-family:var(--font-h);font-size:clamp(1.2rem,3vw,1.8rem);font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:.55rem;line-height:1.2;}
+.sec-desc{font-size:.87rem;color:var(--text2);margin-bottom:1.8rem;max-width:520px;}
+
+/* ── CARD BASE ────────────────────────────────────── */
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh);padding:1.5rem;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease);}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--accent2);}
+
+/* ── TABLE ────────────────────────────────────────── */
+.tbl-wrap{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh);margin-bottom:2.5rem;}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th,.tbl td{padding:.82rem 1.1rem;text-align:left;font-size:.82rem;border-bottom:1px solid var(--border);}
+.tbl th{background:var(--bg2);color:var(--text2);font-family:var(--font-h);font-weight:700;font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;}
+.tbl td{color:var(--text2);}.tbl td:first-child{color:var(--text);font-weight:600;}
+.tbl tr:last-child td{border-bottom:none;}.tbl tr:hover td{background:var(--bg2);}
+.ok{color:#5BAD70;font-weight:700;}.ng{color:#C8B8B0;}.pr{color:#D9A84A;}
+.mono{font-family:monospace;font-size:.77rem;}
+
+/* ── CODE BLOCK ───────────────────────────────────── */
+.code-wrap{background:#FDFAF8;border:1.5px solid var(--border);border-radius:var(--r-md);overflow:hidden;margin-bottom:1.8rem;box-shadow:var(--sh);}
+.code-bar{background:var(--bg2);padding:.52rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.code-dots{display:flex;gap:5px;}.code-dots span{width:9px;height:9px;border-radius:50%;}
+.cd-r{background:#FFBBBB;}.cd-y{background:#FFE5A0;}.cd-g{background:#B5E8C0;}
+.code-lang{font-size:.68rem;color:var(--text3);font-family:monospace;}
+.code-body{padding:1.2rem;font-family:monospace;font-size:.79rem;line-height:1.9;overflow-x:auto;color:#4A3526;}
+.ck{color:#C07858;}.cs{color:#6A9A5A;}.cn{color:#5A8AAA;}.cc{color:#B8A898;}.cf{color:#C07858;}
+
+/* ── BUTTONS ──────────────────────────────────────── */
+.btn{display:inline-block;padding:10px 24px;border-radius:var(--r-full);font-family:var(--font-h);font-weight:700;font-size:.85rem;cursor:pointer;border:none;transition:all var(--ease);text-decoration:none;user-select:none;}
+.btn-prim{background:var(--accent);color:#fff;box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 35%,transparent);}
+.btn-prim:hover{filter:brightness(1.08);transform:translateY(-2px);}
+.btn-sec{background:var(--surface);color:var(--text);border:1.5px solid var(--border);box-shadow:var(--sh);}
+.btn-sec:hover{border-color:var(--accent2);transform:translateY(-2px);}
+.btn-sm{padding:7px 16px;font-size:.76rem;}
+.chip{display:inline-block;padding:3px 10px;border-radius:var(--r-full);font-size:.68rem;font-weight:700;font-family:var(--font-h);}
+.c-or{background:var(--accent-bg);color:var(--accent);border:1.5px solid var(--accent2);}
+.c-gr{background:#E8F5EC;color:#4A9A60;border:1.5px solid #B5DCBE;}
+.c-bl{background:#EAF2FF;color:#3A72C0;border:1.5px solid #B5CFEA;}
+.c-gy{background:var(--bg2);color:var(--text3);border:1.5px solid var(--border);}
+
+/* ── FOOTER ───────────────────────────────────────── */
+footer{background:var(--bg2);border-top:1.5px solid var(--border);padding:3rem 2rem 1.5rem;position:relative;z-index:1;}
+.footer-inner{max-width:1160px;margin:0 auto;}
+.footer-links{display:flex;gap:1.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.1rem;}
+.footer-links a{color:var(--text2);font-size:.8rem;cursor:pointer;text-decoration:none;transition:color var(--ease);}
+.footer-links a:hover{color:var(--accent);}
+.footer-copy{font-size:.73rem;color:var(--text3);text-align:center;margin-bottom:.5rem;}
+/* 免責・帰属 */
+.footer-legal{
+  margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border);
+  font-size:.7rem;color:var(--text3);line-height:1.7;text-align:center;
+}
+.footer-legal a{color:var(--text3);text-decoration:underline;}
+.footer-legal a:hover{color:var(--accent);}
+.footer-ai-credit{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:.6rem;
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--r-full);
+  padding:4px 14px;font-size:.7rem;color:var(--text3);
+}
+.footer-ai-credit strong{color:var(--accent);}
+
+/* ── PAGE: HOME ───────────────────────────────────── */
+.hero{min-height:87vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 4rem;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-full);padding:6px 16px;font-size:.76rem;color:var(--text2);font-weight:500;box-shadow:var(--sh);margin-bottom:2rem;font-family:var(--font-h);}
+.hero h1{font-family:var(--font-h);font-size:clamp(3rem,8vw,5.8rem);font-weight:900;line-height:1.04;letter-spacing:-.035em;margin-bottom:.55rem;}
+.hero h1 .l1{display:block;color:var(--text);}
+.hero h1 .l2{display:block;color:var(--accent);}
+.hero-sub{font-size:clamp(.9rem,2vw,1.05rem);color:var(--text2);max-width:500px;margin:1.4rem auto 2.6rem;font-weight:400;line-height:1.85;}
+.hero-cta{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.2rem;}
+.hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-n{font-family:var(--font-h);font-size:2rem;font-weight:800;color:var(--text);display:block;}
+.stat-l{font-size:.7rem;color:var(--text3);}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:1rem;}
+.topic-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.4rem;cursor:pointer;display:flex;flex-direction:column;gap:.65rem;box-shadow:var(--sh);transition:all var(--ease);}
+.topic-card:hover{transform:translateY(-4px);box-shadow:var(--sh-md);border-color:var(--accent2);}
+.topic-icon{width:46px;height:46px;background:var(--accent-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.topic-title{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--text);}
+.topic-desc{font-size:.8rem;color:var(--text2);line-height:1.6;flex:1;}
+.topic-arr{color:var(--accent);font-size:.95rem;transition:transform var(--ease);}
+.topic-card:hover .topic-arr{transform:translateX(5px);}
+.what-band{background:var(--bg2);border-top:1.5px solid var(--border);border-bottom:1.5px solid var(--border);padding:4.5rem 2rem;margin:3.5rem 0;position:relative;z-index:1;}
+.what-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;}
+.what-text h2{font-family:var(--font-h);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:.8rem;line-height:1.18;}
+.what-text p{color:var(--text2);margin-bottom:.9rem;font-size:.88rem;}
+.ul-dot{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.ul-dot li{font-size:.86rem;color:var(--text2);display:flex;align-items:flex-start;gap:9px;}
+.ul-dot li::before{content:'✦';color:var(--accent);flex-shrink:0;font-size:.68rem;margin-top:4px;}
+.m3g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2rem;}
+.m3c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.4rem;box-shadow:var(--sh);transition:all var(--ease);}
+.m3c.feat{border-color:var(--accent2);background:linear-gradient(150deg,var(--accent-bg),var(--surface));}
+.m3c:hover{transform:translateY(-3px);box-shadow:var(--sh-md);}
+.m3c-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:var(--r-full);font-family:var(--font-h);margin-bottom:.55rem;}
+.m3c-name{font-family:var(--font-h);font-size:1.35rem;font-weight:800;color:var(--text);}
+.m3c-tag{font-size:.76rem;color:var(--accent);margin-bottom:.55rem;}
+.m3c-desc{font-size:.8rem;color:var(--text2);line-height:1.6;margin-bottom:.9rem;}
+.m3c-row{display:flex;justify-content:space-between;font-size:.76rem;padding:.38rem 0;border-bottom:1px solid var(--border);}
+.m3c-row:last-child{border-bottom:none;}
+.ml{color:var(--text3);}.mr{color:var(--text);font-weight:600;font-family:monospace;}
+@media(max-width:900px){.what-inner,.m3g{grid-template-columns:1fr}}
+
+/* ── PAGE: PRICING ────────────────────────────────── */
+.plans-g{display:grid;grid-template-columns:repeat(5,1fr);gap:.85rem;margin-bottom:2.5rem;}
+.plan-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:1.2rem .95rem;display:flex;flex-direction:column;gap:.75rem;box-shadow:var(--sh);transition:all var(--ease);position:relative;overflow:hidden;}
+.plan-c:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--accent2);}
+.plan-c.rec{border-color:var(--accent);background:linear-gradient(150deg,var(--accent-bg),var(--surface));}
+.rec-chip{position:absolute;top:0;right:0;background:var(--accent);color:#fff;font-size:.6rem;font-weight:700;padding:3px 9px;border-bottom-left-radius:11px;font-family:var(--font-h);}
+.plan-name{font-family:var(--font-h);font-size:.95rem;font-weight:800;color:var(--text);}
+.plan-price{font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--text);}
+.plan-per{font-size:.7rem;color:var(--text3);}
+.plan-desc{font-size:.76rem;color:var(--text2);line-height:1.5;}
+.plan-fs{list-style:none;display:flex;flex-direction:column;gap:.38rem;flex:1;}
+.plan-fs li{font-size:.74rem;color:var(--text2);display:flex;align-items:flex-start;gap:5px;line-height:1.4;}
+.plan-fs li::before{content:'✓';color:var(--accent);font-size:.68rem;flex-shrink:0;margin-top:2px;font-weight:800;}
+.plan-fs li.no::before{content:'✗';color:var(--border);}
+.plan-fs li.no{color:var(--text3);}
+.plan-btn{display:block;text-align:center;padding:8px;border-radius:var(--r-full);font-size:.76rem;font-weight:700;cursor:pointer;border:none;font-family:var(--font-h);text-decoration:none;transition:all var(--ease);}
+.pb-p{background:var(--accent);color:#fff;}
+.pb-s{background:transparent;border:1.5px solid var(--border);color:var(--text2);}
+.plan-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
+.tips-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.tip-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1.15rem;box-shadow:var(--sh);}
+.tip-ic{font-size:1.25rem;margin-bottom:.45rem;}
+.tip-t{font-family:var(--font-h);font-size:.87rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+.tip-d{font-size:.76rem;color:var(--text2);line-height:1.6;}
+@media(max-width:1100px){.plans-g{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.plans-g,.tips-g{grid-template-columns:1fr}}
+
+/* ── PAGE: PLATFORMS ──────────────────────────────── */
+.plat-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.1rem;margin-bottom:2.5rem;}
+.plat-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh);transition:all var(--ease);}
+.plat-c:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--accent2);}
+.plat-head{padding:1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.9rem;}
+.plat-ic{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.plat-nm{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--text);}
+.plat-sb{font-size:.7rem;color:var(--text3);margin-top:1px;}
+.plat-body{padding:1.15rem;}
+.plat-desc{font-size:.8rem;color:var(--text2);line-height:1.65;margin-bottom:.85rem;}
+.f-tags{display:flex;flex-wrap:wrap;gap:.32rem;margin-bottom:.85rem;}
+.f-tag{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-full);padding:2px 8px;font-size:.68rem;color:var(--text3);}
+.f-tag.hi{background:var(--accent-bg);border-color:var(--accent2);color:var(--accent);}
+.req-b{background:var(--bg2);border-radius:var(--r-sm);padding:.75rem;}
+.req-t{font-size:.63rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.45rem;font-family:var(--font-h);}
+.req-l{list-style:none;display:flex;flex-direction:column;gap:.28rem;}
+.req-l li{font-size:.74rem;color:var(--text2);display:flex;align-items:flex-start;gap:5px;}
+.req-l li::before{content:'·';color:var(--accent);font-weight:700;}
+.plat-btn{display:block;text-align:center;padding:7px 14px;border-radius:var(--r-full);margin-top:.85rem;font-size:.76rem;font-weight:700;background:var(--accent);color:#fff;cursor:pointer;border:none;font-family:var(--font-h);text-decoration:none;transition:all var(--ease);}
+.plat-btn:hover{filter:brightness(1.08);}
+.steps-r{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-bottom:2.5rem;}
+.step-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1.1rem;box-shadow:var(--sh);}
+.step-n{font-family:var(--font-h);font-size:2rem;font-weight:800;color:var(--accent-bg);line-height:1;margin-bottom:.45rem;}
+.step-t{font-family:var(--font-h);font-size:.87rem;font-weight:700;color:var(--text);margin-bottom:.28rem;}
+.step-d{font-size:.76rem;color:var(--text2);line-height:1.55;}
+@media(max-width:768px){.steps-r{grid-template-columns:1fr 1fr}}
+
+/* ── PAGE: PRODUCTS ───────────────────────────────── */
+.prod-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:1.4rem;box-shadow:var(--sh);transition:border-color var(--ease);}
+.prod-c:hover{border-color:var(--accent2);}
+.prod-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:.95rem;padding:1.4rem;border-bottom:1px solid var(--border);}
+.prod-ic{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.prod-nm{font-family:var(--font-h);font-size:1.15rem;font-weight:800;color:var(--text);}
+.prod-tg{font-size:.75rem;color:var(--text2);margin-top:2px;}
+.prod-body{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;padding:1.4rem;}
+.prod-col h4{font-family:var(--font-h);font-size:.65rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;}
+.prod-desc{font-size:.81rem;color:var(--text2);line-height:1.7;margin-bottom:.75rem;}
+.arr-l{list-style:none;display:flex;flex-direction:column;gap:.42rem;}
+.arr-l li{font-size:.79rem;color:var(--text2);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.arr-l li::before{content:'→';color:var(--accent);flex-shrink:0;}
+.uc-l{display:flex;flex-direction:column;gap:.5rem;}
+.uc-it{background:var(--bg2);border-radius:var(--r-sm);padding:.7rem .85rem;font-size:.76rem;}
+.uc-it strong{color:var(--text);display:block;margin-bottom:1px;font-family:var(--font-h);}
+.uc-it span{color:var(--text2);}
+.dec-g{display:grid;grid-template-columns:repeat(3,1fr);gap:.95rem;}
+.dec-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1.15rem;box-shadow:var(--sh);transition:all var(--ease);}
+.dec-c:hover{border-color:var(--accent2);transform:translateY(-2px);}
+.dec-who{font-size:.7rem;color:var(--accent);font-weight:700;margin-bottom:.32rem;font-family:var(--font-h);}
+.dec-prod{font-family:var(--font-h);font-size:.92rem;font-weight:800;color:var(--text);margin-bottom:.28rem;}
+.dec-r{font-size:.76rem;color:var(--text2);line-height:1.55;}
+@media(max-width:900px){.prod-head{grid-template-columns:auto 1fr;}.prod-body{grid-template-columns:1fr;}.dec-g{grid-template-columns:1fr 1fr;}}
+
+/* ── PAGE: API ────────────────────────────────────── */
+.api-g{display:grid;grid-template-columns:repeat(3,1fr);gap:.95rem;margin-bottom:2.5rem;}
+.api-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1.15rem;box-shadow:var(--sh);}
+.api-card .ai{font-size:1.25rem;margin-bottom:.45rem;}
+.api-card .at{font-family:var(--font-h);font-size:.87rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+.api-card .ad{font-size:.76rem;color:var(--text2);line-height:1.6;}
+.steps-l{display:flex;flex-direction:column;gap:1rem;margin-bottom:2.5rem;}
+.si{display:flex;gap:.95rem;align-items:flex-start;}
+.sn{width:34px;height:34px;flex-shrink:0;background:var(--accent-bg);border:1.5px solid var(--accent2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:800;color:var(--accent);font-size:.85rem;}
+.sb h4{font-family:var(--font-h);font-size:.87rem;font-weight:700;color:var(--text);margin-bottom:.25rem;}
+.sb p{font-size:.8rem;color:var(--text2);line-height:1.6;}
+.sb a{color:var(--accent);text-decoration:none;}
+.sb code{font-family:monospace;color:var(--accent);font-size:.76rem;background:var(--accent-bg);padding:1px 5px;border-radius:4px;}
+.info-box{background:var(--accent-bg);border:1.5px solid var(--accent2);border-radius:var(--r-sm);padding:.85rem 1.1rem;font-size:.82rem;color:var(--text2);display:flex;gap:.7rem;align-items:flex-start;line-height:1.6;margin-bottom:1.5rem;}
+@media(max-width:768px){.api-g{grid-template-columns:1fr 1fr}}
+
+/* ── PAGE: CONNECT ────────────────────────────────── */
+.mcp-box{background:linear-gradient(140deg,var(--accent-bg),var(--surface));border:1.5px solid var(--accent2);border-radius:var(--r-xl);padding:2rem;margin-bottom:2.5rem;}
+.mcp-hd{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem;}
+.mcp-em{font-size:2.3rem;}
+.mcp-ht{font-family:var(--font-h);font-size:1.4rem;font-weight:800;color:var(--text);}
+.mcp-hs{font-size:.78rem;color:var(--text2);}
+.mcp-body{font-size:.83rem;color:var(--text2);line-height:1.75;margin-bottom:1.2rem;max-width:660px;}
+.mcp-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;}
+.mcp-col h4{font-family:var(--font-h);font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.55rem;}
+.dot-l{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
+.dot-l li{font-size:.8rem;color:var(--text2);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.dot-l li::before{content:'⟡';color:var(--accent);flex-shrink:0;font-size:.75rem;}
+.int-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.95rem;margin-bottom:2.5rem;}
+.int-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1.15rem;box-shadow:var(--sh);transition:all var(--ease);}
+.int-c:hover{transform:translateY(-2px);box-shadow:var(--sh-md);border-color:var(--accent2);}
+.int-hd{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;}
+.int-ic{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
+.int-nm{font-family:var(--font-h);font-size:.87rem;font-weight:700;color:var(--text);}
+.int-tp{font-size:.65rem;color:var(--text3);}
+.int-desc{font-size:.76rem;color:var(--text2);line-height:1.6;margin-bottom:.7rem;}
+.int-steps{list-style:none;display:flex;flex-direction:column;gap:.28rem;}
+.int-steps li{font-size:.7rem;color:var(--text2);display:flex;align-items:flex-start;gap:5px;}
+.int-steps li::before{content:attr(data-n);color:var(--accent);font-family:var(--font-h);font-weight:700;font-size:.63rem;flex-shrink:0;margin-top:2px;}
+.i-badge{display:inline-block;padding:2px 9px;border-radius:var(--r-full);font-size:.63rem;font-weight:700;margin-top:.55rem;font-family:var(--font-h);}
+.ib-n{background:#E8F5EC;color:#4A9A60;border:1.5px solid #B5DCBE;}
+.ib-m{background:var(--accent-bg);color:var(--accent);border:1.5px solid var(--accent2);}
+.ib-a{background:#EAF2FF;color:#3A72C0;border:1.5px solid #B5CFEA;}
+@media(max-width:768px){.mcp-cols{grid-template-columns:1fr}}
+
+/* ── PAGE: MODELS ─────────────────────────────────── */
+.mhg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-bottom:3rem;}
+.mhc{border-radius:var(--r-xl);overflow:hidden;transition:transform var(--ease);}
+.mhc:hover{transform:translateY(-5px);}
+.mhc.haiku{background:linear-gradient(150deg,#EEF4FF,#E8F2FF);border:1.5px solid #C5D8F5;}
+.mhc.sonnet{background:linear-gradient(150deg,var(--accent-bg),#FFF3EE);border:1.5px solid var(--accent2);}
+.mhc.opus{background:linear-gradient(150deg,#EEFAF2,#F0FBF4);border:1.5px solid #B5DCBE;}
+.mhc-in{padding:1.7rem;}
+.mhc-em{font-size:1.9rem;margin-bottom:.75rem;}
+.mhc-nm{font-family:var(--font-h);font-size:1.7rem;font-weight:800;color:var(--text);}
+.mhc-id{font-size:.66rem;color:var(--text3);font-family:monospace;margin-bottom:.75rem;}
+.mhc-sl{font-size:.8rem;font-weight:700;margin-bottom:.6rem;}
+.haiku .mhc-sl{color:#3A72C0;}.sonnet .mhc-sl{color:var(--accent);}.opus .mhc-sl{color:#4A9A60;}
+.mhc-desc{font-size:.78rem;color:var(--text2);line-height:1.65;margin-bottom:1rem;}
+.mhc-m{margin-bottom:.52rem;}
+.mhc-ml{font-size:.63rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;font-family:var(--font-h);margin-bottom:3px;}
+.bar-bg{height:4px;background:rgba(0,0,0,.07);border-radius:2px;overflow:hidden;}
+.bar{height:100%;border-radius:2px;}
+.haiku .bar{background:#5A90D0;}.sonnet .bar{background:var(--accent);}.opus .bar{background:#5AAD70;}
+.mhc-mv{font-size:.68rem;color:var(--text3);font-family:monospace;margin-top:2px;}
+.ctx-r{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem;}
+.ctx-b{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1.05rem;text-align:center;box-shadow:var(--sh);}
+.ctx-n{font-family:var(--font-h);font-size:1.8rem;font-weight:800;margin-bottom:.18rem;}
+.ctx-l{font-size:.73rem;color:var(--text2);}
+.ctx-e{font-size:.66rem;color:var(--text3);margin-top:.28rem;}
+.uc-g{display:grid;grid-template-columns:repeat(3,1fr);gap:.95rem;}
+.uc-c{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1.15rem;box-shadow:var(--sh);transition:all var(--ease);}
+.uc-c:hover{border-color:var(--accent2);transform:translateY(-2px);}
+.uc-i{font-size:1.25rem;margin-bottom:.45rem;}
+.uc-t{font-family:var(--font-h);font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.28rem;}
+.uc-m{display:inline-block;padding:2px 8px;border-radius:var(--r-full);font-size:.65rem;font-weight:700;margin-bottom:.48rem;font-family:var(--font-h);}
+.um-h{background:#E8F2FF;color:#3A72C0;}.um-s{background:var(--accent-bg);color:var(--accent);}.um-o{background:#D9F5E2;color:#3A8A55;}
+.uc-d{font-size:.76rem;color:var(--text2);line-height:1.55;}
+@media(max-width:900px){.mhg{grid-template-columns:1fr}.ctx-r,.uc-g{grid-template-columns:1fr 1fr}}
+
+/* ── PAGE: UPDATES ────────────────────────────────── */
+.upd-status{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:.9rem 1.2rem;margin-bottom:1.8rem;box-shadow:var(--sh);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;}
+.upd-msg{font-size:.8rem;color:var(--text2);}
+.hist-entry{margin-bottom:1.8rem;}
+.hist-date-head{font-family:var(--font-h);font-size:.75rem;font-weight:700;color:var(--text3);margin-bottom:.75rem;padding-left:.2rem;}
+.hist-item{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-md);padding:1rem 1.2rem;box-shadow:var(--sh);display:flex;gap:1.1rem;align-items:flex-start;margin-bottom:.6rem;transition:border-color var(--ease);}
+.hist-item:hover{border-color:var(--accent2);}
+.hist-cat{font-family:var(--font-h);font-size:.72rem;font-weight:700;color:var(--text3);min-width:75px;padding-top:2px;}
+.hist-body .ht{font-family:var(--font-h);font-size:.87rem;font-weight:700;color:var(--text);margin-bottom:.22rem;}
+.hist-body .hd{font-size:.76rem;color:var(--text2);line-height:1.6;}
+.h-badge{font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:var(--r-full);font-family:var(--font-h);margin-left:.4rem;}
+.hb-n{background:#E8F5EC;color:#4A9A60;}.hb-u{background:var(--accent-bg);color:var(--accent);}.hb-f{background:#EAF2FF;color:#3A72C0;}
+.empty-state{text-align:center;padding:3rem;color:var(--text3);font-size:.85rem;}
+
+/* ── PAGE: ABOUT ──────────────────────────────────── */
+.about-section{max-width:720px;margin:0 auto;}
+.about-section h2{font-family:var(--font-h);font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:.7rem;margin-top:2rem;}
+.about-section h2:first-child{margin-top:0;}
+.about-section p,.about-section li{font-size:.88rem;color:var(--text2);line-height:1.8;}
+.about-section ul{list-style:disc;padding-left:1.4rem;margin-bottom:1rem;}
+.about-section a{color:var(--accent);text-decoration:underline;}
+.about-ai-card{
+  background:linear-gradient(140deg,var(--accent-bg),var(--surface));
+  border:1.5px solid var(--accent2);border-radius:var(--r-xl);
+  padding:2rem;margin:2rem 0;display:flex;gap:1.2rem;align-items:flex-start;
+}
+.about-ai-icon{font-size:2.5rem;flex-shrink:0;}
+.about-ai-text h3{font-family:var(--font-h);font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:.5rem;}
+.about-ai-text p{font-size:.85rem;color:var(--text2);line-height:1.75;}
+</style>
+</head>
+<body>
+
+<div id="ambient"></div>
+
+<div id="app">
+
+  <!-- =====================================================
+       免責バナー（常時表示 — 商用要件）
+       ===================================================== -->
+  <div id="disclaimer" style="text-align: left;">
+    <strong>⚠️ 非公式情報サイト:</strong>
+    本サイトはAnthropicおよびClaudeの公式サイトではありません。<br>
+    情報は参考目的であり、正確性・完全性を保証しません。<br>
+    最新の公式情報は <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">anthropic.com</a>および<a href="https://docs.anthropic.com" target="_blank" rel="noopener noreferrer">docs.anthropic.com</a> でご確認ください。
+  「Claude」はAnthropicの商標です。
+  </div>
+
+  <!-- =====================================================
+       NAV
+       ===================================================== -->
+  <nav id="nav">
+    <a class="nav-brand" onclick="C.go('home')">
+      <div class="nav-icon-circle">AI</div>
+      <span class="nav-logo-text">AIガイドブック<em>for Claude</em></span>
+      <span class="nav-logo-badge">非公式</span>
+    </a>
+    <ul id="nav-links">
+      <li><a id="nl-home"      onclick="C.go('home')">ホーム</a></li>
+      <li><a id="nl-pricing"   onclick="C.go('pricing')">料金</a></li>
+      <li><a id="nl-platforms" onclick="C.go('platforms')">端末・アプリ</a></li>
+      <li><a id="nl-products"  onclick="C.go('products')">製品比較</a></li>
+      <li><a id="nl-api"       onclick="C.go('api')">API</a></li>
+      <li><a id="nl-connect"   onclick="C.go('connect')">接続方法</a></li>
+      <li><a id="nl-models"    onclick="C.go('models')">モデル</a></li>
+      <li><a id="nl-updates"   onclick="C.go('updates')">更新情報</a></li>
+      <li><a id="nl-about"     onclick="C.go('about')">このサイトについて</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="season-pill" id="season-pill">
+        <span id="s-icon">🌸</span>
+        <span id="s-label">読込中</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Update banner -->
+  <div id="update-banner">
+    <div class="banner-inner">
+      <span class="banner-chip"><span class="dot"></span>更新情報</span>
+      <span class="banner-msg" id="banner-msg"></span>
+      <button class="banner-dismiss" onclick="C.dismissBanner()">✕ 閉じる</button>
+    </div>
+  </div>
+
+  <!-- Timestamp bar -->
+  <div id="ts-bar">
+    この情報は <strong id="ts-text">2026年3月20日 00:00</strong> 時点での情報です
+    &nbsp;—&nbsp; 最新情報は <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer" style="color:var(--text3);text-decoration:underline;">anthropic.com</a> でご確認ください
+  </div>
+
+  <!-- =====================================================
+       PAGES
+       ===================================================== -->
+
+  <!-- HOME -->
+  <div class="page" id="page-home">
+    <div class="hero">
+      <div class="hero-badge"><span class="dot"></span><span id="hero-msg">2026年版 最新情報ガイド</span></div>
+      <h1><span class="l1">Claudeを</span><span class="l2">完全理解する</span></h1>
+      <p class="hero-sub">AnthropicのAIアシスタント「Claude」について、
+        料金・端末・API・製品の違いを
+        すべて日本語でわかりやすく解説する非公式情報ガイド</p>
+      <div class="hero-cta">
+        <button class="btn btn-prim" onclick="C.go('pricing')">料金を比較する</button>
+        <button class="btn btn-sec"  onclick="C.go('products')">製品を比べる</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-n">5つ</span><span class="stat-l">利用プラン</span></div>
+        <div class="stat"><span class="stat-n">3種</span><span class="stat-l">AIモデル</span></div>
+        <div class="stat"><span class="stat-n">1M</span><span class="stat-l">最大コンテキスト</span></div>
+        <div class="stat"><span class="stat-n">全OS</span><span class="stat-l">対応</span></div>
+      </div>
+    </div>
+
+    <div style="max-width:1160px;margin:0 auto;padding:0 2rem 2rem">
+      <div style="text-align:center;margin-bottom:1.8rem">
+        <span class="sec-tag">Topics</span>
+        <h2 class="sec-title">知りたい項目から読む</h2>
+      </div>
+      <div class="topic-grid">
+        <div class="topic-card" onclick="C.go('pricing')"><div class="topic-icon">💰</div><div class="topic-title">料金体系</div><div class="topic-desc">Free・Pro・Max・Team・Enterpriseの5プランを徹底比較。</div><div class="topic-arr">→</div></div>
+        <div class="topic-card" onclick="C.go('platforms')"><div class="topic-icon">📱</div><div class="topic-title">端末・アプリ</div><div class="topic-desc">Web・iOS・Android・Windows・Mac。各プラットフォームの特徴と使い方。</div><div class="topic-arr">→</div></div>
+        <div class="topic-card" onclick="C.go('products')"><div class="topic-icon">⚡</div><div class="topic-title">製品・機能比較</div><div class="topic-desc">Chat・Code・Cowork・Chrome・Office連携の違いを整理。</div><div class="topic-arr">→</div></div>
+        <div class="topic-card" onclick="C.go('api')"><div class="topic-icon">🔌</div><div class="topic-title">API完全ガイド</div><div class="topic-desc">APIの使い方・料金・モデル別価格・Batch APIまで解説。</div><div class="topic-arr">→</div></div>
+        <div class="topic-card" onclick="C.go('connect')"><div class="topic-icon">🔗</div><div class="topic-title">接続・連携方法</div><div class="topic-desc">MCP・Google・Slack・GitHub等との接続方法をステップごとに説明。</div><div class="topic-arr">→</div></div>
+        <div class="topic-card" onclick="C.go('models')"><div class="topic-icon">🧠</div><div class="topic-title">モデル解説</div><div class="topic-desc">Haiku・Sonnet・Opusの3モデルの違いと用途別選択ガイド。</div><div class="topic-arr">→</div></div>
+      </div>
+    </div>
+
+    <div class="what-band">
+      <div class="what-inner">
+        <div class="what-text">
+          <h2>Claudeとは何か？</h2>
+          <p>ClaudeはAnthropicが開発したAIアシスタントです。安全性と有用性を両立するConstitutional AIで訓練されています。</p>
+          <ul class="ul-dot">
+            <li>最大100万トークンのコンテキストウィンドウで長文書類も処理可能</li>
+            <li>コーディング・分析・創作・翻訳など幅広いタスクに対応</li>
+            <li>ウェブ・デスクトップ・モバイルすべてのデバイスで利用可能</li>
+            <li>APIを通じて自社サービスに組み込み可能</li>
+            <li>エージェント機能で複数ステップのタスクを自律実行</li>
+          </ul>
+        </div>
+        <div>
+          <div style="text-align:center;margin-bottom:1.4rem">
+            <span class="sec-tag">Models</span>
+            <h2 class="sec-title" style="margin-bottom:.3rem">3つのモデルファミリー</h2>
+          </div>
+          <div class="m3g">
+    <div class="m3c">
+      
+      <div class="m3c-name">Haiku</div>
+      <div class="m3c-tag">速さとコスパの王者</div>
+      <div class="m3c-desc">シンプルなタスク・大量処理・チャットボットに最適。応答速度最速、APIコストも最安。</div>
+      <div class="m3c-row"><span class="ml">Input料金</span><span class="mr">$0.80/MTok</span></div>
+      <div class="m3c-row"><span class="ml">Output料金</span><span class="mr">$4.00/MTok</span></div>
+      <div class="m3c-row"><span class="ml">コンテキスト</span><span class="mr">200K tokens</span></div>
+    </div>
+    <div class="m3c feat">
+      <div class="m3c-badge">人気</div>
+      <div class="m3c-name">Sonnet</div>
+      <div class="m3c-tag">ベストバランス・最推奨</div>
+      <div class="m3c-desc">速度・性能・コストのベストバランス。ほとんどのユースケースに最適。コーディング・分析に優れる。</div>
+      <div class="m3c-row"><span class="ml">Input料金</span><span class="mr">$3.00/MTok</span></div>
+      <div class="m3c-row"><span class="ml">Output料金</span><span class="mr">$15.00/MTok</span></div>
+      <div class="m3c-row"><span class="ml">コンテキスト</span><span class="mr">200K tokens</span></div>
+    </div>
+    <div class="m3c">
+      
+      <div class="m3c-name">Opus</div>
+      <div class="m3c-tag">最高性能・複雑推論</div>
+      <div class="m3c-desc">最も高度な推論・分析力。100万トークンコンテキスト対応。複雑な研究・法律・財務に最適。</div>
+      <div class="m3c-row"><span class="ml">Input料金</span><span class="mr">$5.00/MTok</span></div>
+      <div class="m3c-row"><span class="ml">Output料金</span><span class="mr">$25.00/MTok</span></div>
+      <div class="m3c-row"><span class="ml">コンテキスト</span><span class="mr">1M tokens</span></div>
+    </div></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a onclick="C.go('home')">ホーム</a><a onclick="C.go('pricing')">料金</a>
+          <a onclick="C.go('platforms')">端末・アプリ</a><a onclick="C.go('products')">製品比較</a>
+          <a onclick="C.go('api')">API</a><a onclick="C.go('connect')">接続方法</a>
+          <a onclick="C.go('models')">モデル</a><a onclick="C.go('updates')">更新情報</a>
+          <a onclick="C.go('about')">このサイトについて</a>
+        </div>
+        <p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p>
+        <div class="footer-legal">
+          本サイトはAnthropicとは無関係の独立した非公式情報サイトです。
+          「Claude」「Anthropic」はAnthropicの商標です。<br>
+          情報は参考目的のみであり、正確性・完全性・最新性を保証しません。
+          投資・購買等の意思決定には必ず<a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">公式サイト</a>をご確認ください。<br>
+          <a href="https://www.anthropic.com/legal/aup" target="_blank" rel="noopener noreferrer">Anthropic利用規約</a> |
+          <a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>
+          <br>
+          <span class="footer-ai-credit">
+            ✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong>
+          </span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- PRICING -->
+  <div class="page" id="page-pricing">
+    <div class="page-hero"><span class="page-tag">Pricing</span><h1 class="page-title">料金体系を完全比較</h1><p class="page-desc">Free〜Enterpriseまで5プランを徹底解説</p></div>
+    <main>
+      <div class="plans-g">
+    <div class="plan-c">
+      
+      <div class="plan-name">Free</div>
+      <div><div class="plan-price">¥0</div><div class="plan-per">永久無料</div></div>
+      <div class="plan-desc">Claudeを試したい方。基本機能が利用可能。</div>
+      <ul class="plan-fs">
+        <li>Claude Sonnetへのアクセス</li><li>ウェブ・iOS・Android対応</li><li>画像分析・基本Webサーチ</li><li>Artifacts機能</li>
+        <li class="no">使用量制限あり</li><li class="no">Projects機能なし</li><li class="no">Claude Opusなし</li><li class="no">Claude Codeなし</li>
+      </ul>
+      <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="plan-btn pb-s">無料で始める</a>
+    </div>
+    <div class="plan-c rec">
+      <div class="rec-chip">人気</div>
+      <div class="plan-name">Pro</div>
+      <div><div class="plan-price">$20</div><div class="plan-per">/月（年払い$17）</div></div>
+      <div class="plan-desc">個人の本格利用に。Freeの5倍の使用量。</div>
+      <ul class="plan-fs">
+        <li>全モデル（Haiku/Sonnet/Opus）</li><li>Free比5倍の使用量</li><li>優先アクセス</li><li>Projects機能</li><li>Claude Code（基本）</li><li>デスクトップアプリ</li><li>Google Workspace連携</li><li>拡張思考モード</li>
+        
+      </ul>
+      <a href="https://claude.ai/upgrade" target="_blank" rel="noopener noreferrer" class="plan-btn pb-p">アップグレード</a>
+    </div>
+    <div class="plan-c">
+      
+      <div class="plan-name">Max</div>
+      <div><div class="plan-price">$100〜</div><div class="plan-per">/月（5x or 20x）</div></div>
+      <div class="plan-desc">ヘビーユーザー向け。制限なしに近い使い方。</div>
+      <ul class="plan-fs">
+        <li>Max 5x: Pro比5倍（$100/月）</li><li>Max 20x: Pro比20倍（$200/月）</li><li>最優先アクセス</li><li>Claude Code フルアクセス</li><li>メモリ機能（長期記憶）</li><li>拡張思考モード</li><li>全モデルアクセス</li><li>Cowork（デスクトップ）</li>
+        
+      </ul>
+      <a href="https://claude.ai/upgrade" target="_blank" rel="noopener noreferrer" class="plan-btn pb-s">Max を選ぶ</a>
+    </div>
+    <div class="plan-c">
+      
+      <div class="plan-name">Team</div>
+      <div><div class="plan-price">$25</div><div class="plan-per">/人/月（年払い）最低5人</div></div>
+      <div class="plan-desc">チーム・組織向け。共同作業と管理機能付き。</div>
+      <ul class="plan-fs">
+        <li>Standard席: $25/人</li><li>Premium席: $100/人（Code付き）</li><li>Pro以上の使用量</li><li>共有プロジェクト・チャット</li><li>集中課金・管理ダッシュボード</li><li>200Kコンテキスト</li><li>新機能アーリーアクセス</li><li>最低5ユーザー必須</li>
+        
+      </ul>
+      <a href="https://claude.ai/team" target="_blank" rel="noopener noreferrer" class="plan-btn pb-s">Team を選ぶ</a>
+    </div>
+    <div class="plan-c">
+      
+      <div class="plan-name">Enterprise</div>
+      <div><div class="plan-price">要問合</div><div class="plan-per">カスタム価格</div></div>
+      <div class="plan-desc">大企業・規制産業向け。最高レベルのセキュリティ。</div>
+      <ul class="plan-fs">
+        <li>500K+コンテキスト</li><li>SSO（シングルサインオン）</li><li>SCIM（ユーザー管理自動化）</li><li>監査ログ</li><li>ロールベースアクセス制御</li><li>GitHub連携</li><li>SOC 2 Type II準拠</li><li>専任サポート</li>
+        
+      </ul>
+      <a href="https://www.anthropic.com/contact-sales" target="_blank" rel="noopener noreferrer" class="plan-btn pb-s">お問い合わせ</a>
+    </div></div>
+      <div style="margin-bottom:1.3rem"><span class="sec-tag">Compare</span><h2 class="sec-title">プラン機能 詳細比較表</h2></div>
+      <div class="tbl-wrap" style="margin-bottom:2.5rem">
+        <table class="tbl">
+          <thead><tr><th>機能</th><th>Free</th><th>Pro</th><th>Max</th><th>Team</th><th>Enterprise</th></tr></thead>
+          <tbody>
+            <tr><td>月額料金</td><td>無料</td><td>$17〜</td><td>$100〜</td><td>$25/人〜</td><td>要問合</td></tr>
+            <tr><td>Claudeモデル</td><td>Sonnet</td><td>全モデル</td><td>全モデル</td><td>全モデル</td><td>全モデル</td></tr>
+            <tr><td>使用量</td><td>制限あり</td><td>Free×5</td><td>Pro×5〜20</td><td>Pro以上</td><td>カスタム</td></tr>
+            <tr><td>コンテキスト</td><td>200K</td><td>200K</td><td>200K〜1M</td><td>200K</td><td>500K+</td></tr>
+            <tr><td>Projects機能</td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓（共有）</span></td><td><span class="ok">✓（共有）</span></td></tr>
+            <tr><td>Claude Code</td><td><span class="ng">✗</span></td><td>基本</td><td>フル</td><td>Premium席のみ</td><td><span class="ok">✓</span></td></tr>
+            <tr><td>デスクトップアプリ</td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+            <tr><td>SSO / SCIM</td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td></tr>
+            <tr><td>Google Workspace</td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-bottom:1.1rem"><span class="sec-tag">Guide</span><h2 class="sec-title">あなたに最適なプランは？</h2></div>
+      <div class="tips-g">
+        <div class="tip-c"><div class="tip-ic">🧪</div><div class="tip-t">まず試したい → Free</div><div class="tip-d">Claudeが自分に合うか確認したい方。無料で基本機能を試せる。</div></div>
+        <div class="tip-c"><div class="tip-ic">👩‍💼</div><div class="tip-t">個人の業務利用 → Pro</div><div class="tip-d">毎日Claudeを使う個人ユーザー。月$20でほとんどのニーズをカバー。</div></div>
+        <div class="tip-c"><div class="tip-ic">🔥</div><div class="tip-t">ヘビー利用 → Max</div><div class="tip-d">1日中Claudeを使い倒す方、大規模コーディング作業が多い方。</div></div>
+        <div class="tip-c"><div class="tip-ic">👥</div><div class="tip-t">チーム利用 → Team</div><div class="tip-d">5〜100人規模。共有プロジェクト・管理機能が欲しい場合。</div></div>
+        <div class="tip-c"><div class="tip-ic">🏢</div><div class="tip-t">大企業・規制業種 → Enterprise</div><div class="tip-d">SSO・監査ログ・コンプライアンス要件がある場合はEnterprise。</div></div>
+        <div class="tip-c"><div class="tip-ic">💻</div><div class="tip-t">開発者 → API</div><div class="tip-d">自分のサービスにClaudeを組み込みたい開発者は従量課金APIを。</div></div>
+      </div>
+    </main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('platforms')">端末</a><a onclick="C.go('products')">製品</a><a onclick="C.go('api')">API</a><a onclick="C.go('about')">このサイトについて</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。「Claude」はAnthropicの商標です。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+  <!-- PLATFORMS -->
+  <div class="page" id="page-platforms">
+    <div class="page-hero"><span class="page-tag">Platforms</span><h1 class="page-title">端末・アプリ完全解説</h1><p class="page-desc">Web・iOS・Android・Windows・Macの使い方</p></div>
+    <main>
+      <div style="margin-bottom:1.3rem"><span class="sec-tag">Platforms</span><h2 class="sec-title">利用可能なプラットフォーム</h2></div>
+      <div class="plat-g">
+        <div class="plat-c"><div class="plat-head"><div class="plat-ic" style="background:#EFF6FF;border:1.5px solid #BFDBFE;">🌐</div><div><div class="plat-nm">ウェブブラウザ</div><div class="plat-sb">claude.ai — 全プラン対応</div></div></div><div class="plat-body"><p class="plat-desc">ブラウザからアクセスするメインのインターフェース。インストール不要でどのデバイスからでも使える。</p><div class="f-tags"><span class="f-tag hi">インストール不要</span><span class="f-tag">ファイルアップロード</span><span class="f-tag">Artifacts</span><span class="f-tag">Projects</span></div><div class="req-b"><div class="req-t">必要環境</div><ul class="req-l"><li>モダンブラウザ（Chrome 90+・Safari 14+等）</li><li>インターネット接続</li><li>Claudeアカウント（無料作成可）</li></ul></div><a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="plat-btn">ブラウザで開く</a></div></div>
+        <div class="plat-c"><div class="plat-head"><div class="plat-ic" style="background:#F5F3FF;border:1.5px solid #DDD6FE;">📱</div><div><div class="plat-nm">iOS アプリ</div><div class="plat-sb">iPhone・iPad — 全プラン対応</div></div></div><div class="plat-body"><p class="plat-desc">iPhone・iPadの公式アプリ。音声入力対応でハンズフリー利用も可能。</p><div class="f-tags"><span class="f-tag hi">音声入力</span><span class="f-tag">カメラ入力</span><span class="f-tag">プッシュ通知</span><span class="f-tag">ウィジェット</span></div><div class="req-b"><div class="req-t">必要環境</div><ul class="req-l"><li>iOS 16.0以降</li><li>iPhone 6s以降 / 任意のiPad</li><li>App Storeから無料ダウンロード</li></ul></div><a href="https://apps.apple.com/app/claude-by-anthropic/id6473753684" target="_blank" rel="noopener noreferrer" class="plat-btn">App Storeでダウンロード</a></div></div>
+        <div class="plat-c"><div class="plat-head"><div class="plat-ic" style="background:#F0FDF4;border:1.5px solid #BBF7D0;">🤖</div><div><div class="plat-nm">Android アプリ</div><div class="plat-sb">Android スマートフォン — 全プラン対応</div></div></div><div class="plat-body"><p class="plat-desc">Android公式アプリ。Google Playから無料ダウンロード。音声入力・ファイル共有など主要機能を完備。</p><div class="f-tags"><span class="f-tag hi">音声入力</span><span class="f-tag">ファイル共有</span><span class="f-tag">画像添付</span><span class="f-tag">ダークモード</span></div><div class="req-b"><div class="req-t">必要環境</div><ul class="req-l"><li>Android 8.0（Oreo）以降</li><li>Google Playから無料ダウンロード</li></ul></div><a href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank" rel="noopener noreferrer" class="plat-btn">Google Playでダウンロード</a></div></div>
+        <div class="plat-c"><div class="plat-head"><div class="plat-ic" style="background:#FDF1EE;border:1.5px solid #F5C4BB;">🖥️</div><div><div class="plat-nm">Mac デスクトップ</div><div class="plat-sb">macOS — 有料プランのみ</div></div></div><div class="plat-body"><p class="plat-desc">macOS専用ネイティブアプリ。Dock常駐・グローバルショートカット対応。Claude CodeとCoworkも統合。</p><div class="f-tags"><span class="f-tag hi">Claude Code統合</span><span class="f-tag hi">Cowork</span><span class="f-tag">Dock常駐</span><span class="f-tag">ローカルファイル</span></div><div class="req-b"><div class="req-t">必要環境</div><ul class="req-l"><li>macOS 12 Monterey以降</li><li>Apple Silicon（M1+）推奨</li><li>有料プラン（Pro/Max/Team/Enterprise）必須</li></ul></div><a href="https://claude.com/download" target="_blank" rel="noopener noreferrer" class="plat-btn">Macアプリをダウンロード</a></div></div>
+        <div class="plat-c"><div class="plat-head"><div class="plat-ic" style="background:#E0F2FE;border:1.5px solid #7DD3FC;">💻</div><div><div class="plat-nm">Windows デスクトップ</div><div class="plat-sb">Windows 10/11 — 有料プランのみ</div></div></div><div class="plat-body"><p class="plat-desc">Windows向け公式デスクトップアプリ。MSIX/EXEインストーラー対応。企業展開も可能。</p><div class="f-tags"><span class="f-tag hi">Claude Code統合</span><span class="f-tag hi">Cowork</span><span class="f-tag">タスクバー常駐</span><span class="f-tag">MSIX展開</span></div><div class="req-b"><div class="req-t">必要環境</div><ul class="req-l"><li>Windows 10（64bit）または Windows 11</li><li>ARM64: CoworkはARM64未対応（2026年3月）</li><li>有料プラン必須</li></ul></div><a href="https://claude.com/download" target="_blank" rel="noopener noreferrer" class="plat-btn">Windowsアプリをダウンロード</a></div></div>
+      </div>
+      <div style="margin-bottom:1.1rem"><span class="sec-tag">Setup</span><h2 class="sec-title">デスクトップアプリの導入手順</h2></div>
+      <div class="steps-r" style="margin-bottom:2.5rem">
+        <div class="step-c"><div class="step-n">01</div><div class="step-t">ダウンロード</div><div class="step-d">claude.com/downloadにアクセスし、Windows（.exe/.msix）またはMac（.dmg）をダウンロード</div></div>
+        <div class="step-c"><div class="step-n">02</div><div class="step-t">インストール</div><div class="step-d">インストーラーを実行。Macは.dmgを開いてApplicationsフォルダへドラッグ。</div></div>
+        <div class="step-c"><div class="step-n">03</div><div class="step-t">サインイン</div><div class="step-d">Claudeアカウントでサインイン（有料プランが必要）。GoogleまたはメールでOK。</div></div>
+        <div class="step-c"><div class="step-n">04</div><div class="step-t">機能セットアップ</div><div class="step-d">設定→拡張機能でデスクトップ拡張機能を追加。Code使用時はGitのインストールも必要。</div></div>
+      </div>
+      <div style="margin-bottom:1.1rem"><span class="sec-tag">Compare</span><h2 class="sec-title">プラットフォーム別 機能比較</h2></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>機能</th><th>Web</th><th>iOS</th><th>Android</th><th>Mac App</th><th>Windows App</th></tr></thead><tbody>
+        <tr><td>基本チャット</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+        <tr><td>音声入力</td><td><span class="pr">△</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="pr">△</span></td><td><span class="pr">△</span></td></tr>
+        <tr><td>Claude Code</td><td><span class="ok">✓</span></td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+        <tr><td>Cowork</td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ok">✓（M1+）</span></td><td><span class="ok">✓（x64）</span></td></tr>
+        <tr><td>ローカルファイル</td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+        <tr><td>MCP接続</td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+        <tr><td>無料プラン対応</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ng">✗</span></td><td><span class="ng">✗</span></td></tr>
+      </tbody></table></div>
+    </main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('pricing')">料金</a><a onclick="C.go('products')">製品</a><a onclick="C.go('about')">このサイトについて</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="page" id="page-products">
+    <div class="page-hero"><span class="page-tag">Products</span><h1 class="page-title">製品・機能徹底比較</h1><p class="page-desc">Chat・Code・Cowork・Chrome・Office連携</p></div>
+    <main id="m-products"></main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('pricing')">料金</a><a onclick="C.go('platforms')">端末</a><a onclick="C.go('api')">API</a><a onclick="C.go('about')">このサイトについて</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+  <!-- API -->
+  <div class="page" id="page-api">
+    <div class="page-hero"><span class="page-tag">API</span><h1 class="page-title">Anthropic API 完全ガイド</h1><p class="page-desc">開発者向けAPIの使い方・料金・ベストプラクティス</p></div>
+    <main>
+      <div style="margin-bottom:1.3rem"><span class="sec-tag">Overview</span><h2 class="sec-title">APIとは？</h2></div>
+      <div class="api-g" style="margin-bottom:2.5rem">
+        <div class="api-card"><div class="ai">💳</div><div class="at">従量課金制</div><div class="ad">使用したトークン数に応じた課金。月額固定なし。初期費用ゼロで始められる。</div></div>
+        <div class="api-card"><div class="ai">🌐</div><div class="at">REST API</div><div class="ad">標準的なREST APIとJSON形式。Python・TypeScript/JS向けSDKも公式提供。</div></div>
+        <div class="api-card"><div class="ai">🔑</div><div class="at">APIキー管理</div><div class="ad">console.anthropic.comでAPIキーを発行・管理。使用量をリアルタイムモニタリング。</div></div>
+        <div class="api-card"><div class="ai">⚡</div><div class="at">ストリーミング</div><div class="ad">SSEでレスポンスをストリーミング受信。チャットUIのリアルタイム表示に最適。</div></div>
+        <div class="api-card"><div class="ai">🗂️</div><div class="at">Batch API</div><div class="ad">24時間以内処理でよいバッチタスクは50%割引。大量処理に最適。</div></div>
+        <div class="api-card"><div class="ai">📦</div><div class="at">プロンプトキャッシュ</div><div class="ad">頻繁に使うプロンプトをキャッシュしてInput料金を最大90%削減。</div></div>
+      </div>
+      <div style="margin-bottom:1.1rem"><span class="sec-tag">Pricing</span><h2 class="sec-title">APIモデル別料金（2026年3月20日 00:00時点）</h2></div>
+      <div class="tbl-wrap" style="margin-bottom:1.4rem">
+        <table class="tbl">
+          <thead><tr><th>モデル</th><th>モデルID</th><th>Input（/MTok）</th><th>Output（/MTok）</th><th>コンテキスト</th></tr></thead>
+          <tbody>
+            
+            <tr>
+              <td>Haiku </td>
+              <td class="mono">claude-haiku-4-5-20251001</td>
+              <td class="mono">$0.80</td>
+              <td class="mono">$4.00</td>
+              <td>200K tokens</td>
+            </tr>
+            <tr>
+              <td>Sonnet <span class="chip c-or" style="font-size:.58rem;padding:1px 7px;">推奨</span></td>
+              <td class="mono">claude-sonnet-4-6</td>
+              <td class="mono">$3.00</td>
+              <td class="mono">$15.00</td>
+              <td>200K tokens</td>
+            </tr>
+            <tr>
+              <td>Opus </td>
+              <td class="mono">claude-opus-4-6</td>
+              <td class="mono">$5.00</td>
+              <td class="mono">$25.00</td>
+              <td>1M tokens</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-box" style="margin-bottom:2.5rem"><span>ℹ️</span><span>Batch APIを使うとすべてのモデルで <strong>50%割引</strong>。プロンプトキャッシュではInput料金が最大 <strong>90%削減</strong> 可能。</span></div>
+      <div style="margin-bottom:1.1rem"><span class="sec-tag">Quickstart</span><h2 class="sec-title">APIの始め方</h2></div>
+      <div class="steps-l" style="margin-bottom:2.5rem">
+        <div class="si"><div class="sn">1</div><div class="sb"><h4>コンソールアカウントを作成</h4><p><a href="https://console.anthropic.com" target="_blank" rel="noopener noreferrer">console.anthropic.com</a>でAnthropicコンソールアカウントを作成。claude.aiアカウントとは別。</p></div></div>
+        <div class="si"><div class="sn">2</div><div class="sb"><h4>APIキーを発行</h4><p>コンソール → API Keys → 「Create Key」で発行。<code>sk-ant-</code>で始まるキーを安全に保管。</p></div></div>
+        <div class="si"><div class="sn">3</div><div class="sb"><h4>SDKをインストール</h4><p>Node.js: <code>npm install @anthropic-ai/sdk</code>　Python: <code>pip install anthropic</code></p></div></div>
+        <div class="si"><div class="sn">4</div><div class="sb"><h4>最初のリクエストを送る</h4><p>APIキーを環境変数 <code>ANTHROPIC_API_KEY</code> に設定し、下記のコードを実行。</p></div></div>
+        <div class="si"><div class="sn">5</div><div class="sb"><h4>本番環境へ</h4><p>レート制限・エラーハンドリング・プロンプトキャッシュを設定してデプロイ。</p></div></div>
+      </div>
+      <div style="margin-bottom:1.1rem"><span class="sec-tag">Examples</span><h2 class="sec-title">コードサンプル</h2></div>
+      <div class="code-wrap">
+        <div class="code-bar"><div class="code-dots"><span class="cd-r"></span><span class="cd-y"></span><span class="cd-g"></span></div><span class="code-lang">JavaScript / Node.js — 基本的なメッセージ</span></div>
+        <div class="code-body"><span class="ck">import</span> Anthropic <span class="ck">from</span> <span class="cs">'@anthropic-ai/sdk'</span>;
+<span class="ck">const</span> client = <span class="ck">new</span> Anthropic({ apiKey: process.env.<span class="cc">ANTHROPIC_API_KEY</span> });
+<span class="ck">const</span> message = <span class="ck">await</span> client.messages.create({
+  model: <span class="cs">"claude-sonnet-4-6"</span>, max_tokens: <span class="cn">1024</span>,
+  messages: [{ role: <span class="cs">"user"</span>, content: <span class="cs">"Pythonでフィボナッチ数列を生成して"</span> }]
+});
+console.log(message.content[<span class="cn">0</span>].text);</div>
+      </div>
+      <div class="code-wrap">
+        <div class="code-bar"><div class="code-dots"><span class="cd-r"></span><span class="cd-y"></span><span class="cd-g"></span></div><span class="code-lang">Python — ストリーミングレスポンス</span></div>
+        <div class="code-body"><span class="ck">import</span> anthropic
+client = anthropic.Anthropic()
+<span class="ck">with</span> client.messages.stream(
+    model=<span class="cs">"claude-sonnet-4-6"</span>, max_tokens=<span class="cn">1024</span>,
+    messages=[{<span class="cs">"role"</span>:<span class="cs">"user"</span>,<span class="cs">"content"</span>:<span class="cs">"長い物語を書いて"</span>}]
+) <span class="ck">as</span> stream:
+    <span class="ck">for</span> text <span class="ck">in</span> stream.text_stream():
+        print(text, end=<span class="cs">""</span>, flush=True)</div>
+      </div>
+    </main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('pricing')">料金</a><a onclick="C.go('connect')">接続方法</a><a onclick="C.go('about')">このサイトについて</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+  <!-- CONNECT -->
+  <div class="page" id="page-connect">
+    <div class="page-hero"><span class="page-tag">Connections</span><h1 class="page-title">接続・連携完全ガイド</h1><p class="page-desc">Google・Slack・GitHub・MCPとの接続方法を解説</p></div>
+    <main id="m-connect"></main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('api')">API</a><a onclick="C.go('models')">モデル</a><a onclick="C.go('about')">このサイトについて</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+  <!-- MODELS -->
+  <div class="page" id="page-models">
+    <div class="page-hero"><span class="page-tag">Models</span><h1 class="page-title">Claudeモデル完全解説</h1><p class="page-desc">Haiku・Sonnet・Opusの違いと用途別選択ガイド</p></div>
+    <main id="m-models"></main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('pricing')">料金</a><a onclick="C.go('api')">API</a><a onclick="C.go('about')">このサイトについて</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+  <!-- UPDATES -->
+  <div class="page" id="page-updates">
+    <div class="page-hero"><span class="page-tag">Updates</span><h1 class="page-title">更新情報</h1><p class="page-desc">Anthropic公式ページの変更を自動検出して表示しています</p></div>
+    <main>
+      <div class="upd-status">
+        <span class="upd-msg"><span class="dot"></span>自動更新システム稼働中 — 最終確認: <strong>2026年3月20日 00:00</strong></span>
+        <a href="https://www.anthropic.com/news" target="_blank" rel="noopener noreferrer" class="btn btn-prim btn-sm">公式ニュースを確認</a>
+      </div>
+      <div class="info-box"><span>ℹ️</span><span>更新情報はAnthropicの公式ページをサーバー側で定期チェックし、変更が検出された場合に自動表示されます。変更内容の解釈は自動処理によるものです。確定情報は必ず<a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">公式サイト</a>でご確認ください。</span></div>
+      
+    <div class="hist-entry">
+      <div class="hist-date-head">2026年3月20日</div>
+      
+        <div class="hist-item">
+          <div class="hist-cat">モデル</div>
+          <div class="hist-body">
+            <div class="ht">Claude Opus 4.6 リリース
+              <span class="h-badge hb-n">新規</span>
+            </div>
+            <div class="hd">1Mトークンコンテキスト対応の最高性能モデル。Extended Thinking対応。</div>
+          </div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-cat">モデル</div>
+          <div class="hist-body">
+            <div class="ht">Claude Sonnet 4.6 に更新
+              <span class="h-badge hb-u">更新</span>
+            </div>
+            <div class="hd">バランス型モデルが4.6にアップデート。コーディング・分析性能が向上。</div>
+          </div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-cat">製品</div>
+          <div class="hist-body">
+            <div class="ht">Claude in Chrome Beta 公開
+              <span class="h-badge hb-n">新規</span>
+            </div>
+            <div class="hd">Chromeブラウザ拡張機能。ブラウジングエージェント機能をBeta提供。</div>
+          </div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-cat">製品</div>
+          <div class="hist-body">
+            <div class="ht">Cowork Research Preview 開始
+              <span class="h-badge hb-n">新規</span>
+            </div>
+            <div class="hd">デスクトップ向けGUIエージェント。ノンエンジニアでも自動化が可能。</div>
+          </div>
+        </div>
+        <div class="hist-item">
+          <div class="hist-cat">プラットフォーム</div>
+          <div class="hist-body">
+            <div class="ht">Windows デスクトップアプリ 公開
+              <span class="h-badge hb-n">新規</span>
+            </div>
+            <div class="hd">macOSに続きWindowsデスクトップアプリが正式リリース。有料プラン必須。</div>
+          </div>
+        </div>
+    </div>
+    </main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('about')">このサイトについて</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="page" id="page-about">
+    <div class="page-hero"><span class="page-tag">About</span><h1 class="page-title">このサイトについて</h1><p class="page-desc">サイトの目的・免責事項・AIによる制作について</p></div>
+    <main>
+      <div class="about-section">
+
+        <div class="about-ai-card">
+          <div class="about-ai-icon">✨</div>
+          <div class="about-ai-text">
+            <h3>このサイトはAIによって作成されました</h3>
+            <p>本サイトのコンテンツ・デザイン・コードは、AnthropicのAIアシスタント「<strong>Claude</strong>（claude.ai）」によって作成されました。人間の監修のもと、Claudeが企画・執筆・設計・実装を行っています。AIが作成したコンテンツであることを明示することで、透明性の高い情報提供を目指しています。</p>
+          </div>
+        </div>
+
+        <h2>サイトの目的</h2>
+        <p>本サイト「AIガイドブック for Claude」は、AnthropicのAIアシスタント「Claude」に関する情報を日本語でわかりやすく提供することを目的とした、独立した非公式情報サイトです。料金・プラン・製品・API・モデルの違いを整理・解説しています。</p>
+
+        <h2>重要な免責事項</h2>
+        <ul>
+          <li>本サイトは<strong>Anthropicとは無関係の独立した非公式情報サイト</strong>です。</li>
+          <li>本サイトに掲載する情報は参考目的のみであり、<strong>正確性・完全性・最新性を保証しません</strong>。</li>
+          <li>情報は自動更新システムにより定期的に確認されますが、その内容の正確性を保証するものではありません。</li>
+          <li>投資・購買・契約等の意思決定には、必ず<a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">Anthropic公式サイト</a>の最新情報をご確認ください。</li>
+          <li>本サイトの情報の使用により生じた損害について、サイト運営者は責任を負いません。</li>
+        </ul>
+
+        <h2>商標・著作権について</h2>
+        <ul>
+          <li>「Claude」「Anthropic」はAnthropic PBC（以下「Anthropic」）の商標または登録商標です。</li>
+          <li>本サイトはAnthropicの公認を受けておらず、Anthropicと提携・スポンサー関係にあるものではありません。</li>
+          <li>本サイトで使用するAnthropicの製品名・サービス名は情報提供目的のみであり、商標侵害を意図するものではありません。</li>
+          <li>本サイトのオリジナルコンテンツ・デザイン・コードの著作権はサイト運営者に帰属します。</li>
+        </ul>
+
+        <h2>自動更新システムについて</h2>
+        <p>本サイトはNode.jsを使用したサーバーサイドの自動更新システムを採用しています。Anthropicの公式ページを定期的にチェックし、変更が検出された場合にコンテンツを自動更新します。APIキーは一切使用せず、すべてパブリックページのみを参照します。</p>
+
+        <h2>プライバシー</h2>
+        <p>本サイトはユーザーの個人情報を収集しません。アクセス解析ツールを使用する場合は、各ツールのプライバシーポリシーに従います。</p>
+
+        <h2>お問い合わせ</h2>
+        <p>情報の誤り・更新漏れ等をお気づきの場合は、各ページ下部のリンクよりAnthropicの公式情報をご確認ください。</p>
+
+        <h2>関連公式リンク</h2>
+        <ul>
+          <li><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">claude.ai — Claude公式チャット</a></li>
+          <li><a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer">anthropic.com — Anthropic公式サイト</a></li>
+          <li><a href="https://docs.anthropic.com" target="_blank" rel="noopener noreferrer">docs.anthropic.com — APIドキュメント</a></li>
+          <li><a href="https://www.anthropic.com/legal/aup" target="_blank" rel="noopener noreferrer">Anthropic利用規約</a></li>
+          <li><a href="https://www.anthropic.com/privacy" target="_blank" rel="noopener noreferrer">Anthropicプライバシーポリシー</a></li>
+        </ul>
+
+      </div>
+    </main>
+    <footer><div class="footer-inner"><div class="footer-links"><a onclick="C.go('home')">ホーム</a><a onclick="C.go('updates')">更新情報</a></div><p class="footer-copy">© 2026 AIガイドブック for Claude — 非公式情報サイト</p><div class="footer-legal">本サイトはAnthropicとは無関係の独立した非公式情報サイトです。「Claude」はAnthropicの商標です。<br><span class="footer-ai-credit">✨ <strong>このサイトはClaude（Anthropic）によって作成されました</strong></span></div></div></footer>
+  </div>
+
+</div><!-- #app -->
+
+<!-- =====================================================
+     JAVASCRIPT — クライアントサイドMVC
+     （APIキー不使用・静的ページSPA）
+     ===================================================== -->
+<script>
+'use strict';
+
+/* ── SEASON MODEL ─────────────────────────────────── */
+const SeasonModel = (() => {
+  const S = {
+    spring:{ label:'春', icon:'🌸', msg:'🌸 春の情報ガイド', vars:{'--bg':'#FAF7F5','--bg2':'#F4EDE6','--bg3':'#ECE0D5','--surface':'#FFFFFF','--border':'#E6D8CE','--text':'#3C2A1E','--text2':'#7A5E50','--text3':'#B09888','--accent':'#D97B6C','--accent2':'#F0A882','--accent-bg':'#FDF0EC','--season-bg':'#FDE4DC'} },
+    summer:{ label:'夏', icon:'🌿', msg:'🌿 夏の情報ガイド', vars:{'--bg':'#F2F9F5','--bg2':'#E8F5EE','--bg3':'#D5EDDE','--surface':'#FAFFFE','--border':'#CCE6D8','--text':'#1A3328','--text2':'#3D6B55','--text3':'#7DAA90','--accent':'#3A9A6A','--accent2':'#90CDA8','--accent-bg':'#E8F7EE','--season-bg':'#D5EDDE'} },
+    autumn:{ label:'秋', icon:'🍁', msg:'🍁 秋の情報ガイド', vars:{'--bg':'#FAF6F0','--bg2':'#F5EEE3','--bg3':'#EAE0CE','--surface':'#FFFDF9','--border':'#E5D8C5','--text':'#2E1D0A','--text2':'#6B4E28','--text3':'#A08060','--accent':'#C07830','--accent2':'#E8B880','--accent-bg':'#FDF2E0','--season-bg':'#F5E8D0'} },
+    winter:{ label:'冬', icon:'❄️', msg:'❄️ 冬の情報ガイド', vars:{'--bg':'#F6F8FB','--bg2':'#EDF0F5','--bg3':'#DFE5EF','--surface':'#FFFFFF','--border':'#D5DCE8','--text':'#1E2A3A','--text2':'#4A5870','--text3':'#8A98AA','--accent':'#5A7ABA','--accent2':'#A0B8D8','--accent-bg':'#EAF0FA','--season-bg':'#DDE8F5'} }
+  };
+  function detect(lat) {
+    const m = new Date().getMonth()+1, s=lat<0;
+    if(m>=3&&m<=5)return s?'autumn':'spring';
+    if(m>=6&&m<=8)return s?'winter':'summer';
+    if(m>=9&&m<=11)return s?'spring':'autumn';
+    return s?'summer':'winter';
+  }
+  async function load() {
+    return new Promise(r=>{
+      const fb=()=>{ const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''; const s=['Australia','Brazil','Argentina','Chile','New_Zealand','South_Africa','Auckland'].some(z=>tz.includes(z)); r(S[detect(s?-35:40)]); };
+      if(!navigator.geolocation){fb();return;}
+      navigator.geolocation.getCurrentPosition(p=>r(S[detect(p.coords.latitude)]),fb,{timeout:3500});
+    });
+  }
+  return { load };
+})();
+
+/* ── VIEW ─────────────────────────────────────────── */
+const View = (() => {
+  function applySeason(s) {
+    const r=document.documentElement;
+    Object.entries(s.vars).forEach(([k,v])=>r.style.setProperty(k,v));
+    document.getElementById('s-icon').textContent=s.icon;
+    document.getElementById('s-label').textContent=s.label;
+    const hm=document.getElementById('hero-msg');
+    if(hm)hm.textContent=s.msg;
+  }
+  function showBanner(msg){document.getElementById('banner-msg').textContent=msg;document.getElementById('update-banner').classList.add('show');}
+  function hideBanner(){document.getElementById('update-banner').classList.remove('show');}
+  function showPage(page){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    const el=document.getElementById('page-'+page);
+    if(el)el.classList.add('active');
+    document.querySelectorAll('#nav-links a').forEach(a=>a.classList.remove('active'));
+    const na=document.getElementById('nl-'+page);
+    if(na)na.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function into(id,html){const el=document.getElementById(id);if(el&&!el._r){el.innerHTML=html;el._r=1;}}
+  function renderProducts(){
+    into('m-products', `
+    <div style="margin-bottom:1.3rem"><span class="sec-tag">Products</span><h2 class="sec-title">Claudeの製品ラインナップ</h2></div>
+    <div class="prod-c"><div class="prod-head"><div class="prod-ic" style="background:#EDE9FE;border:1.5px solid #C4B5FD;">💬</div><div><div class="prod-nm">Claude Chat</div><div class="prod-tg">Web・iOS・Android・デスクトップ対応の基本AIアシスタント</div></div><div style="display:flex;gap:.32rem;flex-wrap:wrap;"><span class="chip c-gr">全プラン対応</span><span class="chip c-gy">メイン製品</span></div></div><div class="prod-body"><div class="prod-col"><h4>概要・特徴</h4><p class="prod-desc">Claudeの中核製品。チャット形式でAIと対話し、文章作成・分析・コーディング・翻訳など幅広い作業を支援。</p><ul class="arr-l"><li>テキスト・画像・ファイルのアップロードと分析</li><li>Projects機能で長期プロジェクトを管理</li><li>Webサーチ機能で最新情報を取得</li><li>Artifacts（HTML・コード・ドキュメント生成）</li></ul></div><div class="prod-col"><h4>活用ケース</h4><div class="uc-l"><div class="uc-it"><strong>📝 ライティング</strong><span>記事・メール・報告書の作成</span></div><div class="uc-it"><strong>📊 分析・要約</strong><span>PDF・CSV・長文書類の要約</span></div><div class="uc-it"><strong>💡 アイデア創出</strong><span>ブレインストーミング・企画立案</span></div><div class="uc-it"><strong>🌐 翻訳</strong><span>多言語翻訳・ローカライゼーション</span></div></div></div></div></div>
+    <div class="prod-c"><div class="prod-head"><div class="prod-ic" style="background:#ECFDF5;border:1.5px solid #6EE7B7;">⌨️</div><div><div class="prod-nm">Claude Code</div><div class="prod-tg">開発者向けコーディングエージェント — CLI・VS Code・デスクトップアプリ</div></div><div style="display:flex;gap:.32rem;flex-wrap:wrap;"><span class="chip c-or">Pro以上</span><span class="chip c-bl">CLI/IDE</span></div></div><div class="prod-body"><div class="prod-col"><h4>概要・特徴</h4><p class="prod-desc">ターミナル・VS Code・デスクトップアプリで動くコーディングエージェント。コードベースを理解し複数ファイルの編集・テスト・PR管理まで自律実行。</p><ul class="arr-l"><li>CLIでターミナルから直接使用（npm install -g）</li><li>VS Code拡張機能でIDE内に統合</li><li>CLAUDE.mdでプロジェクト固有の指示を設定</li><li>Gitとの統合（コミット・PR・ブランチ管理）</li></ul></div><div class="prod-col"><h4>活用ケース</h4><div class="uc-l"><div class="uc-it"><strong>🔍 コードレビュー</strong><span>バグ発見・改善提案</span></div><div class="uc-it"><strong>🏗️ 機能実装</strong><span>自然言語の指示から自動実装</span></div><div class="uc-it"><strong>🧪 テスト生成</strong><span>ユニットテスト・統合テストの作成</span></div><div class="uc-it"><strong>📦 リファクタリング</strong><span>大規模コードベースの整理</span></div></div></div></div></div>
+    <div class="prod-c"><div class="prod-head"><div class="prod-ic" style="background:#FDF1EE;border:1.5px solid #F5C4BB;">🤝</div><div><div class="prod-nm">Cowork</div><div class="prod-tg">ノンエンジニア向けデスクトップエージェント（Research Preview）</div></div><div style="display:flex;gap:.32rem;flex-wrap:wrap;"><span class="chip c-or">Pro以上</span><span class="chip c-bl">Research Preview</span></div></div><div class="prod-body"><div class="prod-col"><h4>概要・特徴</h4><p class="prod-desc">Claude CodeのエージェントをGUIで使えるようにした製品。ターミナルなしで複数ステップのタスクを自律実行。非エンジニアでも高度な自動化が可能。</p><ul class="arr-l"><li>ローカルファイルへの直接アクセスと操作</li><li>複数ステップの複雑タスクを自律実行</li><li>Excelスプレッドシート・PowerPoint等の生成</li><li>MCPプラグインで外部ツール連携</li></ul></div><div class="prod-col"><h4>活用ケース</h4><div class="uc-l"><div class="uc-it"><strong>📂 ファイル整理</strong><span>散在する書類を整理・命名</span></div><div class="uc-it"><strong>📊 データ分析</strong><span>複数ソースを収集・チャート作成</span></div><div class="uc-it"><strong>📅 ブリーフィング</strong><span>優先事項をまとめて報告</span></div></div></div></div></div>
+    <div class="prod-c"><div class="prod-head"><div class="prod-ic" style="background:#FEFCE8;border:1.5px solid #FDE68A;">🌐</div><div><div class="prod-nm">Claude in Chrome</div><div class="prod-tg">Chromeブラウザ拡張機能 — ブラウジングエージェント（Beta）</div></div><div style="display:flex;gap:.32rem;flex-wrap:wrap;"><span class="chip c-or">Pro以上</span><span class="chip c-bl">Beta</span></div></div><div class="prod-body"><div class="prod-col"><h4>概要・特徴</h4><p class="prod-desc">ChromeブラウザにClaudeを統合するエージェント機能。複数サイトをまたがった情報収集・フォーム入力・操作を自動化。</p><ul class="arr-l"><li>閲覧中のページをリアルタイムで解析・要約</li><li>複数タブにまたがる情報収集の自動化</li><li>フォーム入力・クリック操作の自動化</li></ul></div><div class="prod-col"><h4>活用ケース</h4><div class="uc-l"><div class="uc-it"><strong>🔍 リサーチ</strong><span>複数サイトから自動収集・比較</span></div><div class="uc-it"><strong>📝 フォーム自動化</strong><span>繰り返し入力の自動処理</span></div><div class="uc-it"><strong>🛒 比較購入</strong><span>ECサイトの価格・レビュー比較</span></div></div></div></div></div>
+    <div class="prod-c" style="margin-bottom:2.5rem"><div class="prod-head"><div class="prod-ic" style="background:#EFF6FF;border:1.5px solid #BFDBFE;">📊</div><div><div class="prod-nm">Claude in Excel / PowerPoint</div><div class="prod-tg">Microsoft Office統合 — スプレッドシート・スライドエージェント（Beta）</div></div><div style="display:flex;gap:.32rem;flex-wrap:wrap;"><span class="chip c-or">有料プラン</span><span class="chip c-bl">Beta</span></div></div><div class="prod-body"><div class="prod-col"><h4>概要・特徴</h4><p class="prod-desc">Microsoft ExcelとPowerPointにClaudeを直接統合するアドイン。自然言語でデータ分析・数式生成・スライド作成が可能。</p><ul class="arr-l"><li>Excelでの自然言語によるデータ分析・数式生成</li><li>PowerPointスライドの自動生成・デザイン調整</li><li>Microsoft 365アドインとしてインストール</li></ul></div><div class="prod-col"><h4>活用ケース</h4><div class="uc-l"><div class="uc-it"><strong>📈 データ分析</strong><span>Excelデータの自動集計・グラフ作成</span></div><div class="uc-it"><strong>🔢 数式生成</strong><span>複雑な数式を自然言語から生成</span></div><div class="uc-it"><strong>🎨 スライド作成</strong><span>トピックからPowerPointを自動生成</span></div></div></div></div></div>
+    <div style="margin-top:2.2rem;margin-bottom:1.1rem"><span class="sec-tag">Guide</span><h2 class="sec-title">どの製品を選ぶべきか</h2></div>
+    <div class="dec-g">
+      <div class="dec-c"><div class="dec-who">📝 ライター・マーケター・研究者</div><div class="dec-prod">→ Claude Chat</div><div class="dec-r">文章生成・翻訳・分析が主な用途なら基本のChatで十分。</div></div>
+      <div class="dec-c"><div class="dec-who">💻 エンジニア・開発者</div><div class="dec-prod">→ Claude Code</div><div class="dec-r">コードの理解・編集・テスト・PRまで一気通貫で自動化。</div></div>
+      <div class="dec-c"><div class="dec-who">📊 ビジネスパーソン</div><div class="dec-prod">→ Cowork</div><div class="dec-r">ターミナルを使わずにエージェント機能を使いたい方向け。</div></div>
+      <div class="dec-c"><div class="dec-who">🌐 リサーチャー・EC担当</div><div class="dec-prod">→ Claude in Chrome</div><div class="dec-r">ウェブリサーチの効率化・競合調査・フォーム自動化。</div></div>
+      <div class="dec-c"><div class="dec-who">📈 Excel・PPT多用者</div><div class="dec-prod">→ Claude in Excel/PPT</div><div class="dec-r">Microsoft Officeが仕事の中心ならアドインとして使うと自然。</div></div>
+      <div class="dec-c"><div class="dec-who">🤔 迷ったら</div><div class="dec-prod">→ まずChatから</div><div class="dec-r">まずFreeのChatから始め、必要になったらPro以上にアップグレード。</div></div>
+    </div>`);
+  }
+  function renderConnect(){
+    into('m-connect', `
+    <div style="margin-bottom:1.3rem"><span class="sec-tag">MCP</span><h2 class="sec-title">MCPとは？Claudeの接続を拡張する仕組み</h2></div>
+    <div class="mcp-box"><div class="mcp-hd"><div class="mcp-em">🔌</div><div><div class="mcp-ht">Model Context Protocol</div><div class="mcp-hs">オープンスタンダード — Anthropicが提唱</div></div></div><p class="mcp-body">MCPはAIモデルと外部データソース・ツールを安全に接続するためのオープンプロトコルです。ClaudeのデスクトップアプリやClaude Codeから、対応するMCPサーバーをインストールするだけでSlack・Notion・GitHub・データベース等と接続できます。</p><div class="mcp-cols"><div class="mcp-col"><h4>MCPの特徴</h4><ul class="dot-l"><li>プラグイン形式で機能を追加（インストールするだけ）</li><li>デスクトップアプリ・CLIで使用可能</li><li>公式＋サードパーティ多数のサーバーが存在</li><li>カスタムMCPサーバーを自作して独自ツールと接続可能</li></ul></div><div class="mcp-col"><h4>代表的なMCPサーバー（公式）</h4><ul class="dot-l"><li>Filesystem — ローカルファイルシステムへのアクセス</li><li>GitHub — リポジトリ・PR・Issues操作</li><li>Google Drive — Googleドキュメント読み書き</li><li>Slack — チャンネル・メッセージ操作</li><li>PostgreSQL / SQLite — データベース直接操作</li></ul></div></div></div>
+    <div style="margin-bottom:1.1rem"><span class="sec-tag">Integrations</span><h2 class="sec-title">主要ツール連携方法</h2></div>
+    <div class="int-g">
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#EFF6FF;border:1.5px solid #BFDBFE;">📁</div><div><div class="int-nm">Google Workspace</div><div class="int-tp">Drive・Docs・Gmail・Sheets</div></div></div><div class="int-desc">ClaudeからGoogleドキュメント・スプレッドシート・Gmailを直接読み書き。</div><ol class="int-steps"><li data-n="1">claude.ai → Settings → Connections</li><li data-n="2">「Google Drive」を選択しConnect</li><li data-n="3">Googleアカウントで認証・権限付与</li><li data-n="4">Projectsでフォルダを知識源として追加</li></ol><span class="i-badge ib-n">ネイティブ統合</span></div>
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#F5F3FF;border:1.5px solid #DDD6FE;">💬</div><div><div class="int-nm">Slack</div><div class="int-tp">チームチャット連携</div></div></div><div class="int-desc">Slackワークスペース内でClaudeをメンション呼び出し。</div><ol class="int-steps"><li data-n="1">Slack App Marketplaceで「Claude」を検索</li><li data-n="2">管理者がアプリを承認して追加</li><li data-n="3">@Claudeでメンションして使用開始</li></ol><span class="i-badge ib-n">ネイティブ統合</span></div>
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#F9FAFB;border:1.5px solid #E5E7EB;">🐙</div><div><div class="int-nm">GitHub</div><div class="int-tp">コードリポジトリ連携</div></div></div><div class="int-desc">GitHubリポジトリをClaudeに読み込ませてコードレビュー・PR作成を自動化。</div><ol class="int-steps"><li data-n="1">Claude CodeのCLIを起動</li><li data-n="2">リポジトリルートで「claude」を実行</li><li data-n="3">または MCP GitHub サーバーをインストール</li></ol><span class="i-badge ib-m">MCP / ネイティブ</span></div>
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#F3F4F6;border:1.5px solid #D1D5DB;">💻</div><div><div class="int-nm">VS Code</div><div class="int-tp">コードエディタ統合</div></div></div><div class="int-desc">VS Code拡張機能でClaudeをIDE内に統合。エディタ内でコード修正が可能。</div><ol class="int-steps"><li data-n="1">VS Code拡張機能マーケットで「Claude Code」を検索</li><li data-n="2">インストール → Claudeアカウントでサインイン</li><li data-n="3">コードを選択して「Ask Claude」</li></ol><span class="i-badge ib-n">公式拡張機能</span></div>
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#E0F2FE;border:1.5px solid #7DD3FC;">☁️</div><div><div class="int-nm">AWS Bedrock</div><div class="int-tp">クラウドAPI統合</div></div></div><div class="int-desc">AWS BedrockからAnthropicのClaudeモデルにアクセス。</div><ol class="int-steps"><li data-n="1">AWSコンソール → Amazon Bedrock → モデルアクセス</li><li data-n="2">Claudeモデルへのアクセスをリクエスト</li><li data-n="3">boto3またはAWS SDKでAPI呼び出し</li></ol><span class="i-badge ib-a">クラウドAPI</span></div>
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#F9FAFB;border:1.5px solid #E5E7EB;">📓</div><div><div class="int-nm">Notion</div><div class="int-tp">ノート・ドキュメント管理</div></div></div><div class="int-desc">MCPサーバー経由でClaudeに接続。ドキュメント検索・ページ作成・DB操作が可能。</div><ol class="int-steps"><li data-n="1">Notion Integration Tokenを発行</li><li data-n="2">Claude DesktopのMCP設定にサーバーを追加</li><li data-n="3">設定ファイルにTokenを記述して再起動</li></ol><span class="i-badge ib-m">MCP</span></div>
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#FEFCE8;border:1.5px solid #FDE68A;">⚡</div><div><div class="int-nm">Zapier / Make</div><div class="int-tp">ノーコード自動化</div></div></div><div class="int-desc">コードなしにClaudeを既存のワークフローに組み込む。</div><ol class="int-steps"><li data-n="1">Zapier → Apps で「Claude」を検索</li><li data-n="2">AnthropicのAPIキーを入力して接続</li><li data-n="3">トリガーとアクションを設定</li></ol><span class="i-badge ib-a">API連携</span></div>
+      <div class="int-c"><div class="int-hd"><div class="int-ic" style="background:#FFF7ED;border:1.5px solid #FED7AA;">🔷</div><div><div class="int-nm">Google Cloud Vertex AI</div><div class="int-tp">GCPでClaude利用</div></div></div><div class="int-desc">Google CloudのVertex AIプラットフォームからClaudeを利用。</div><ol class="int-steps"><li data-n="1">GCPコンソール → Vertex AI → Model Garden</li><li data-n="2">Anthropic Claude → Deployをクリック</li><li data-n="3">APIエンドポイントをアプリに設定</li></ol><span class="i-badge ib-a">クラウドAPI</span></div>
+    </div>
+    <div style="margin-bottom:1.1rem"><span class="sec-tag">MCP Setup</span><h2 class="sec-title">MCPサーバーの設定方法</h2></div>
+    <div class="code-wrap"><div class="code-bar"><div class="code-dots"><span class="cd-r"></span><span class="cd-y"></span><span class="cd-g"></span></div><span class="code-lang">~/.claude/claude_desktop_config.json（Mac）/ %APPDATA%\Claude\（Windows）</span></div><div class="code-body">{ <span class="ck">"mcpServers"</span>: { <span class="cc">// ローカルファイルシステム</span>
+  <span class="ck">"filesystem"</span>: { <span class="ck">"command"</span>: <span class="cs">"npx"</span>, <span class="ck">"args"</span>: [<span class="cs">"-y"</span>, <span class="cs">"@modelcontextprotocol/server-filesystem"</span>, <span class="cs">"/Users/あなた/Documents"</span>] },
+  <span class="cc">// GitHubリポジトリ操作</span>
+  <span class="ck">"github"</span>: { <span class="ck">"command"</span>: <span class="cs">"npx"</span>, <span class="ck">"args"</span>: [<span class="cs">"-y"</span>, <span class="cs">"@modelcontextprotocol/server-github"</span>], <span class="ck">"env"</span>: { <span class="ck">"GITHUB_PERSONAL_ACCESS_TOKEN"</span>: <span class="cs">"&lt;your-token&gt;"</span> } }
+} }</div></div>`);
+  }
+  function renderModels(){
+    into('m-models',`
+    <div style="margin-bottom:1.3rem"><span class="sec-tag">Model Family</span><h2 class="sec-title">3つのモデルファミリー</h2></div>
+    <div class="mhg">
+      <div class="mhc haiku"><div class="mhc-in"><div class="mhc-em">⚡</div><div class="mhc-nm">Haiku</div><div class="mhc-id">claude-haiku-4-5-20251001</div><div class="mhc-sl">⚡ 速さとコスパの王者</div><div class="mhc-desc">シンプルなタスク・大量処理・チャットボットに最適。応答速度最速、APIコストも最安。</div><div class="mhc-m"><div class="mhc-ml">速度</div><div class="bar-bg"><div class="bar" style="width:95%"></div></div><div class="mhc-mv">最速</div></div><div class="mhc-m"><div class="mhc-ml">性能</div><div class="bar-bg"><div class="bar" style="width:55%"></div></div><div class="mhc-mv">標準</div></div><div class="mhc-m"><div class="mhc-ml">Input料金</div><div class="bar-bg"><div class="bar" style="width:20%"></div></div><div class="mhc-mv">$0.80/MTok</div></div></div></div>
+      <div class="mhc sonnet"><div class="mhc-in"><div class="mhc-em">⭐</div><div class="mhc-nm">Sonnet</div><div class="mhc-id">claude-sonnet-4-6</div><div class="mhc-sl">⭐ ベストバランス・最推奨</div><div class="mhc-desc">速度・性能・コストのベストバランス。ほとんどのユースケースに最適。コーディング・分析に優れる。</div><div class="mhc-m"><div class="mhc-ml">速度</div><div class="bar-bg"><div class="bar" style="width:75%"></div></div><div class="mhc-mv">高速</div></div><div class="mhc-m"><div class="mhc-ml">性能</div><div class="bar-bg"><div class="bar" style="width:80%"></div></div><div class="mhc-mv">高性能</div></div><div class="mhc-m"><div class="mhc-ml">Input料金</div><div class="bar-bg"><div class="bar" style="width:40%"></div></div><div class="mhc-mv">$3.00/MTok</div></div></div></div>
+      <div class="mhc opus"><div class="mhc-in"><div class="mhc-em">🏆</div><div class="mhc-nm">Opus</div><div class="mhc-id">claude-opus-4-6</div><div class="mhc-sl">🏆 最高性能・複雑推論</div><div class="mhc-desc">最も高度な推論・分析力。100万トークンコンテキスト対応。複雑な研究・法律・財務に最適。</div><div class="mhc-m"><div class="mhc-ml">速度</div><div class="bar-bg"><div class="bar" style="width:55%"></div></div><div class="mhc-mv">標準</div></div><div class="mhc-m"><div class="mhc-ml">性能</div><div class="bar-bg"><div class="bar" style="width:100%"></div></div><div class="mhc-mv">最高</div></div><div class="mhc-m"><div class="mhc-ml">Input料金</div><div class="bar-bg"><div class="bar" style="width:60%"></div></div><div class="mhc-mv">$5.00/MTok</div></div></div></div>
+    </div>
+    <div style="margin-bottom:1.1rem"><span class="sec-tag">Specs</span><h2 class="sec-title">詳細スペック比較</h2></div>
+    <div class="tbl-wrap" style="margin-bottom:2.5rem"><table class="tbl"><thead><tr><th>項目</th><th>Haiku 4.5</th><th>Sonnet 4.6 ★推奨</th><th>Opus 4.6</th></tr></thead><tbody>
+      <tr><td>モデルID</td><td class="mono">claude-haiku-4-5-20251001</td><td class="mono">claude-sonnet-4-6</td><td class="mono">claude-opus-4-6</td></tr>
+      <tr><td>Input料金（/MTok）</td><td class="mono">$0.80</td><td class="mono">$3.00</td><td class="mono">$5.00</td></tr>
+      <tr><td>Output料金（/MTok）</td><td class="mono">$4.00</td><td class="mono">$15.00</td><td class="mono">$25.00</td></tr>
+      <tr><td>コンテキスト</td><td>200K</td><td>200K</td><td>1M</td></tr>
+      <tr><td>最大出力トークン</td><td>8K</td><td>64K</td><td>128K</td></tr>
+      <tr><td>速度</td><td>最速</td><td>高速</td><td>標準</td></tr>
+      <tr><td>Extended Thinking</td><td><span class="ng">✗</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+      <tr><td>Vision（画像入力）</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+      <tr><td>Tool Use</td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td><td><span class="ok">✓</span></td></tr>
+    </tbody></table></div>
+    <div class="card" style="margin-bottom:2.5rem"><div style="display:flex;align-items:center;gap:.85rem;margin-bottom:1rem"><span style="font-size:1.5rem">📏</span><div class="sec-title" style="margin-bottom:0;font-size:1.05rem">コンテキストウィンドウとは？</div></div><p style="font-size:.82rem;color:var(--text2);line-height:1.75;margin-bottom:1rem;">Claudeが一度に処理できるテキストの量。大きいほど長い書類・コードベースを一度に扱える。1トークン ≒ 英語0.75単語 / 日本語0.5〜1文字。</p><div class="ctx-r"><div class="ctx-b"><div class="ctx-n" style="color:#5A90D0;">200K</div><div class="ctx-l">Haiku / Sonnet</div><div class="ctx-e">≈ 文庫本3〜4冊分</div></div><div class="ctx-b"><div class="ctx-n" style="color:#5AAD70;">1M</div><div class="ctx-l">Opus 4.6</div><div class="ctx-e">≈ 大型コードベース全体</div></div><div class="ctx-b"><div class="ctx-n" style="color:var(--accent);">≈0.75</div><div class="ctx-l">英語 1トークン</div><div class="ctx-e">日本語: 1〜2文字<br>コード: 1〜4文字</div></div></div></div>
+    <div style="margin-bottom:1.1rem"><span class="sec-tag">Use Cases</span><h2 class="sec-title">タスク別 最適モデル選択</h2></div>
+    <div class="uc-g">
+      <div class="uc-c"><div class="uc-i">🤖</div><div class="uc-t">チャットボット・CS</div><span class="uc-m um-h">→ Haiku 推奨</span><div class="uc-d">大量の問い合わせ処理・FAQbot。低コストと高速応答が最重要。</div></div>
+      <div class="uc-c"><div class="uc-i">📝</div><div class="uc-t">文章作成・翻訳</div><span class="uc-m um-s">→ Sonnet 推奨</span><div class="uc-d">記事・レポート・メール作成、日英翻訳。品質とコストのバランスが最適。</div></div>
+      <div class="uc-c"><div class="uc-i">💻</div><div class="uc-t">コーディング補助</div><span class="uc-m um-s">→ Sonnet 推奨</span><div class="uc-d">バグ修正・コードレビュー・機能実装。Sonnetはコーディング能力が高い。</div></div>
+      <div class="uc-c"><div class="uc-i">🔬</div><div class="uc-t">複雑な研究・分析</div><span class="uc-m um-o">→ Opus 推奨</span><div class="uc-d">法律文書・医療診断サポート・財務モデリング。高度な推論が必要なタスク。</div></div>
+      <div class="uc-c"><div class="uc-i">📚</div><div class="uc-t">長文書類処理</div><span class="uc-m um-o">→ Opus 推奨</span><div class="uc-d">100万トークンのコンテキストで大規模コードベースや長大な文書を一度に処理。</div></div>
+      <div class="uc-c"><div class="uc-i">⚡</div><div class="uc-t">リアルタイム処理</div><span class="uc-m um-h">→ Haiku 推奨</span><div class="uc-d">応答速度最優先のアプリ・タイピング補助・自動補完。低レイテンシが強み。</div></div>
+      <div class="uc-c"><div class="uc-i">🧮</div><div class="uc-t">高難度数学・推論</div><span class="uc-m um-o">→ Opus 推奨</span><div class="uc-d">数学的証明・論理パズル・複合的な戦略分析。Extended Thinkingと組み合わせて最高性能。</div></div>
+      <div class="uc-c"><div class="uc-i">🎨</div><div class="uc-t">創作・コンテンツ</div><span class="uc-m um-s">→ Sonnet 推奨</span><div class="uc-d">小説・脚本・マーケティングコピー。創造性と品質のバランスが良い。</div></div>
+      <div class="uc-c"><div class="uc-i">🌐</div><div class="uc-t">多言語処理</div><span class="uc-m um-s">→ Sonnet 推奨</span><div class="uc-d">日本語・英語・中国語など多言語での高品質な翻訳・要約・生成。</div></div>
+    </div>`);
+  }
+  return { applySeason, showBanner, hideBanner, showPage, renderProducts, renderConnect, renderModels };
+})();
+
+/* ── CONTROLLER ───────────────────────────────────── */
+const C = (() => {
+  const LAZY = {
+    products: ()=>View.renderProducts(),
+    connect:  ()=>View.renderConnect(),
+    models:   ()=>View.renderModels()
+  };
+  function go(page) {
+    View.showPage(page);
+    if(LAZY[page]) LAZY[page]();
+  }
+  function dismissBanner(){ View.hideBanner(); }
+  async function init() {
+    go('home');
+    // Season（非同期・ノンブロッキング）
+    SeasonModel.load().then(s=>View.applySeason(s));
+  }
+  return { go, dismissBanner, init };
+})();
+
+document.addEventListener('DOMContentLoaded', ()=>C.init());
+</script>
+</body>
+</html>
