@@ -1,0 +1,88 @@
+<!-- ============================================
+  共通ヘッダー・フッターの参照テンプレート
+  各HTMLファイルにコピーして使用
+  ============================================ -->
+
+<!-- HEADER -->
+<header class="site-header">
+  <nav class="nav-inner">
+    <a href="../index.html" class="site-logo">
+      <div class="logo-mark">C</div>
+      <div class="logo-text">
+        <span class="l-main">Claude Guide</span>
+        <span class="l-sub">非公式ガイド</span>
+      </div>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../pages/pricing.html">💳 料金</a></li>
+      <li><a href="../pages/devices.html">📱 端末</a></li>
+      <li><a href="../pages/windows.html">🪟 Windows</a></li>
+      <li><a href="../pages/api.html">🔌 API</a></li>
+      <li><a href="../pages/features.html">✨ 機能比較</a></li>
+      <li><a href="../pages/claude-code.html">💻 Code</a></li>
+      <li><a href="../pages/connection.html">🔗 接続</a></li>
+    </ul>
+
+    <button class="update-badge" id="update-badge" aria-label="更新情報">
+      <div class="badge-dot"></div>
+      <span class="badge-text">更新情報</span>
+    </button>
+  </nav>
+</header>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap">
+          <div class="logo-mark">C</div>
+          <div class="logo-text"><span class="l-main">Claude Guide</span></div>
+        </div>
+        <p>Claudeの使い方・料金・機能を<br>わかりやすく紹介する情報サイトです。<br><br>🤖 このサイトは Claude によって作成されました。</p>
+      </div>
+      <div class="footer-col">
+        <h4>サービス</h4>
+        <ul>
+          <li><a href="../pages/pricing.html">料金体系</a></li>
+          <li><a href="../pages/features.html">機能比較</a></li>
+          <li><a href="../pages/devices.html">対応端末</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>活用方法</h4>
+        <ul>
+          <li><a href="../pages/api.html">API利用</a></li>
+          <li><a href="../pages/claude-code.html">Claude Code</a></li>
+          <li><a href="../pages/connection.html">接続・連携</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>公式リンク</h4>
+        <ul>
+          <li><a href="https://claude.ai" target="_blank" rel="noopener">claude.ai ↗</a></li>
+          <li><a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic ↗</a></li>
+          <li><a href="https://docs.anthropic.com" target="_blank" rel="noopener">公式ドキュメント ↗</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-meta">
+        <span>© 2026 Claude ガイド — 非公式情報サイト</span>
+        <span id="footer-timestamp"></span>
+      </div>
+      <div class="footer-disclaimer">
+        <strong>⚠️ 非公式情報サイト：</strong>
+        本サイトは Anthropic および Claude の公式サイトではありません。
+        情報は参考目的であり、正確性・完全性を保証しません。
+        最新の公式情報は <a href="https://www.anthropic.com" target="_blank" rel="noopener">anthropic.com</a> および
+        <a href="https://docs.anthropic.com" target="_blank" rel="noopener">docs.anthropic.com</a> でご確認ください。
+        「Claude」は Anthropic の商標です。
+      </div>
+    </div>
+  </div>
+</footer>
