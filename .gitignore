@@ -1,0 +1,18 @@
+node_modules/
+
+# 翻訳ビルド生成物（npm run translate で再生成可能）
+en/
+zh-CN/
+zh-TW/
+ko/
+es/
+fr/
+de/
+pt/
+ru/
+ar/
+hi/
+th/
+vi/
+id/
+.claude/
