@@ -1,0 +1,1056 @@
+<!DOCTYPE html><html lang="de"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>So verwenden Sie Claude – Claude-Anleitung</title>
+  <meta name="description" content="Leicht verständliche Erklärung für Anfänger zur Verwendung von Claude. Wir stellen viele praktische Beispiele für Anregungen für das tägliche Leben, die Arbeit, das Studium und die Kreativität vor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Shippori+Mincho+B1:wght@400;500;600;800&amp;family=Noto+Sans+JP:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   Claude ガイド — デザインシステム v2
+   コンセプト：やさしい贅沢 / 日本女性誌のような上品さ
+   ============================================================ */
+
+
+
+:root {
+  --cream:         #FDFAF6;
+  --cream-warm:    #FBF5EE;
+  --petal-pale:    #FAF0EC;
+  --petal:         #F0D9D1;
+  --petal-mid:     #E8C5BB;
+
+  --rose:          #C07B72;
+  --rose-deep:     #A5584F;
+  --rose-light:    #EFD0CB;
+  --rose-glow:     rgba(192,123,114,0.15);
+
+  --mauve:         #BFA3AE;
+  --mauve-light:   #EFE4EA;
+  --sage:          #9BB5A2;
+  --sage-light:    #E4EEEA;
+  --teal:          #87ABA6;
+  --teal-light:    #DFF0EE;
+  --gold:          #C8A47A;
+  --gold-light:    #F4EAD8;
+
+  --text:          #2E2420;
+  --text-sub:      #6E5550;
+  --text-muted:    #A8908C;
+  --text-light:    #C4AEAD;
+
+  --border:        #EAD8D3;
+  --border-soft:   #F4ECE9;
+  --border-strong: #D9BEB8;
+
+  --white:         #FFFFFF;
+  --bg:            var(--cream);
+
+  --shadow-xs:  0 1px 4px rgba(160,90,80,0.06);
+  --shadow-sm:  0 2px 12px rgba(160,90,80,0.08);
+  --shadow-md:  0 6px 28px rgba(160,90,80,0.11);
+  --shadow-lg:  0 16px 56px rgba(160,90,80,0.14);
+  --shadow-xl:  0 24px 80px rgba(160,90,80,0.17);
+
+  --r-xs:   6px;
+  --r-sm:   12px;
+  --r-md:   20px;
+  --r-lg:   28px;
+  --r-xl:   40px;
+  --r-full: 9999px;
+
+  --font-serif: 'Cormorant Garamond', 'Shippori Mincho B1', serif;
+  --font-jp:    'Shippori Mincho B1', serif;
+  --font-body:  'Noto Sans JP', sans-serif;
+
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --duration:   0.35s;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: var(--rose); text-decoration: none; transition: color var(--duration) var(--ease-out); }
+a:hover { color: var(--rose-deep); }
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3 {
+  font-family: var(--font-jp);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+/* ── ヘッダー ── */
+.site-header {
+  background: rgba(253,250,246,0.9);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 32px;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.logo-mark {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--petal-mid) 0%, var(--mauve) 100%);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(160,90,80,0.22);
+  flex-shrink: 0;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+.logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+
+.logo-text .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.logo-text .l-sub {
+  font-size: 0.63rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.nav-links a {
+  color: var(--text-sub);
+  font-size: 0.81rem;
+  font-weight: 300;
+  padding: 6px 13px;
+  border-radius: var(--r-full);
+  transition: all var(--duration) var(--ease-out);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--rose);
+  background: var(--petal-pale);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* ── レイアウト ── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section { padding: 72px 0; }
+
+.section-alt {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, var(--cream) 100%);
+}
+
+.section-title-wrap { margin-bottom: 40px; }
+
+.section-title {
+  font-family: var(--font-jp);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+
+.section-title-wrap .title-line {
+  width: 36px; height: 1px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+  margin-top: 8px;
+}
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+  display: block;
+}
+
+/* ── カードグリッド ── */
+.card-grid   { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card-grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 28px 26px;
+  transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--petal) 50%, transparent);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
+}
+
+.card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+.card p  { font-size: 0.84rem; color: var(--text-sub); line-height: 1.85; font-weight: 300; }
+
+.card-icon {
+  width: 46px; height: 46px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--petal-pale), var(--mauve-light));
+}
+
+/* ── インフォボックス ── */
+.info-box {
+  background: linear-gradient(135deg, var(--sage-light), var(--teal-light));
+  border: 1px solid rgba(155,181,162,0.4);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-weight: 300;
+}
+
+.info-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+.warn-box {
+  background: linear-gradient(135deg, #FDF4E4, #FFF8EE);
+  border: 1px solid rgba(200,164,122,0.4);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  font-size: 0.84rem;
+  color: #7A5C30;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+/* ── ページヘッダー ── */
+.page-header {
+  position: relative;
+  padding: 72px 32px 64px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--cream-warm);
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse, rgba(224,185,175,0.28) 0%, transparent 70%);
+  filter: blur(60px);
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.page-header .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--rose-deep);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-family: var(--font-body);
+}
+
+.page-header .eyebrow::before,
+.page-header .eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: var(--petal-mid);
+}
+
+.page-header h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  position: relative;
+}
+
+.page-header p {
+  font-size: 0.92rem;
+  color: var(--text-sub);
+  max-width: 500px;
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 2;
+}
+
+/* ── パンくず ── */
+.breadcrumb {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  font-size: 0.74rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+.breadcrumb a { color: var(--text-light); }
+.breadcrumb a:hover { color: var(--rose); }
+.breadcrumb .sep { color: var(--border-strong); font-size: 0.6rem; }
+.breadcrumb span { color: var(--rose); }
+
+/* ── チップ ── */
+.chip {
+  display: inline-block;
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  font-size: 0.69rem;
+  font-weight: 500;
+  padding: 3px 11px;
+  border-radius: var(--r-full);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--petal);
+}
+
+.chip-teal     { background: var(--teal-light);  color: #4A8A84; border-color: var(--teal); }
+.chip-sage     { background: var(--sage-light);  color: #527A60; border-color: var(--sage); }
+.chip-lavender { background: var(--mauve-light); color: #7A6080; border-color: var(--mauve); }
+.chip-gold     { background: var(--gold-light);  color: #8A6A3A; border-color: var(--gold); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+
+/* ── ボタン ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--r-full);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+  border: 1px solid transparent;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  box-shadow: 0 4px 16px rgba(192,123,114,0.28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(192,123,114,0.38);
+  color: white;
+}
+
+.btn-outline {
+  background: var(--white);
+  color: var(--rose);
+  border-color: var(--petal-mid);
+}
+
+.btn-outline:hover {
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  border-color: var(--rose-light);
+}
+
+/* ── フッター ── */
+.site-footer {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, #EFE0DA 100%);
+  border-top: 1px solid var(--border);
+  padding: 56px 32px 36px;
+}
+
+.footer-inner { max-width: 1000px; margin: 0 auto; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo-wrap {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+
+.footer-brand .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.footer-brand p {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  max-width: 210px;
+  font-weight: 300;
+}
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { font-size: 0.81rem; color: var(--text-sub); font-weight: 300; }
+.footer-col ul li a:hover { color: var(--rose); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.73rem;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+}
+
+.footer-disclaimer {
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--r-md);
+  padding: 16px 22px;
+  font-size: 0.74rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  border: 1px solid var(--border-soft);
+  font-weight: 300;
+}
+
+.footer-disclaimer strong { color: var(--rose); font-weight: 500; }
+
+/* ── スクロールトップ ── */
+.scroll-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--rose);
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration) var(--ease-out);
+  z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.scroll-top:hover {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+/* ── プロンプト例ボックス ── */
+.prompt-example {
+  background: var(--cream-warm);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--rose);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 14px 18px;
+  font-size: 0.84rem;
+  color: var(--text);
+  margin: 10px 0;
+  font-weight: 400;
+  line-height: 1.75;
+  position: relative;
+}
+
+.prompt-example::before {
+  content: '💬';
+  position: absolute;
+  top: 12px; left: -28px;
+  font-size: 0.9rem;
+}
+
+.prompt-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+/* ── 良い例・悪い例 ── */
+.example-good {
+  background: linear-gradient(135deg, var(--sage-light), #E8F2EA);
+  border: 1px solid rgba(155,181,162,0.5);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin: 8px 0;
+}
+
+.example-bad {
+  background: linear-gradient(135deg, #FDF0EE, #FEE8E4);
+  border: 1px solid rgba(192,123,114,0.3);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin: 8px 0;
+}
+
+.example-good .label,
+.example-bad .label {
+  font-size: 0.74rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.example-good .label { color: #527A60; }
+.example-bad .label { color: var(--rose-deep); }
+
+.example-good p,
+.example-bad p {
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ── レスポンシブ ── */
+
+/* 中間幅: ナビリンクを縮小して1行に収める */
+@media (max-width: 1100px) {
+  .nav-links a { font-size: 0.73rem; padding: 5px 8px; }
+  .nav-links { gap: 1px; }
+  .site-header { padding: 0 16px; }
+  .nav-inner { gap: 10px; }
+}
+
+/* 900px以下: ハンバーガーメニューに切替 */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: rgba(253,250,246,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px; z-index: 99; gap: 4px;
+  }
+  .nav-links.open a { font-size: 0.85rem; padding: 10px 16px; }
+  .nav-toggle { display: block; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .card-grid, .card-grid-2 { grid-template-columns: 1fr; }
+  .page-header { padding: 56px 24px 48px; }
+  .section { padding: 52px 0; }
+  .container { padding: 0 20px; }
+}
+
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-meta { flex-direction: column; align-items: flex-start; }
+}
+
+/* page-header 高さ統一 */
+.page-header { display: block; width: 100%; box-sizing: border-box; }
+.page-header p { max-width: 440px; }
+
+/* 言語プルダウン */
+.gt-widget{flex-shrink:0;}
+#gt-lang-select{
+  appearance:none;-webkit-appearance:none;
+  background:linear-gradient(135deg,var(--petal-pale),var(--mauve-light));
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23A5584F'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  border:1px solid var(--petal-mid);border-radius:var(--r-full);
+  padding:5px 28px 5px 12px;font-size:0.72rem;font-family:var(--font-body);
+  color:var(--rose-deep);cursor:pointer;outline:none;max-width:130px;
+  transition:all var(--duration) var(--ease-out);
+}
+#gt-lang-select:hover{border-color:var(--rose-light);}
+</style>
+  <script src="../i18n.js"></script>
+</head>
+<body data-current-page="usage.html" data-current-lang="de">
+
+<header class="site-header">
+  <nav class="nav-inner">
+    <a href="index.html" class="site-logo"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">Claude Guide</span><span class="l-sub">inoffizieller Führer</span></div></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="pricing.html">Gebühr</a></li>
+      <li><a href="devices.html">Terminal</a></li>
+      <li><a href="services.html">Service</a></li>
+      <li><a href="windows.html">Desktop</a></li>
+      <li><a href="features.html">Funktionsvergleich</a></li>
+      <li><a href="usage.html" class="active">Verwendung</a></li>
+      <li><a href="services/api.html">API</a></li>
+    </ul>
+    <div id="gt-select-wrap" class="gt-widget"></div>
+  </nav>
+</header>
+
+<div class="container"><div class="breadcrumb"><a href="index.html">Heim</a> <span class="sep">›</span> <span>Wie man es benutzt</span></div></div>
+<div class="page-header">
+  <div class="eyebrow">Nutzungstipps</div>
+  <h1>So verwenden Sie Claude</h1>
+  <p>Praktische Beispielaufforderungen, die auch Anfänger sofort nutzen können<br>Nach Kategorien geordnet.</p>
+</div>
+
+<!-- ══════════════════════════════════════════
+     1. 日常生活での活用
+     ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">🏠 Verwendung im täglichen Leben</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Machen Sie Ihren Alltag bequemer. Sprechen Sie gerne mit Claude</p>
+    </div>
+
+    <div class="card-grid-2">
+      <!-- メール・手紙 -->
+      <div class="card">
+        <div class="chip">Kommunikation</div>
+        <h3>✉️ Verfassen Sie E-Mails/Briefe</h3>
+        <p>Von geschäftlichen E-Mails bis hin zu privaten Nachrichten werden Texte vorgeschlagen, die zum Anlass passen.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Bitte schreiben Sie Ihrem Geschäftspartner eine Entschuldigungs-E-Mail. Wir entschuldigen uns für die 3-tägige Lieferverzögerung.</div>
+        <div class="prompt-example">Denken Sie an Glückwunschbotschaften zur Hochzeit an Ihre Freunde. Es fühlt sich lässig und warm an.</div>
+        <div class="prompt-example">Schreiben Sie eine Notiz, in der Sie sich dafür entschuldigen, dass Sie das PTA-Treffen verpasst haben.</div>
+      </div>
+
+      <!-- 旅行計画 -->
+      <div class="card">
+        <div class="chip chip-teal">Ausgehen</div>
+        <h3>✈️ Reiseplanung</h3>
+        <p>Teilen Sie uns einfach Ihr Reiseziel, Ihre Daten und Ihr Budget mit und wir schlagen Ihnen einen Reiseplan vor, der zu Ihnen passt.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Erstellen Sie einen Kyoto-Reiseplan für 3 Nächte und 4 Tage. Ich möchte gerne Tempel und Schreine besuchen und Gourmet-Essen genießen. Das Budget beträgt 50.000 Yen pro Person.</div>
+        <div class="prompt-example">Wir haben eine Liste mit Dingen erstellt, die wir für eine Reise nach Hawaii als vierköpfige Familie (Kinder sind 5 und 8 Jahre alt) einpacken sollten.</div>
+        <div class="prompt-example">Bitte nennen Sie mir 5 empfohlene Orte, zu denen Sie am dreitägigen Wochenende im nächsten Monat (ab Tokio) einen Tagesausflug unternehmen können.</div>
+      </div>
+
+      <!-- 料理・レシピ -->
+      <div class="card">
+        <div class="chip chip-sage">Mahlzeit</div>
+        <h3>🍳 Kochen/Rezepte</h3>
+        <p>Es hilft Ihnen, Rezepte aus Resten im Kühlschrank zu finden und ernährungsphysiologisch ausgewogene Menüs zu erstellen.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Erzählen Sie mir bitte 3 einfache Rezepte, die Sie mit dem Hühnchen und dem Kohl, die Sie im Kühlschrank haben, zubereiten können. In weniger als 20 Minuten kochen.</div>
+        <div class="prompt-example">Denken Sie an die Abendmenüs für eine Woche. Das Budget für eine vierköpfige Familie beträgt 10.000 Yen und wir möchten uns auf japanisches Essen konzentrieren.</div>
+        <div class="prompt-example">Mein Kind hasst Gemüse. Bitte verraten Sie mir einige köstliche Rezepte zum Essen von Gemüse.</div>
+      </div>
+
+      <!-- 買い物の相談 -->
+      <div class="card">
+        <div class="chip chip-gold">Einkaufen</div>
+        <h3>🛒 Einkaufsberatung</h3>
+        <p>Wenn Sie Schwierigkeiten bei der Auswahl eines Produkts haben, fragen Sie Claude. Es wird Ihnen helfen, Vergleichspunkte zu organisieren.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Vergleichen Sie drei empfohlene Roboterstaubsauger im Preis von 50.000 Yen. Für Haushalte mit Haustieren.</div>
+        <div class="prompt-example">Bitte sagen Sie mir, welche spiegellose Einobjektivkamera für Einsteiger zu empfehlen ist. Budget etwa 150.000 Yen.</div>
+        <div class="prompt-example">Ich möchte, dass meine Grundschulkinder Programmieren lernen. Vergleichen Sie empfohlene Lehrmaterialien und Dienstleistungen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     2. 仕事での活用
+     ══════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">💼 Verwendung bei der Arbeit</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Verbessern Sie die Arbeitseffizienz erheblich. Von der Materialerstellung bis zur Ideengenerierung</p>
+    </div>
+
+    <div class="card-grid-2">
+      <!-- 文書作成 -->
+      <div class="card">
+        <div class="chip">dokumentieren</div>
+        <h3>📝 Dokumentenerstellung</h3>
+        <p>Erstellen Sie schnell Entwürfe von Geschäftsdokumenten wie Protokollen, Vorschlägen und Berichten.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Erstellen Sie eine Vorlage für das Protokoll. Beinhaltet Teilnehmer, Tagesordnung, Entscheidungen und nächste Aktionspunkte.</div>
+        <div class="prompt-example">Schreiben Sie Ihrem Chef einen Entwurf eines Projektvorschlags. Das Thema lautete „Verbesserung der internen Kommunikation“.</div>
+        <div class="prompt-example">Überlegen Sie, wie Sie den Geschäftsbericht dieses Monats schreiben sollen. Der Umsatz betrug 120 % im Vergleich zum Vormonat.</div>
+      </div>
+
+      <!-- データ分析 -->
+      <div class="card">
+        <div class="chip chip-teal">Analyse</div>
+        <h3>📊 Datenanalyse</h3>
+        <p>Es ist in Ordnung, wenn Sie nicht wissen, wie man Daten liest. Claude wird Trends und Punkte erläutern.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Bitte analysieren Sie die Verkaufstrends in diesen Excel-Daten und teilen Sie mir die Verbesserungspunkte mit.</div>
+        <div class="prompt-example">Erklären Sie, wie Sie die Verkaufsgrafik so lesen, dass auch Anfänger sie verstehen können.</div>
+        <div class="prompt-example">Kategorisieren Sie die Umfrageergebnisse (100 kostenlose Beschreibungen) und fassen Sie die wichtigsten Meinungen in 5 zusammen.</div>
+      </div>
+
+      <!-- 翻訳・校正 -->
+      <div class="card">
+        <div class="chip chip-lavender">Sprache</div>
+        <h3>🌐 Übersetzung/Korrekturlesen</h3>
+        <p>Gut in der natürlichen Übersetzung und Satzprüfung. Überlassen Sie uns Geschäftsunterlagen und Alltagsgespräche.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Bitte übersetzen Sie diese englische E-Mail in natürliches Japanisch. Verwenden Sie einen geschäftlichen E-Mail-Ton.</div>
+        <div class="prompt-example">Bitte überprüfen Sie diesen Satz auf Tippfehler und schlagen Sie Verbesserungen vor.</div>
+        <div class="prompt-example">Erklären Sie mir bitte den Unterschied zwischen „Bitte prüfen“ und „Bitte bestätigen“. Mit Beispielsätzen.</div>
+      </div>
+
+      <!-- アイデア出し -->
+      <div class="card">
+        <div class="chip chip-gold">Idee</div>
+        <h3>💡 Ideengenerierung</h3>
+        <p>Als Brainstorming-Partner schlagen wir Ideen aus mehreren Perspektiven vor.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Reichen Sie 20 Namensideen für neue Produkte ein. Zielgruppe sind Frauen in den Zwanzigern und Naturkosmetik.</div>
+        <div class="prompt-example">10 Teambuilding-Planungsideen. Sie können auch aus der Ferne teilnehmen.</div>
+        <div class="prompt-example">Überlegen Sie sich Ideen, um Kunden in Ihr Café zu locken. Das Problem besteht darin, dass die Leerstandsquote an Wochentagen tagsüber hoch ist.</div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:24px;">
+      <span class="icon">💡</span>
+      <div>Wenn Sie es beruflich nutzen, gehen Sie bitte vorsichtig mit vertraulichen Informationen um. Bitte überprüfen Sie Ihre Unternehmensrichtlinien und vermeiden Sie die Eingabe persönlicher oder vertraulicher Daten.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     3. 学習での活用
+     ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">📚 Verwendung beim Lernen</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Stellen Sie jederzeit Fragen zu allem, was Sie nicht verstehen. Ihr persönlicher Nachhilfelehrer</p>
+    </div>
+
+    <div class="card-grid">
+      <!-- 勉強のサポート -->
+      <div class="card">
+        <div class="chip chip-sage">grundlegendes Lernen</div>
+        <h3>📖 Studienunterstützung</h3>
+        <p>Wir erklären schwierige Konzepte auf leicht verständliche Weise entsprechend Ihrem Niveau. Sie können auch Übungsfragen erstellen.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Erklären Sie den Mechanismus der Photosynthese auf eine Weise, die auch Schüler der Mittelstufe verstehen können. Verwenden Sie leicht vorstellbare Analogien anstelle von Diagrammen.</div>
+        <div class="prompt-example">Stellen Sie 5 TOEIC-Grammatikfragen. Mit Erklärung liegt das Levelziel bei 600 Punkten.</div>
+        <div class="prompt-example">Ordnen Sie die Meiji-Restauration in der japanischen Geschichte in chronologischer Reihenfolge. Eine Reihe wichtiger Personen und Ereignisse.</div>
+      </div>
+
+      <!-- プログラミング -->
+      <div class="card">
+        <div class="chip chip-teal">ES</div>
+        <h3>💻 Programmierung</h3>
+        <p>Vom Schreiben von Code bis zum Beheben von Fehlern. Es bietet ausführliche Anleitungen auch für Programmiereinsteiger.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Ich möchte mit Python eine einfache Haushaltsbuchanwendung erstellen. Schritt-für-Schritt-Anleitung für Anfänger.</div>
+        <div class="prompt-example">Bitte teilen Sie mir die Ursache und Lösung dieser Fehlermeldung mit: „TypeError: Nicht iterierbares NoneType-Objekt kann nicht entpackt werden.“</div>
+        <div class="prompt-example">Schreiben Sie Code zum Erstellen einer Selbsteinführungsseite mit HTML und CSS. Mit einem einfachen und stilvollen Design.</div>
+      </div>
+
+      <!-- 読書・要約 -->
+      <div class="card">
+        <div class="chip chip-lavender">Lektüre</div>
+        <h3>📑 Lektüre/Zusammenfassung</h3>
+        <p>Fassen Sie lange Dokumente zusammen und beantworten Sie Fragen, um Ihr Verständnis Ihrer Lektüre zu vertiefen.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Fassen Sie die Zusammenfassung dieser Arbeit in drei Zeilen zusammen. Vermeiden Sie möglichst Fachbegriffe.</div>
+        <div class="prompt-example">Nennen Sie mir bitte 5 Wirtschaftsbücher, die Sie empfehlen. Beschreiben Sie jeden Hauptpunkt in einem Wort. Für neue Mitglieder der Gesellschaft.</div>
+        <div class="prompt-example">Bitte geben Sie mir konkrete Beispiele dafür, wie Sie jede der „7 Gewohnheiten“ in Ihrem täglichen Leben anwenden können.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     4. クリエイティブな活用
+     ══════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">🎨 Kreativer Einsatz</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Ein Partner für ausdrucksstarke Aktivitäten wie das Schreiben von Texten, das Posten auf SNS, das Halten von Präsentationen usw.</p>
+    </div>
+
+    <div class="card-grid">
+      <!-- 文章・ストーリー -->
+      <div class="card">
+        <div class="chip">Beleuchtung</div>
+        <h3>✍️ Text/Geschichte</h3>
+        <p>Wir unterstützen die Erstellung verschiedener Texte wie Romanhandlungen, Blogartikel, Märchen etc.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Schreiben Sie kurze Märchen für Kinder. Das Thema ist „Mut“ und die Hauptfigur ist ein kleiner Hase.</div>
+        <div class="prompt-example">Überlegen Sie sich 10 Titelideen für Ihren Blogartikel. Das Thema lautet „Produktivität steigern im Homeoffice“.</div>
+        <div class="prompt-example">Schreiben Sie eine Erklärung zur Eigenwerbung. 5 Jahre im Vertrieb tätig, ausgeprägte Kommunikationsfähigkeiten. Für Jobwechselaktivitäten.</div>
+      </div>
+
+      <!-- SNS投稿 -->
+      <div class="card">
+        <div class="chip chip-teal">SNS</div>
+        <h3>📱 SNS-Beitrag</h3>
+        <p>Erstellen Sie Beiträge, die für jede Plattform optimiert sind. Auch Vorschläge für Hashtags.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Ich denke über Untertitel für Instagram nach. Etwas, das zu dem im Café aufgenommenen Latte-Art-Foto passt. Mit Hashtag.</div>
+        <div class="prompt-example">Veröffentlichen Sie einen Text mit maximal 140 Zeichen auf X (Twitter). Die Veröffentlichung eines neuen Produkts ankündigen und so ein Gefühl der Aufregung erzeugen.</div>
+        <div class="prompt-example">Denken Sie über den Titel und die Beschreibung des YouTube-Videos nach. Der Inhalt ist „Gitarrenkurs für Anfänger“.</div>
+      </div>
+
+      <!-- プレゼン資料 -->
+      <div class="card">
+        <div class="chip chip-gold">Präsentation</div>
+        <h3>📊 Präsentationsmaterialien</h3>
+        <p>Unterstützt die Erstellung von Folienkompositionsplänen und Skripten. Reduzieren Sie die Vorbereitungszeit für Präsentationen.</p>
+        <div class="prompt-label">Beispiel-Eingabeaufforderung</div>
+        <div class="prompt-example">Erstellen Sie einen Folienlayoutplan für die Schulung neuer Mitarbeiter. Insgesamt 10 Seiten, von der Unternehmensübersicht bis hin zu Verhaltensrichtlinien.</div>
+        <div class="prompt-example">Überlegen Sie sich drei Muster für Eröffnungsgespräche, die in Präsentationen für Kunden verwendet werden können.</div>
+        <div class="prompt-example">Schreiben Sie eine 5-minütige Rede zu Umweltthemen. Für Präsentationen vor Gymnasiasten.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     5. 上手に使うコツ
+     ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">✨ Tipps zur effektiven Anwendung</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Mit ein wenig Aufwand können Claudes Antworten viel besser sein.</p>
+    </div>
+
+    <!-- コツ 1: 具体的に指示する -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>1. Geben Sie konkrete Anweisungen</h3>
+      <p>Anstatt vage Fragen zu stellen, erhalten Sie eine genauere Antwort, wenn Sie die Bedingungen und Hintergründe konkret erläutern.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+        <div class="example-bad">
+          <span class="label">❌ Mehrdeutiges Beispiel</span>
+          <p>„Sagen Sie mir, welchen Computer Sie empfehlen“</p>
+        </div>
+        <div class="example-good">
+          <span class="label">✅ Konkrete Beispiele</span>
+          <p>„Was sind bei einem Budget von 100.000 Yen drei empfehlenswerte Laptops zum Schreiben von Universitätsberichten und zum Ansehen von Videos? Konzentrieren Sie sich auf Leichtigkeit.“</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;">
+        <div class="example-bad">
+          <span class="label">❌ Mehrdeutiges Beispiel</span>
+          <p>„Schreib mir eine E-Mail“</p>
+        </div>
+        <div class="example-good">
+          <span class="label">✅ Konkrete Beispiele</span>
+          <p>„Schreiben Sie eine E-Mail an Ihren Geschäftspartner, Unternehmen A, um einen Besprechungsplan für die nächste Woche zu vereinbaren. Empfohlene Termine sind Dienstag- und Donnerstagnachmittag. Sprechen Sie in einem höflichen Ton.“</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- コツ 2: 役割を与える -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>2. Geben Sie eine Rolle</h3>
+      <p>Sie können Claude eine Expertenrolle zuweisen und spezifische Antworten auf dieses Fachgebiet erhalten.</p>
+      <div class="prompt-example">Sie sind ein professioneller Redakteur. Bitte lesen Sie den Text unten Korrektur, um ihn leichter lesbar zu machen.</div>
+      <div class="prompt-example">Sie sind Webdesigner mit 10 Jahren Erfahrung. Bitte bringen Sie Anfängern die Grundlagen des Farbschemas der Website bei.</div>
+      <div class="prompt-example">Sie sind ein registrierter Ernährungsberater. Bitte schlagen Sie einen täglichen Speiseplan für diejenigen vor, die eine Diät machen.</div>
+    </div>
+
+    <!-- コツ 3: 段階的に質問する -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>3. Stellen Sie Fragen Schritt für Schritt</h3>
+      <p>Anstatt Fragen zu komplexen Themen auf einmal zu stellen, können Sie tiefergehende Antworten erhalten, indem Sie die Fragen schrittweise stellen.</p>
+      <div class="info-box">
+        <span class="icon">💡</span>
+        <div>
+          <strong>Schritt 1:</strong>„Bringen Sie mir die Grundgerüste des Marketings bei.“<br>
+          <strong>Schritt 2:</strong>„Erzählen Sie mir bitte bald mehr über die 4P-Analyse.“<br>
+          <strong>Schritt 3:</strong>„Ich denke über die Strategie meines Cafés mithilfe der 4P-Analyse nach“
+        </div>
+      </div>
+      <p style="margin-top:12px; font-size:0.84rem; color:var(--text-sub);">Indem Sie die nächste Frage auf Grundlage der vorherigen Antwort stellen, können Sie das Gespräch vertiefen und weitere praktische Ratschläge erhalten.</p>
+    </div>
+
+    <!-- コツ 4: 出力形式を指定する -->
+    <div class="card" style="margin-bottom:20px;">
+      <h3>4. Geben Sie das Ausgabeformat an</h3>
+      <p>Wenn Sie ihnen zuerst das gewünschte Format mitteilen, werden sie in einem benutzerfreundlichen Format antworten.</p>
+      <div class="tags">
+        <span class="chip">Tabellenformat</span>
+        <span class="chip chip-teal">Aufzählungspunkte</span>
+        <span class="chip chip-sage">Nummernliste</span>
+        <span class="chip chip-lavender">Abschlag</span>
+        <span class="chip chip-gold">JSON</span>
+      </div>
+      <div class="prompt-example">Die folgenden Informationen sind in einem Tabellenformat mit 3 Spalten „Artikel/Inhalt/Notizen“ zusammengefasst.</div>
+      <div class="prompt-example">Listen Sie 5 Vor- und 5 Nachteile in Stichpunkten auf.</div>
+      <div class="prompt-example">Fassen Sie die Schritte in einer nummerierten Liste zusammen, wobei jeder Schritt nicht länger als zwei Zeilen sein darf.</div>
+    </div>
+
+    <!-- コツ 5: やり直しを恐れない -->
+    <div class="card">
+      <h3>5. Nutzen Sie Nacharbeit/zusätzliche Anweisungen</h3>
+      <p>Es ist in Ordnung, wenn Ihre erste Antwort nicht perfekt ist. Kann mit zusätzlichen Anweisungen angepasst werden.</p>
+      <div class="prompt-example">Schreiben Sie es in einem lockereren Ton um.</div>
+      <div class="prompt-example">Fassen Sie sich kurz, nicht mehr als 300 Zeichen.</div>
+      <div class="prompt-example">Guter Inhalt, aber bitte geben Sie konkrete Zahlenangaben an.</div>
+      <div class="info-box" style="margin-top:12px;">
+        <span class="icon">🔄</span>
+        <div>Sie können mit Claude so viele Gespräche führen, wie Sie möchten. Fühlen Sie sich frei, Wünsche zu äußern wie „Mach es ein bisschen mehr so“ oder „Ändere das.“</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- サービス一覧への誘導 -->
+<section class="section">
+  <div class="container" style="text-align:center;">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Erfahren Sie mehr über Claudes Dienstleistungen</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Sie sehen auf einen Blick, welche Dienste zu Ihrem Zweck passen, wie z. B. Chat, Cowork, Code, Erweiterungen usw.</p>
+    </div>
+    <a href="services.html" class="btn btn-primary" style="margin-top:16px;">Siehe Leistungsverzeichnis →</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section-alt" style="text-align:center; padding:56px 0;">
+  <div class="container">
+    <h2 style="font-family:var(--font-jp); font-size:1.5rem; margin-bottom:16px;">Beginnen Sie mit Claude</h2>
+    <p style="color:var(--text-sub); font-size:0.9rem; margin-bottom:28px; font-weight:300;">Auch mit dem kostenlosen Plan können Sie alle Vorteile nutzen. Bitte zögern Sie nicht, zuerst mit mir zu sprechen.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://claude.ai" target="_blank" rel="noopener" class="btn btn-primary">Öffnen Sie Claude ↗</a>
+      <a href="pricing.html" class="btn btn-outline">Preispläne anzeigen</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-wrap"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">Claude Guide</span><span class="l-sub">inoffizieller Führer</span></div></div><p>🤖 Diese Seite wurde von Claude erstellt.</p></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-meta"><span>© 2026 Claude Guide – Inoffizielle Informationsseite</span></div>
+    <div class="footer-disclaimer"><strong>⚠️ Inoffizielle Informationsseite:</strong>Diese Seite ist nicht die offizielle Seite von Anthropic oder Claude. Die Informationen dienen nur zu Referenzzwecken und übernehmen keine Gewähr für Richtigkeit oder Vollständigkeit. Die neuesten offiziellen Informationen sind <a href="https://www.anthropic.com" target="_blank" rel="noopener">anthropic.com</a> Und <a href="https://docs.anthropic.com" target="_blank" rel="noopener">docs.anthropic.com</a> Überprüfen Sie bitte. „Claude“ ist ein Markenzeichen von Anthropic.</div>
+  </div>
+</div></footer>
+<button class="scroll-top" id="scroll-top" aria-label="トップに戻る">↑</button>
+<script src="mvc-model.js"></script>
+<script src="mvc-view.js"></script>
+<script src="mvc-controller.js"></script>
+
+
+</body></html>

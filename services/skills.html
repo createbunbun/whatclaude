@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills（スキル） — Claude ガイド</title>
+  <meta name="description" content="Claude Skillsの使い方を解説。よく使う作業手順を保存してワンクリックで呼び出せるカスタムショートカット機能。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Shippori+Mincho+B1:wght@400;500;600;800&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   Claude ガイド — デザインシステム v2
+   コンセプト：やさしい贅沢 / 日本女性誌のような上品さ
+   ============================================================ */
+
+
+
+:root {
+  --cream:         #FDFAF6;
+  --cream-warm:    #FBF5EE;
+  --petal-pale:    #FAF0EC;
+  --petal:         #F0D9D1;
+  --petal-mid:     #E8C5BB;
+
+  --rose:          #C07B72;
+  --rose-deep:     #A5584F;
+  --rose-light:    #EFD0CB;
+  --rose-glow:     rgba(192,123,114,0.15);
+
+  --mauve:         #BFA3AE;
+  --mauve-light:   #EFE4EA;
+  --sage:          #9BB5A2;
+  --sage-light:    #E4EEEA;
+  --teal:          #87ABA6;
+  --teal-light:    #DFF0EE;
+  --gold:          #C8A47A;
+  --gold-light:    #F4EAD8;
+
+  --text:          #2E2420;
+  --text-sub:      #6E5550;
+  --text-muted:    #A8908C;
+  --text-light:    #C4AEAD;
+
+  --border:        #EAD8D3;
+  --border-soft:   #F4ECE9;
+  --border-strong: #D9BEB8;
+
+  --white:         #FFFFFF;
+  --bg:            var(--cream);
+
+  --shadow-xs:  0 1px 4px rgba(160,90,80,0.06);
+  --shadow-sm:  0 2px 12px rgba(160,90,80,0.08);
+  --shadow-md:  0 6px 28px rgba(160,90,80,0.11);
+  --shadow-lg:  0 16px 56px rgba(160,90,80,0.14);
+  --shadow-xl:  0 24px 80px rgba(160,90,80,0.17);
+
+  --r-xs:   6px;
+  --r-sm:   12px;
+  --r-md:   20px;
+  --r-lg:   28px;
+  --r-xl:   40px;
+  --r-full: 9999px;
+
+  --font-serif: 'Cormorant Garamond', 'Shippori Mincho B1', serif;
+  --font-jp:    'Shippori Mincho B1', serif;
+  --font-body:  'Noto Sans JP', sans-serif;
+
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --duration:   0.35s;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: var(--rose); text-decoration: none; transition: color var(--duration) var(--ease-out); }
+a:hover { color: var(--rose-deep); }
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3 {
+  font-family: var(--font-jp);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+/* ── ヘッダー ── */
+.site-header {
+  background: rgba(253,250,246,0.9);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 32px;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.logo-mark {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--petal-mid) 0%, var(--mauve) 100%);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(160,90,80,0.22);
+  flex-shrink: 0;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+.logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+
+.logo-text .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.logo-text .l-sub {
+  font-size: 0.63rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.nav-links a {
+  color: var(--text-sub);
+  font-size: 0.81rem;
+  font-weight: 300;
+  padding: 6px 13px;
+  border-radius: var(--r-full);
+  transition: all var(--duration) var(--ease-out);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--rose);
+  background: var(--petal-pale);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* ── レイアウト ── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section { padding: 72px 0; }
+
+.section-alt {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, var(--cream) 100%);
+}
+
+.section-title-wrap { margin-bottom: 40px; }
+
+.section-title {
+  font-family: var(--font-jp);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+
+.section-title-wrap .title-line {
+  width: 36px; height: 1px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+  margin-top: 8px;
+}
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+  display: block;
+}
+
+/* ── カードグリッド ── */
+.card-grid   { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card-grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 28px 26px;
+  transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--petal) 50%, transparent);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
+}
+
+.card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+.card p  { font-size: 0.84rem; color: var(--text-sub); line-height: 1.85; font-weight: 300; }
+
+.card-icon {
+  width: 46px; height: 46px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--petal-pale), var(--mauve-light));
+}
+
+/* ── ボタン ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--r-full);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+  border: 1px solid transparent;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  box-shadow: 0 4px 16px rgba(192,123,114,0.28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(192,123,114,0.38);
+  color: white;
+}
+
+.btn-outline {
+  background: var(--white);
+  color: var(--rose);
+  border-color: var(--petal-mid);
+}
+
+.btn-outline:hover {
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  border-color: var(--rose-light);
+}
+
+/* ── インフォボックス ── */
+.info-box {
+  background: linear-gradient(135deg, var(--sage-light), var(--teal-light));
+  border: 1px solid rgba(155,181,162,0.4);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-weight: 300;
+}
+
+.info-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+.warn-box {
+  background: linear-gradient(135deg, #FDF4E4, #FFF8EE);
+  border: 1px solid rgba(200,164,122,0.4);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  font-size: 0.84rem;
+  color: #7A5C30;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+/* ── ページヘッダー ── */
+.page-header {
+  position: relative;
+  padding: 72px 32px 64px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--cream-warm);
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse, rgba(224,185,175,0.28) 0%, transparent 70%);
+  filter: blur(60px);
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.page-header .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--rose-deep);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-family: var(--font-body);
+}
+
+.page-header .eyebrow::before,
+.page-header .eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: var(--petal-mid);
+}
+
+.page-header h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  position: relative;
+}
+
+.page-header p {
+  font-size: 0.92rem;
+  color: var(--text-sub);
+  max-width: 500px;
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 2;
+}
+
+/* ── パンくず ── */
+.breadcrumb {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  font-size: 0.74rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+.breadcrumb a { color: var(--text-light); }
+.breadcrumb a:hover { color: var(--rose); }
+.breadcrumb .sep { color: var(--border-strong); font-size: 0.6rem; }
+.breadcrumb span { color: var(--rose); }
+
+/* ── フッター ── */
+.site-footer {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, #EFE0DA 100%);
+  border-top: 1px solid var(--border);
+  padding: 56px 32px 36px;
+}
+
+.footer-inner { max-width: 1000px; margin: 0 auto; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo-wrap {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+
+.footer-brand .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.footer-brand p {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  max-width: 210px;
+  font-weight: 300;
+}
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { font-size: 0.81rem; color: var(--text-sub); font-weight: 300; }
+.footer-col ul li a:hover { color: var(--rose); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.73rem;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+}
+
+.footer-disclaimer {
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--r-md);
+  padding: 16px 22px;
+  font-size: 0.74rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  border: 1px solid var(--border-soft);
+  font-weight: 300;
+}
+
+.footer-disclaimer strong { color: var(--rose); font-weight: 500; }
+
+/* ── チップ ── */
+.chip {
+  display: inline-block;
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  font-size: 0.69rem;
+  font-weight: 500;
+  padding: 3px 11px;
+  border-radius: var(--r-full);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--petal);
+}
+
+.chip-teal     { background: var(--teal-light);  color: #4A8A84; border-color: var(--teal); }
+.chip-sage     { background: var(--sage-light);  color: #527A60; border-color: var(--sage); }
+.chip-lavender { background: var(--mauve-light); color: #7A6080; border-color: var(--mauve); }
+.chip-gold     { background: var(--gold-light);  color: #8A6A3A; border-color: var(--gold); }
+
+/* ── コードブロック ── */
+.code-block {
+  background: #2A2128;
+  color: #EAD8D4;
+  border-radius: var(--r-md);
+  padding: 22px 28px;
+  font-family: 'Courier New', 'SF Mono', monospace;
+  font-size: 0.82rem;
+  overflow-x: auto;
+  margin: 16px 0;
+  line-height: 1.8;
+}
+
+/* ── スクロールトップ ── */
+.scroll-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--white), var(--petal-pale));
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  color: var(--rose);
+  font-size: 0.95rem;
+  transition: all var(--duration) var(--ease-out);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.scroll-top.visible { opacity: 1; pointer-events: auto; }
+
+.scroll-top:hover {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+/* ── ステップ ── */
+.step-list {
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.step-item {
+  counter-increment: step-counter;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  padding: 24px 26px;
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--duration) var(--ease-out);
+}
+
+.step-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.step-num {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.step-content p {
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  font-weight: 300;
+}
+
+/* ── レスポンシブ ── */
+
+/* 中間幅: ナビリンクを縮小して1行に収める */
+@media (max-width: 1100px) {
+  .nav-links a { font-size: 0.73rem; padding: 5px 8px; }
+  .nav-links { gap: 1px; }
+  .site-header { padding: 0 16px; }
+  .nav-inner { gap: 10px; }
+}
+
+/* 900px以下: ハンバーガーメニューに切替 */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: rgba(253,250,246,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px; z-index: 99; gap: 4px;
+  }
+  .nav-links.open a { font-size: 0.85rem; padding: 10px 16px; }
+  .nav-toggle { display: block; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .card-grid, .card-grid-2 { grid-template-columns: 1fr; }
+  .page-header { padding: 56px 24px 48px; }
+  .section { padding: 52px 0; }
+  .container { padding: 0 20px; }
+  .step-item { flex-direction: column; gap: 12px; }
+}
+
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-meta { flex-direction: column; align-items: flex-start; }
+}
+
+/* page-header 高さ統一 */
+.page-header { display: block; width: 100%; box-sizing: border-box; }
+.page-header p { max-width: 440px; }
+
+/* 言語プルダウン */
+.gt-widget{flex-shrink:0;}
+#gt-lang-select{
+  appearance:none;-webkit-appearance:none;
+  background:linear-gradient(135deg,var(--petal-pale),var(--mauve-light));
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23A5584F'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  border:1px solid var(--petal-mid);border-radius:var(--r-full);
+  padding:5px 28px 5px 12px;font-size:0.72rem;font-family:var(--font-body);
+  color:var(--rose-deep);cursor:pointer;outline:none;max-width:130px;
+  transition:all var(--duration) var(--ease-out);
+}
+#gt-lang-select:hover{border-color:var(--rose-light);}
+</style>
+  <script src="../i18n.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav-inner">
+    <a href="../index.html" class="site-logo"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">Claude Guide</span><span class="l-sub">非公式ガイド</span></div></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../pricing.html">料金</a></li>
+      <li><a href="../devices.html">端末</a></li>
+      <li><a href="../services.html">サービス</a></li>
+      <li><a href="../windows.html">Desktop</a></li>
+      <li><a href="../features.html">機能比較</a></li>
+      <li><a href="../usage.html">活用</a></li>
+      <li><a href="api.html">API</a></li>
+    </ul>
+    <div id="gt-select-wrap" class="gt-widget"></div>
+  </nav>
+</header>
+
+<div class="container"><div class="breadcrumb"><a href="../index.html">ホーム</a> › <a href="../services.html">サービス</a> › <span>Skills</span></div></div>
+<div class="page-header">
+  <div class="eyebrow">Skills</div>
+  <h1>Skills（スキル）</h1>
+  <p>よく使う作業を「レシピ」として保存し、ワンクリックで呼び出せる機能です</p>
+</div>
+
+<!-- Skills とは -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Skills とは</h2>
+      <div class="title-line"></div>
+      <span class="section-sub">はじめての方にもわかりやすく</span>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+      <h3>料理の「レシピ」のようなもの</h3>
+      <p>毎回同じ手順を説明しなくても、保存したスキルを選ぶだけで Claude が決まった手順で作業してくれます。たとえば「毎週やるレポート作成」「決まったフォーマットの議事録」など、繰り返す作業に最適です。</p>
+    </div>
+
+    <div class="card">
+      <h3>こんな方におすすめ</h3>
+      <p>毎回同じ指示を入力するのが面倒に感じる方、チーム内で作業手順を統一したい方、定型作業を自動化して時間を節約したい方にぴったりの機能です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 対応プラットフォーム -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">対応プラットフォーム</h2>
+      <div class="title-line"></div>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+      <h3>Claude Code 内で利用</h3>
+      <p>Skills は Claude Code のターミナル環境で利用できます。Mac / Windows / Linux すべてに対応しています。</p>
+    </div>
+
+    <div class="info-box">
+      <span class="icon">ℹ️</span>
+      <div>Claude Code のインストールが必要です。プログラミング知識がある方向けの機能です。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 必要なプラン -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">必要なプラン</h2>
+      <div class="title-line"></div>
+    </div>
+
+    <div class="card">
+      <h3>Claude Code と同じプランで利用可能</h3>
+      <p>Skills は Claude Code の一部として提供される機能です。<strong>Max プラン</strong>（月額 $100 または $200）、もしくは <strong>Anthropic API の従量課金</strong>でご利用いただけます。追加料金はかかりません。</p>
+    </div>
+  </div>
+</section>
+
+<!-- スキルの具体例 -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">スキルの具体例</h2>
+      <div class="title-line"></div>
+      <span class="section-sub">こんな使い方ができます</span>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <span class="chip chip-teal">定型業務</span>
+        <h3>「週次レポート」スキル</h3>
+        <p>毎週のデータを決まったフォーマットでまとめます。データの集計方法や出力形式をあらかじめ設定しておけば、ワンクリックでレポートが完成します。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔍</div>
+        <span class="chip chip-lavender">開発</span>
+        <h3>「コードレビュー」スキル</h3>
+        <p>チームのコーディングルールに従ってコードをチェックします。命名規則・エラーハンドリング・パフォーマンスなど、確認ポイントを事前に定義できます。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <span class="chip chip-sage">翻訳</span>
+        <h3>「翻訳チェック」スキル</h3>
+        <p>原文と訳文を比較して改善点を提案します。用語の統一性、ニュアンスの正確さ、読みやすさなどを自動的にチェックしてくれます。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <span class="chip chip-gold">Git</span>
+        <h3>「PR作成」スキル</h3>
+        <p>コミット内容からプルリクエストの説明文を自動生成します。変更点のサマリー、テスト手順、レビューポイントなどを含む PR を素早く作成できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- スキルの作り方 -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">スキルの作り方</h2>
+      <div class="title-line"></div>
+      <span class="section-sub">3ステップで簡単に作成</span>
+    </div>
+
+    <ol class="step-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>/skill コマンドを実行</h3>
+          <p>Claude Code のターミナルで <code>/skill</code> コマンドを入力します。スキル作成のウィザードが開始されます。</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>スキルの名前と手順を記述</h3>
+          <p>スキルに名前を付け、Claude に実行してほしい手順を記述します。Markdown 形式で細かい指示を書くことができます。</p>
+        </div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>次回から呼び出すだけ</h3>
+          <p>作成したスキルは <code>/skillname</code> のように名前で呼び出せます。毎回同じ手順を説明する必要はもうありません。</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 関連ページ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">関連ページ</h2>
+      <div class="title-line"></div>
+    </div>
+
+    <div class="card">
+      <h3>Claude Code 詳細ガイド</h3>
+      <p>Skills は Claude Code の機能の一つです。Claude Code のインストール方法・基本的な使い方・料金など、詳しい情報はこちらをご覧ください。</p>
+      <div style="margin-top: 16px;">
+        <a href="code.html" class="btn btn-outline">Claude Code の詳細を見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-wrap"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">Claude Guide</span><span class="l-sub">非公式ガイド</span></div></div><p>このサイトは Claude によって作成されました。</p></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-meta"><span>© 2026 Claude ガイド — 非公式情報サイト</span></div>
+    <div class="footer-disclaimer"><strong>⚠️ 非公式情報サイト：</strong>本サイトは Anthropic および Claude の公式サイトではありません。情報は参考目的であり、正確性・完全性を保証しません。最新の公式情報は <a href="https://www.anthropic.com" target="_blank" rel="noopener">anthropic.com</a> および <a href="https://docs.anthropic.com" target="_blank" rel="noopener">docs.anthropic.com</a> でご確認ください。「Claude」は Anthropic の商標です。</div>
+  </div>
+</div></footer>
+<button class="scroll-top" id="scroll-top" aria-label="トップに戻る">↑</button>
+<script src="../mvc-model.js"></script>
+<script src="../mvc-view.js"></script>
+<script src="../mvc-controller.js"></script>
+</body>
+</html>

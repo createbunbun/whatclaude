@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ページが見つかりません — Claude ガイド</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FDFAF6;
+      --rose: #C07B72;
+      --rose-deep: #A5584F;
+      --text: #2E2420;
+      --text-sub: #6E5550;
+      --border: #EAD8D3;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .error-code {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 6rem;
+      font-weight: 600;
+      color: var(--rose);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    p {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .home-link {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: var(--rose);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .home-link:hover { background: var(--rose-deep); }
+  </style>
+</head>
+<body>
+  <div class="error-code">404</div>
+  <h1>Page not found</h1>
+  <p>お探しのページは見つかりませんでした。<br>移動または削除された可能性があります。</p>
+  <a href="/" class="home-link">ホームに戻る</a>
+</body>
+</html>

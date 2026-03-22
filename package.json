@@ -1,0 +1,16 @@
+{
+  "name": "claude-guide",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Claude 非公式ガイド — 多言語静的サイト",
+  "scripts": {
+    "start": "node server.js",
+    "translate": "node translate-build.js",
+    "translate:clean": "node translate-build.js --clean"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.21.0",
+    "google-translate-api-x": "^10.7.1"
+  }
+}

@@ -1,0 +1,1047 @@
+<!DOCTYPE html><html lang="zh-Hans"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>克劳德聊天 — 克劳德指南</title>
+  <meta name="description" content="为初学者详细讲解如何使用克劳德聊天。 可以从浏览器或智能手机应用程序免费启动人工智能聊天功能和用法。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Shippori+Mincho+B1:wght@400;500;600;800&amp;family=Noto+Sans+JP:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   Claude ガイド — デザインシステム v2
+   コンセプト：やさしい贅沢 / 日本女性誌のような上品さ
+   ============================================================ */
+
+
+
+:root {
+  --cream:         #FDFAF6;
+  --cream-warm:    #FBF5EE;
+  --petal-pale:    #FAF0EC;
+  --petal:         #F0D9D1;
+  --petal-mid:     #E8C5BB;
+
+  --rose:          #C07B72;
+  --rose-deep:     #A5584F;
+  --rose-light:    #EFD0CB;
+  --rose-glow:     rgba(192,123,114,0.15);
+
+  --mauve:         #BFA3AE;
+  --mauve-light:   #EFE4EA;
+  --sage:          #9BB5A2;
+  --sage-light:    #E4EEEA;
+  --teal:          #87ABA6;
+  --teal-light:    #DFF0EE;
+  --gold:          #C8A47A;
+  --gold-light:    #F4EAD8;
+
+  --text:          #2E2420;
+  --text-sub:      #6E5550;
+  --text-muted:    #A8908C;
+  --text-light:    #C4AEAD;
+
+  --border:        #EAD8D3;
+  --border-soft:   #F4ECE9;
+  --border-strong: #D9BEB8;
+
+  --white:         #FFFFFF;
+  --bg:            var(--cream);
+
+  --shadow-xs:  0 1px 4px rgba(160,90,80,0.06);
+  --shadow-sm:  0 2px 12px rgba(160,90,80,0.08);
+  --shadow-md:  0 6px 28px rgba(160,90,80,0.11);
+  --shadow-lg:  0 16px 56px rgba(160,90,80,0.14);
+  --shadow-xl:  0 24px 80px rgba(160,90,80,0.17);
+
+  --r-xs:   6px;
+  --r-sm:   12px;
+  --r-md:   20px;
+  --r-lg:   28px;
+  --r-xl:   40px;
+  --r-full: 9999px;
+
+  --font-serif: 'Cormorant Garamond', 'Shippori Mincho B1', serif;
+  --font-jp:    'Shippori Mincho B1', serif;
+  --font-body:  'Noto Sans JP', sans-serif;
+
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --duration:   0.35s;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: var(--rose); text-decoration: none; transition: color var(--duration) var(--ease-out); }
+a:hover { color: var(--rose-deep); }
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3 {
+  font-family: var(--font-jp);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+/* ── ヘッダー ── */
+.site-header {
+  background: rgba(253,250,246,0.9);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 32px;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.logo-mark {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--petal-mid) 0%, var(--mauve) 100%);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(160,90,80,0.22);
+  flex-shrink: 0;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+.logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+
+.logo-text .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.logo-text .l-sub {
+  font-size: 0.63rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.nav-links a {
+  color: var(--text-sub);
+  font-size: 0.81rem;
+  font-weight: 300;
+  padding: 6px 13px;
+  border-radius: var(--r-full);
+  transition: all var(--duration) var(--ease-out);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--rose);
+  background: var(--petal-pale);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* ── レイアウト ── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section { padding: 72px 0; }
+
+.section-alt {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, var(--cream) 100%);
+}
+
+.section-title-wrap { margin-bottom: 40px; }
+
+.section-title {
+  font-family: var(--font-jp);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+
+.section-title-wrap .title-line {
+  width: 36px; height: 1px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+  margin-top: 8px;
+}
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+  display: block;
+}
+
+/* ── カードグリッド ── */
+.card-grid   { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card-grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 28px 26px;
+  transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--petal) 50%, transparent);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
+}
+
+.card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+.card p  { font-size: 0.84rem; color: var(--text-sub); line-height: 1.85; font-weight: 300; }
+
+.card-icon {
+  width: 46px; height: 46px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--petal-pale), var(--mauve-light));
+}
+
+/* ── テーブル ── */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  background: var(--white);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.compare-table thead th {
+  background: linear-gradient(180deg, var(--petal-pale), var(--cream-warm));
+  color: var(--text-sub);
+  font-weight: 500;
+  font-size: 0.77rem;
+  letter-spacing: 0.07em;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+.compare-table thead th:first-child { text-align: left; }
+
+.compare-table tbody tr {
+  border-bottom: 1px solid var(--border-soft);
+  transition: background var(--duration);
+}
+
+.compare-table tbody tr:last-child { border-bottom: none; }
+.compare-table tbody tr:hover      { background: var(--petal-pale); }
+
+.compare-table tbody td {
+  padding: 13px 20px;
+  color: var(--text-sub);
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 300;
+}
+
+.compare-table tbody td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.compare-table .check { color: #4A8F6A; font-size: 1rem; font-weight: 700; }
+.compare-table .cross { color: var(--text-light);  font-size: 0.9rem; }
+
+/* ── ボタン ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--r-full);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+  border: 1px solid transparent;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  box-shadow: 0 4px 16px rgba(192,123,114,0.28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(192,123,114,0.38);
+  color: white;
+}
+
+.btn-outline {
+  background: var(--white);
+  color: var(--rose);
+  border-color: var(--petal-mid);
+}
+
+.btn-outline:hover {
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  border-color: var(--rose-light);
+}
+
+/* ── インフォボックス ── */
+.info-box {
+  background: linear-gradient(135deg, var(--sage-light), var(--teal-light));
+  border: 1px solid rgba(155,181,162,0.4);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-weight: 300;
+}
+
+.info-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+/* ── ページヘッダー ── */
+.page-header {
+  position: relative;
+  padding: 72px 32px 64px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--cream-warm);
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse, rgba(224,185,175,0.28) 0%, transparent 70%);
+  filter: blur(60px);
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.page-header .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--rose-deep);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-family: var(--font-body);
+}
+
+.page-header .eyebrow::before,
+.page-header .eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: var(--petal-mid);
+}
+
+.page-header h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  position: relative;
+}
+
+.page-header p {
+  font-size: 0.92rem;
+  color: var(--text-sub);
+  max-width: 500px;
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 2;
+}
+
+/* ── パンくず ── */
+.breadcrumb {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  font-size: 0.74rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+.breadcrumb a { color: var(--text-light); }
+.breadcrumb a:hover { color: var(--rose); }
+.breadcrumb .sep { color: var(--border-strong); font-size: 0.6rem; }
+.breadcrumb span { color: var(--rose); }
+
+/* ── フッター ── */
+.site-footer {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, #EFE0DA 100%);
+  border-top: 1px solid var(--border);
+  padding: 56px 32px 36px;
+}
+
+.footer-inner { max-width: 1000px; margin: 0 auto; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo-wrap {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+
+.footer-brand .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.footer-brand p {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  max-width: 210px;
+  font-weight: 300;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.73rem;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+}
+
+.footer-disclaimer {
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--r-md);
+  padding: 16px 22px;
+  font-size: 0.74rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  border: 1px solid var(--border-soft);
+  font-weight: 300;
+}
+
+.footer-disclaimer strong { color: var(--rose); font-weight: 500; }
+
+/* ── チップ ── */
+.chip {
+  display: inline-block;
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  font-size: 0.69rem;
+  font-weight: 500;
+  padding: 3px 11px;
+  border-radius: var(--r-full);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--petal);
+}
+
+.chip-teal     { background: var(--teal-light);  color: #4A8A84; border-color: var(--teal); }
+.chip-sage     { background: var(--sage-light);  color: #527A60; border-color: var(--sage); }
+.chip-lavender { background: var(--mauve-light); color: #7A6080; border-color: var(--mauve); }
+.chip-gold     { background: var(--gold-light);  color: #8A6A3A; border-color: var(--gold); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+
+/* ── プランカード ── */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.plan-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-xl);
+  padding: 32px 26px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-xs);
+}
+
+.plan-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  background: linear-gradient(90deg, var(--petal-mid), var(--mauve));
+}
+
+.plan-card.featured {
+  border-color: var(--petal-mid);
+  background: linear-gradient(160deg, var(--white) 0%, var(--petal-pale) 100%);
+  box-shadow: var(--shadow-md);
+}
+
+.plan-card.featured::after {
+  background: linear-gradient(90deg, var(--rose), var(--mauve));
+}
+
+.plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.plan-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; letter-spacing: 0.04em; }
+
+.plan-price {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--rose);
+  line-height: 1.2;
+  margin: 16px 0 4px;
+}
+
+.plan-price sub { font-size: 0.8rem; font-family: var(--font-body); color: var(--text-muted); font-weight: 300; }
+.plan-price span {
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-weight: 300;
+}
+.plan-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 300; }
+
+.plan-features {
+  list-style: none;
+  font-size: 0.82rem;
+  color: var(--text-sub);
+}
+
+.plan-features li {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex; align-items: flex-start; gap: 8px;
+  font-weight: 300;
+}
+
+.plan-features li:last-child { border-bottom: none; }
+.plan-features .chk { color: #4A8F6A; font-size: 0.85rem; flex-shrink: 0; margin-top: 3px; font-weight: 700; }
+
+.plan-badge {
+  position: absolute;
+  top: 18px; right: 18px;
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  letter-spacing: 0.06em;
+}
+
+/* ── ハイライト ── */
+.highlight {
+  background: linear-gradient(135deg, var(--petal-pale), var(--mauve-light));
+  color: var(--rose-deep);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 0.88em;
+  border: 1px solid var(--petal);
+}
+
+/* ── スクロールトップ ── */
+.scroll-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--white), var(--petal-pale));
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  color: var(--rose);
+  font-size: 0.95rem;
+  transition: all var(--duration) var(--ease-out);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.scroll-top.visible { opacity: 1; pointer-events: auto; }
+
+.scroll-top:hover {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+/* ── ローディング ── */
+.loading-spinner {
+  display: inline-block;
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--rose);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── レスポンシブ ── */
+
+/* 中間幅: ナビリンクを縮小して1行に収める */
+@media (max-width: 1100px) {
+  .nav-links a { font-size: 0.73rem; padding: 5px 8px; }
+  .nav-links { gap: 1px; }
+  .site-header { padding: 0 16px; }
+  .nav-inner { gap: 10px; }
+}
+
+/* 900px以下: ハンバーガーメニューに切替 */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: rgba(253,250,246,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px; z-index: 99; gap: 4px;
+  }
+  .nav-links.open a { font-size: 0.85rem; padding: 10px 16px; }
+  .nav-toggle { display: block; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .plan-grid, .card-grid, .card-grid-2 { grid-template-columns: 1fr; }
+  .page-header { padding: 56px 24px 48px; }
+  .section { padding: 52px 0; }
+  .container { padding: 0 20px; }
+  .compare-table { font-size: 0.77rem; }
+  .compare-table th, .compare-table td { padding: 10px 12px; }
+}
+
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-meta { flex-direction: column; align-items: flex-start; }
+}
+
+
+/* page-header 高さ統一 */
+.page-header { min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.page-header p { max-width: 440px; }
+
+
+
+/* ====== パッチ: 表示修正 ====== */
+
+/* page-header を全幅確保・下がり防止 */
+.page-header { display: block; width: 100%; box-sizing: border-box; }
+
+/* 言語プルダウン */
+.gt-widget{flex-shrink:0;}
+#gt-lang-select{
+  appearance:none;-webkit-appearance:none;
+  background:linear-gradient(135deg,var(--petal-pale),var(--mauve-light));
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23A5584F'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  border:1px solid var(--petal-mid);border-radius:var(--r-full);
+  padding:5px 28px 5px 12px;font-size:0.72rem;font-family:var(--font-body);
+  color:var(--rose-deep);cursor:pointer;outline:none;max-width:130px;
+  transition:all var(--duration) var(--ease-out);
+}
+#gt-lang-select:hover{border-color:var(--rose-light);}
+</style>
+  <style>
+    /* ── ステップ ── */
+    .steps { margin: 16px 0; }
+    .step-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .step-item:last-child { border-bottom: none; }
+    .step-num {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--rose), var(--mauve));
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      flex-shrink: 0;
+      font-family: var(--font-serif);
+      box-shadow: 0 3px 10px rgba(192,123,114,0.25);
+    }
+    .step-content h4 {
+      font-family: var(--font-jp);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .step-content p {
+      font-size: 0.84rem;
+      color: var(--text-sub);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    /* ── 関連ページリンク ── */
+    .related-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .related-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all var(--duration) var(--ease-out);
+      box-shadow: var(--shadow-xs);
+    }
+    .related-link:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--petal);
+      color: var(--text);
+    }
+    .related-link .rl-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .related-link .rl-text { font-size: 0.86rem; font-weight: 500; letter-spacing: 0.03em; }
+    .related-link .rl-desc { font-size: 0.73rem; color: var(--text-muted); font-weight: 300; margin-top: 2px; }
+  </style>
+  <script src="../../i18n.js"></script>
+</head>
+<body data-current-page="services/chat.html" data-current-lang="zh-CN">
+
+<header class="site-header">
+  <nav class="nav-inner">
+    <a href="../index.html" class="site-logo"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">克劳德·指南</span><span class="l-sub">非官方指南</span></div></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../pricing.html">费用</a></li>
+      <li><a href="../devices.html">终端</a></li>
+      <li><a href="../services.html">服务</a></li>
+      <li><a href="../windows.html">桌面</a></li>
+      <li><a href="../features.html">特性比较</a></li>
+      <li><a href="../usage.html">利用率</a></li>
+      <li><a href="api.html">应用程序编程接口</a></li>
+    </ul>
+    <div id="gt-select-wrap" class="gt-widget"></div>
+  </nav>
+</header>
+
+<div class="container"><div class="breadcrumb"><a href="../index.html">家</a> › <a href="../services.html">服务</a> › <span>聊天</span></div></div>
+<div class="page-header">
+  <div class="eyebrow">聊天</div>
+  <h1>克劳德聊天</h1>
+  <p>这些是 Claude 的基本功能，任何人都可以通过浏览器或智能手机免费开始使用。</p>
+</div>
+
+<!-- Claude チャットとは -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">什么是克劳德聊天？</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="info-box">
+      <span class="icon">💬</span>
+      <div>克劳德聊天是<a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> 或者它是一种可以通过智能手机应用程序使用的人工智能聊天服务。 只需在文本框中输入您的问题并提交，克劳德就会为您解答。 注册帐户是免费的，您可以立即开始。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 対応プラットフォーム -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">支持的平台</h2>
+      <div class="title-line"></div>
+    </div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>平台</th>
+          <th>兼容环境</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🌐 浏览器 (claude.ai)</td>
+          <td>Windows/Mac/Linux 完全兼容</td>
+        </tr>
+        <tr>
+          <td>📱 智能手机应用程序</td>
+          <td>iOS/安卓</td>
+        </tr>
+        <tr>
+          <td>🖥️ 桌面应用程序</td>
+          <td>苹果电脑/Windows</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 始め方（3ステップ） -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">如何开始（3 个步骤）</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="card">
+      <div class="steps">
+        <div class="step-item"><div class="step-num">1</div><div class="step-content">
+          <h4>访问/下载</h4>
+          <p><a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> 访问或下载应用程序</p>
+        </div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-content">
+          <h4>免费注册</h4>
+          <p>使用您的电子邮件地址或 Google 帐户免费注册</p>
+        </div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-content">
+          <h4>开始聊天</h4>
+          <p>只需输入您的消息并发送</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- できること -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">你能做什么</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">❓</div>
+        <h3>问题/调查</h3>
+        <p>你可以用自然语言提出你想知道的问题，比如“用初中生能理解的方式告诉我光合作用的机制。”</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✍️</div>
+        <h3>写作</h3>
+        <p>我们支持创建从商业文档到休闲文本的所有内容，例如“向您的业务合作伙伴写一封道歉电子邮件。”</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>翻译/校对</h3>
+        <p>您可以进行多语言翻译和校对，例如“将此英语句子翻译成自然的日语”。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>概括</h3>
+        <p>我擅长总结长文，组织要点，比如“把这篇长文总结成三行”。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💡</div>
+        <h3>创意产生</h3>
+        <p>成为集思广益的合作伙伴，例如“为新产品想出 20 个命名创意”。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🖼️</div>
+        <h3>图像读取（Pro及以上版本）</h3>
+        <p>阅读并回答照片和截图的内容。 对于分析文档和从图像中提取文本很有用。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 料金プラン -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">价格方案</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="plan-grid">
+      <div class="plan-card">
+        <h3>自由的</h3>
+        <div class="plan-price">$0</div>
+        <div class="plan-desc">对于那些想先尝试的人</div>
+        <ul class="plan-features">
+          <li><span class="chk">✓</span>基本聊天功能</li>
+          <li><span class="chk">✓</span>次数有限</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <span class="plan-badge">人气</span>
+        <h3>专业版</h3>
+        <div class="plan-price">20 美元<sub>/月</sub></div>
+        <div class="plan-desc">对于那些想要每天使用它的人</div>
+        <ul class="plan-features">
+          <li><span class="chk">✓</span>5 次使用</li>
+          <li><span class="chk">✓</span>图像读取</li>
+          <li><span class="chk">✓</span>项目特色</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <h3>最大限度</h3>
+        <div class="plan-price">100 美元<sub>/月</sub></div>
+        <div class="plan-desc">对于重度用户</div>
+        <ul class="plan-features">
+          <li><span class="chk">✓</span>更大的使用配额</li>
+          <li><span class="chk">✓</span>包括克劳德代码</li>
+          <li><span class="chk">✓</span>所有专业版功能</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 関連ページ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">相关页面</h2>
+      <div class="title-line"></div>
+    </div>
+    <div class="related-links">
+      <a href="code.html" class="related-link">
+        <span class="rl-icon">💻</span>
+        <div><div class="rl-text">克劳德·科德</div><div class="rl-desc">基于 CLI 的编码代理</div></div>
+      </a>
+      <a href="api.html" class="related-link">
+        <span class="rl-icon">🔌</span>
+        <div><div class="rl-text">应用程序编程接口</div><div class="rl-desc">合并到您的应用程序中</div></div>
+      </a>
+      <a href="integrations.html" class="related-link">
+        <span class="rl-icon">🔗</span>
+        <div><div class="rl-text">外部合作</div><div class="rl-desc">与其他服务集成/合作</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-wrap"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">克劳德·指南</span><span class="l-sub">非官方指南</span></div></div><p>该网站由克劳德创建。</p></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-meta"><span>© 2026 Claude Guide — 非官方信息网站</span></div>
+    <div class="footer-disclaimer"><strong>⚠️非官方信息网站：</strong>本网站不是 Anthropic 或 Claude 的官方网站。 该信息仅供参考，不保证准确性或完整性。 最新的官方信息是 <a href="https://www.anthropic.com" target="_blank" rel="noopener">anthropic.com</a> 和 <a href="https://docs.anthropic.com" target="_blank" rel="noopener">docs.anthropic.com</a> 请检查。 “Claude”是 Anthropic 的商标。</div>
+  </div>
+</div></footer>
+<button class="scroll-top" id="scroll-top" aria-label="トップに戻る">↑</button>
+<script src="../mvc-model.js"></script>
+<script src="../mvc-view.js"></script>
+<script src="../mvc-controller.js"></script>
+
+
+</body></html>

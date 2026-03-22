@@ -1,0 +1,1309 @@
+<!DOCTYPE html><html lang="fr"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des services Claude — Guide Claude</title>
+  <meta name="description" content="Explication de tous les services de Claude pour les débutants. Vous pouvez voir en un coup d'œil les plates-formes et les plans tarifaires pris en charge pour le chat, les projets, le travail collaboratif, le code, les compétences, les extensions et les API.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Shippori+Mincho+B1:wght@400;500;600;800&amp;family=Noto+Sans+JP:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   Claude ガイド — デザインシステム v2
+   コンセプト：やさしい贅沢 / 日本女性誌のような上品さ
+   ============================================================ */
+
+
+
+:root {
+  --cream:         #FDFAF6;
+  --cream-warm:    #FBF5EE;
+  --petal-pale:    #FAF0EC;
+  --petal:         #F0D9D1;
+  --petal-mid:     #E8C5BB;
+
+  --rose:          #C07B72;
+  --rose-deep:     #A5584F;
+  --rose-light:    #EFD0CB;
+  --rose-glow:     rgba(192,123,114,0.15);
+
+  --mauve:         #BFA3AE;
+  --mauve-light:   #EFE4EA;
+  --sage:          #9BB5A2;
+  --sage-light:    #E4EEEA;
+  --teal:          #87ABA6;
+  --teal-light:    #DFF0EE;
+  --gold:          #C8A47A;
+  --gold-light:    #F4EAD8;
+
+  --text:          #2E2420;
+  --text-sub:      #6E5550;
+  --text-muted:    #A8908C;
+  --text-light:    #C4AEAD;
+
+  --border:        #EAD8D3;
+  --border-soft:   #F4ECE9;
+  --border-strong: #D9BEB8;
+
+  --white:         #FFFFFF;
+  --bg:            var(--cream);
+
+  --shadow-xs:  0 1px 4px rgba(160,90,80,0.06);
+  --shadow-sm:  0 2px 12px rgba(160,90,80,0.08);
+  --shadow-md:  0 6px 28px rgba(160,90,80,0.11);
+  --shadow-lg:  0 16px 56px rgba(160,90,80,0.14);
+  --shadow-xl:  0 24px 80px rgba(160,90,80,0.17);
+
+  --r-xs:   6px;
+  --r-sm:   12px;
+  --r-md:   20px;
+  --r-lg:   28px;
+  --r-xl:   40px;
+  --r-full: 9999px;
+
+  --font-serif: 'Cormorant Garamond', 'Shippori Mincho B1', serif;
+  --font-jp:    'Shippori Mincho B1', serif;
+  --font-body:  'Noto Sans JP', sans-serif;
+
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --duration:   0.35s;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.85;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: var(--rose); text-decoration: none; transition: color var(--duration) var(--ease-out); }
+a:hover { color: var(--rose-deep); }
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3 {
+  font-family: var(--font-jp);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+}
+
+/* ── ヘッダー ── */
+.site-header {
+  background: rgba(253,250,246,0.9);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--border-soft);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 32px;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 16px;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.logo-mark {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--petal-mid) 0%, var(--mauve) 100%);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(160,90,80,0.22);
+  flex-shrink: 0;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+
+.logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+
+.logo-text .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.logo-text .l-sub {
+  font-size: 0.63rem;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 300;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.nav-links a {
+  color: var(--text-sub);
+  font-size: 0.81rem;
+  font-weight: 300;
+  padding: 6px 13px;
+  border-radius: var(--r-full);
+  transition: all var(--duration) var(--ease-out);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--rose);
+  background: var(--petal-pale);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* ── レイアウト ── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section { padding: 72px 0; }
+
+.section-alt {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, var(--cream) 100%);
+}
+
+.section-title-wrap { margin-bottom: 40px; }
+
+.section-title {
+  font-family: var(--font-jp);
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  display: inline-block;
+}
+
+.section-title-wrap .title-line {
+  width: 36px; height: 1px;
+  background: linear-gradient(90deg, var(--rose), transparent);
+  margin-top: 8px;
+}
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-top: 6px;
+  display: block;
+}
+
+/* ── カードグリッド ── */
+.card-grid   { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card-grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px; }
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 28px 26px;
+  transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--petal) 50%, transparent);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border);
+}
+
+.card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+.card p  { font-size: 0.84rem; color: var(--text-sub); line-height: 1.85; font-weight: 300; }
+
+.card-icon {
+  width: 46px; height: 46px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--petal-pale), var(--mauve-light));
+}
+
+/* ── インフォボックス ── */
+.info-box {
+  background: linear-gradient(135deg, var(--sage-light), var(--teal-light));
+  border: 1px solid rgba(155,181,162,0.4);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-weight: 300;
+}
+
+.info-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+.warn-box {
+  background: linear-gradient(135deg, #FDF4E4, #FFF8EE);
+  border: 1px solid rgba(200,164,122,0.4);
+  border-radius: var(--r-md);
+  padding: 18px 22px;
+  font-size: 0.84rem;
+  color: #7A5C30;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+/* ── ページヘッダー ── */
+.page-header {
+  position: relative;
+  padding: 72px 32px 64px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--cream-warm);
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse, rgba(224,185,175,0.28) 0%, transparent 70%);
+  filter: blur(60px);
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.page-header .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--rose-deep);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  font-family: var(--font-body);
+}
+
+.page-header .eyebrow::before,
+.page-header .eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: var(--petal-mid);
+}
+
+.page-header h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  position: relative;
+}
+
+.page-header p {
+  font-size: 0.92rem;
+  color: var(--text-sub);
+  max-width: 500px;
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 2;
+}
+
+/* ── パンくず ── */
+.breadcrumb {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  font-size: 0.74rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+.breadcrumb a { color: var(--text-light); }
+.breadcrumb a:hover { color: var(--rose); }
+.breadcrumb .sep { color: var(--border-strong); font-size: 0.6rem; }
+.breadcrumb span { color: var(--rose); }
+
+/* ── チップ ── */
+.chip {
+  display: inline-block;
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  font-size: 0.69rem;
+  font-weight: 500;
+  padding: 3px 11px;
+  border-radius: var(--r-full);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--petal);
+}
+
+.chip-teal     { background: var(--teal-light);  color: #4A8A84; border-color: var(--teal); }
+.chip-sage     { background: var(--sage-light);  color: #527A60; border-color: var(--sage); }
+.chip-lavender { background: var(--mauve-light); color: #7A6080; border-color: var(--mauve); }
+.chip-gold     { background: var(--gold-light);  color: #8A6A3A; border-color: var(--gold); }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+
+/* ── ボタン ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--r-full);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+  border: 1px solid transparent;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  box-shadow: 0 4px 16px rgba(192,123,114,0.28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(192,123,114,0.38);
+  color: white;
+}
+
+.btn-outline {
+  background: var(--white);
+  color: var(--rose);
+  border-color: var(--petal-mid);
+}
+
+.btn-outline:hover {
+  background: var(--petal-pale);
+  color: var(--rose-deep);
+  border-color: var(--rose-light);
+}
+
+/* ── フッター ── */
+.site-footer {
+  background: linear-gradient(180deg, var(--petal-pale) 0%, #EFE0DA 100%);
+  border-top: 1px solid var(--border);
+  padding: 56px 32px 36px;
+}
+
+.footer-inner { max-width: 1000px; margin: 0 auto; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand .logo-wrap {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+
+.footer-brand .l-main {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.06em;
+}
+
+.footer-brand p {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  max-width: 210px;
+  font-weight: 300;
+}
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { font-size: 0.81rem; color: var(--text-sub); font-weight: 300; }
+.footer-col ul li a:hover { color: var(--rose); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.73rem;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+}
+
+.footer-disclaimer {
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--r-md);
+  padding: 16px 22px;
+  font-size: 0.74rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+  border: 1px solid var(--border-soft);
+  font-weight: 300;
+}
+
+.footer-disclaimer strong { color: var(--rose); font-weight: 500; }
+
+/* ── スクロールトップ ── */
+.scroll-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--rose);
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration) var(--ease-out);
+  z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.scroll-top:hover {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+/* ── プロンプト例ボックス ── */
+.prompt-example {
+  background: var(--cream-warm);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--rose);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 14px 18px;
+  font-size: 0.84rem;
+  color: var(--text);
+  margin: 10px 0;
+  font-weight: 400;
+  line-height: 1.75;
+  position: relative;
+}
+
+.prompt-example::before {
+  content: '\1F4AC';
+  position: absolute;
+  top: 12px; left: -28px;
+  font-size: 0.9rem;
+}
+
+.prompt-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+/* ── 良い例・悪い例 ── */
+.example-good {
+  background: linear-gradient(135deg, var(--sage-light), #E8F2EA);
+  border: 1px solid rgba(155,181,162,0.5);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin: 8px 0;
+}
+
+.example-bad {
+  background: linear-gradient(135deg, #FDF0EE, #FEE8E4);
+  border: 1px solid rgba(192,123,114,0.3);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin: 8px 0;
+}
+
+.example-good .label,
+.example-bad .label {
+  font-size: 0.74rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.example-good .label { color: #527A60; }
+.example-bad .label { color: var(--rose-deep); }
+
+.example-good p,
+.example-bad p {
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ── レスポンシブ ── */
+
+/* 中間幅: ナビリンクを縮小して1行に収める */
+@media (max-width: 1100px) {
+  .nav-links a { font-size: 0.73rem; padding: 5px 8px; }
+  .nav-links { gap: 1px; }
+  .site-header { padding: 0 16px; }
+  .nav-inner { gap: 10px; }
+}
+
+/* 900px以下: ハンバーガーメニューに切替 */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 68px; left: 0; right: 0;
+    background: rgba(253,250,246,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px; z-index: 99; gap: 4px;
+  }
+  .nav-links.open a { font-size: 0.85rem; padding: 10px 16px; }
+  .nav-toggle { display: block; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .card-grid, .card-grid-2 { grid-template-columns: 1fr; }
+  .page-header { padding: 56px 24px 48px; }
+  .section { padding: 52px 0; }
+  .container { padding: 0 20px; }
+}
+
+@media (max-width: 560px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-meta { flex-direction: column; align-items: flex-start; }
+}
+
+/* page-header 高さ統一 */
+.page-header { display: block; width: 100%; box-sizing: border-box; }
+.page-header p { max-width: 440px; }
+
+/* 言語プルダウン */
+.gt-widget{flex-shrink:0;}
+#gt-lang-select{
+  appearance:none;-webkit-appearance:none;
+  background:linear-gradient(135deg,var(--petal-pale),var(--mauve-light));
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23A5584F'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+  border:1px solid var(--petal-mid);border-radius:var(--r-full);
+  padding:5px 28px 5px 12px;font-size:0.72rem;font-family:var(--font-body);
+  color:var(--rose-deep);cursor:pointer;outline:none;max-width:130px;
+  transition:all var(--duration) var(--ease-out);
+}
+#gt-lang-select:hover{border-color:var(--rose-light);}
+
+/* ── サービスカード専用 ── */
+.service-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+  transition: all var(--duration) var(--ease-out);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--petal) 50%, transparent);
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border);
+}
+
+.service-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  font-family: var(--font-jp);
+}
+
+.service-card > p {
+  font-size: 0.88rem;
+  color: var(--text-sub);
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 18px;
+}
+
+.service-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.service-info-item {
+  background: linear-gradient(135deg, var(--sage-light), var(--teal-light));
+  border: 1px solid rgba(155,181,162,0.35);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  font-weight: 300;
+  flex: 1 1 200px;
+  line-height: 1.7;
+}
+
+.service-info-item strong {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #4A8A84;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.service-info-item.plan-box {
+  background: linear-gradient(135deg, var(--gold-light), #FFF8EE);
+  border-color: rgba(200,164,122,0.4);
+}
+
+.service-info-item.plan-box strong {
+  color: #8A6A3A;
+}
+
+.service-note {
+  background: linear-gradient(135deg, #FDF4E4, #FFF8EE);
+  border: 1px solid rgba(200,164,122,0.35);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: #7A5C30;
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+.service-detail {
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+.service-detail ul {
+  list-style: none;
+  margin-top: 8px;
+}
+
+.service-detail ul li {
+  padding-left: 1.2em;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.service-detail ul li::before {
+  content: '・';
+  position: absolute;
+  left: 0;
+}
+
+/* ── 比較テーブル ── */
+.comparison-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 12px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-weight: 300;
+  min-width: 640px;
+}
+
+.comparison-table thead th {
+  background: linear-gradient(135deg, var(--petal-pale), var(--mauve-light));
+  color: var(--rose-deep);
+  font-weight: 500;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--petal-mid);
+}
+
+.comparison-table tbody td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-sub);
+  vertical-align: top;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background: rgba(253,250,246,0.5);
+}
+
+.comparison-table tbody td:first-child {
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ── 決定パス ── */
+.decision-path {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all var(--duration) var(--ease-out);
+}
+
+.decision-path:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border);
+}
+
+.decision-path .dp-label {
+  background: linear-gradient(135deg, var(--petal-pale), var(--rose-light));
+  color: var(--rose-deep);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--r-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.decision-path .dp-arrow {
+  color: var(--text-muted);
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.decision-path .dp-answer {
+  font-size: 0.86rem;
+  color: var(--text-sub);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.decision-path .dp-answer strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── 拡張機能サブリスト ── */
+.integration-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.integration-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 0.84rem;
+  color: var(--text-sub);
+  font-weight: 300;
+}
+
+.integration-list li:last-child { border-bottom: none; }
+
+.integration-list .int-name {
+  font-weight: 500;
+  color: var(--text);
+  min-width: 180px;
+}
+
+.integration-list .int-platform {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .service-info { flex-direction: column; }
+  .decision-path { flex-direction: column; gap: 8px; }
+  .integration-list .int-name { min-width: auto; }
+}
+</style>
+  <script src="../i18n.js"></script>
+</head>
+<body data-current-page="services.html" data-current-lang="fr">
+
+<header class="site-header">
+  <nav class="nav-inner">
+    <a href="index.html" class="site-logo"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">Claude Guide</span><span class="l-sub">guide non officiel</span></div></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="pricing.html">Frais</a></li>
+      <li><a href="devices.html">Terminal</a></li>
+      <li><a href="services.html" class="active">service</a></li>
+      <li><a href="windows.html">Bureau</a></li>
+      <li><a href="features.html">Comparaison des fonctionnalités</a></li>
+      <li><a href="usage.html">Utilisation</a></li>
+      <li><a href="services/api.html">API</a></li>
+    </ul>
+    <div id="gt-select-wrap" class="gt-widget"></div>
+  </nav>
+</header>
+
+<div class="container"><div class="breadcrumb"><a href="index.html">Maison</a> <span class="sep">›</span> <span>Liste des services</span></div></div>
+<div class="page-header">
+  <div class="eyebrow">Services</div>
+  <h1>Liste de services de Claude</h1>
+  <p>Un guide en un coup d'œil pour voir quel service vous convient le mieux.<br>Organisé par plan et environnement pris en charge.</p>
+</div>
+
+<!-- ══════════════════════════════════════════
+     サービス一覧
+     ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+
+    <!-- 1. Claude チャット -->
+    <div class="service-card">
+      <h3>💬Claude Chat</h3>
+      <p>C'est l'utilisation la plus basique. Parlez simplement à Claude depuis votre navigateur ou votre application pour smartphone et vous pourrez immédiatement avoir une conversation avec l'IA. Vous pouvez commencer gratuitement en créant un compte.</p>
+
+      <div class="service-info">
+        <div class="service-info-item">
+          <strong>Plateformes prises en charge</strong>
+          🌐 Navigateur (PC/Smartphone)<br>
+          📱Application iOS/Android<br>
+          🖥️ Application de bureau Mac<br>
+          🪟 Application de bureau Windows
+        </div>
+        <div class="service-info-item plan-box">
+          <strong>Plan dont vous avez besoin</strong>
+          Disponible à partir du plan gratuit
+        </div>
+      </div>
+
+      <div class="service-detail">
+        <p><strong>Comment commencer&nbsp;:</strong><a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> Visitez simplement et inscrivez-vous avec votre adresse e-mail ou votre compte Google. Il vous suffit de taper votre question dans le champ de saisie et Claude y répondra pour vous.</p>
+        <p style="margin-top:10px;"><strong>Vous pouvez faire ceci&nbsp;:</strong></p>
+        <ul>
+          <li>Création et correction de textes (emails, rapports, articles de blog, etc.)</li>
+          <li>Réponses aux questions (aide à la recherche)</li>
+          <li>Discussion/consultation sur le mur d’idées</li>
+          <li>Traduction/Résumé</li>
+          <li>Calcul et organisation des données</li>
+        </ul>
+      </div>
+      <p style="margin-top:14px;"><a href="services/chat.html" style="color:var(--rose); font-weight:500; font-size:0.85rem;">Afficher les détails du chat →</a></p>
+    </div>
+
+    <!-- 2. Projects -->
+    <div class="service-card">
+      <h3>📁 Projets</h3>
+      <p>Cette fonctionnalité permet d'organiser les conversations par thème. Vous pouvez facilement retrouver des communications antérieures en les divisant en catégories telles que « travail », « apprentissage de l'anglais » et « planification de voyage ». Vous pouvez également saisir des instructions personnalisées (instructions prédéfinies) pour chaque projet.</p>
+
+      <div class="service-info">
+        <div class="service-info-item">
+          <strong>Plateformes prises en charge</strong>
+          🌐 Navigateur<br>
+          📱 Application pour smartphone
+        </div>
+        <div class="service-info-item plan-box">
+          <strong>Plan dont vous avez besoin</strong>
+          Disponible à partir du plan gratuit
+        </div>
+      </div>
+
+      <div class="service-detail">
+        <p>C'est comme un dossier de conversations. Par exemple, si vous définissez une instruction pour votre projet « travail » sur « Veuillez utiliser un langage poli dans les e-mails professionnels », Claude répondra sur ce ton sans avoir à le préciser à chaque fois. Vous pouvez également télécharger des fichiers et poser des questions en fonction de leur contenu.</p>
+      </div>
+      <p style="margin-top:14px;"><a href="services/chat.html" style="color:var(--rose); font-weight:500; font-size:0.85rem;">Afficher les détails du chat/des projets →</a></p>
+    </div>
+
+    <!-- 3. Cowork -->
+    <div class="service-card">
+      <h3>🖥️ Cotravail</h3>
+      <p>Cette fonctionnalité permet à Claude de travailler automatiquement en coulisses sur votre ordinateur. Par exemple, vous pouvez dire « Conservez ce document ensemble » et Claude travaillera dessus en arrière-plan pendant que vous travaillerez sur autre chose.</p>
+
+      <div class="service-info">
+        <div class="service-info-item">
+          <strong>Plateformes prises en charge</strong>
+          🖥️ Mac / 🪟 Application de bureau Windows
+        </div>
+        <div class="service-info-item plan-box">
+          <strong>Plan dont vous avez besoin</strong>
+          Pro et supérieur
+        </div>
+      </div>
+
+      <div class="service-note">
+        ⚠️ <strong>Note:</strong>Vous devrez installer l'application de bureau (version Mac ou Windows). Il ne peut pas être utilisé dans la version navigateur (claude.ai) ni dans l'application smartphone.
+      </div>
+
+      <div class="service-detail">
+        <p><strong>Qu'est-ce qu'un «&nbsp;agent&nbsp;»&nbsp;?</strong> Le «&nbsp;agent&nbsp;» fait ici référence à une IA qui pense par elle-même et effectue des tâches en votre nom. Le chat normal implique un aller-retour « question → réponse », mais les agents passent par plusieurs étapes tout en prenant leurs propres décisions. L’image est qu’un « assistant IA » travaille dans les coulisses.</p>
+      </div>
+      <p style="margin-top:14px;"><a href="services/cowork.html" style="color:var(--rose); font-weight:500; font-size:0.85rem;">Voir les détails sur Cowork →</a></p>
+    </div>
+
+    <!-- 4. Claude Code -->
+    <div class="service-card">
+      <h3>💻Claude Code See More</h3>
+      <p>Il s'agit d'un outil d'IA spécialisé dans la programmation (développement de logiciels). Vous pouvez confier la création, la modification et le débogage de votre code (recherche et correction de la cause des erreurs) à Claude.</p>
+
+      <div class="service-info">
+        <div class="service-info-item">
+          <strong>Plateformes prises en charge</strong>
+          🖥️ Mac / 🪟 Windows / 🐧 Linux<br>
+          (Nécessite une installation sur le bureau)
+        </div>
+        <div class="service-info-item plan-box">
+          <strong>Plan dont vous avez besoin</strong>
+          Forfait Max ou API avec paiement à l'utilisation
+        </div>
+      </div>
+
+      <div class="service-note">
+        ⚠️ <strong>Note:</strong>Installation requise. Opérez sur un écran appelé "Terminal". Un outil pour les programmeurs et les ingénieurs.
+      </div>
+
+      <div class="service-detail">
+        <p><strong>Qu'est-ce qu'un « terminal » ?</strong> Un écran pour émettre des instructions textuelles à un ordinateur. Il n'y a pas de boutons ou de menus comme dans les applications que vous utilisez habituellement, et vous l'utilisez en saisissant des commandes (instructions) sur le clavier. Il s'agit de « Terminal » sur Mac et de « Invite de commandes » ou « PowerShell » sur Windows.</p>
+        <p style="margin-top:8px;">Claude Code s'exécute sur ce terminal et lit les fichiers de votre projet pendant que vous écrivez et modifiez votre code.</p>
+      </div>
+      <p style="margin-top:14px;"><a href="services/code.html" style="color:var(--rose); font-weight:500; font-size:0.85rem;">En savoir plus sur Claude Code →</a></p>
+    </div>
+
+    <!-- 5. Skills -->
+    <div class="service-card">
+      <h3>⚡Compétences</h3>
+      <p>Une fonction de raccourci qui permet de sauvegarder les procédures de travail fréquemment utilisées et de les appeler avec une seule commande. Cela vous évite d’avoir à saisir encore et encore les mêmes instructions.</p>
+
+      <div class="service-info">
+        <div class="service-info-item">
+          <strong>Plateformes prises en charge</strong>
+          Utilisation dans Claude Code<br>
+          (🖥️ Mac / 🪟 Windows / 🐧 Linux)
+        </div>
+        <div class="service-info-item plan-box">
+          <strong>Plan dont vous avez besoin</strong>
+          Identique à Claude Code (forfait Max ou API avec paiement à l'utilisation)
+        </div>
+      </div>
+
+      <div class="service-detail">
+        <p>C'est comme une « recette » en cuisine. Par exemple, si vous enregistrez une série d'étapes telles que «&nbsp;Exécuter un test et corrigez-le s'il échoue&nbsp;» en tant que compétence, vous pourrez l'exécuter automatiquement la prochaine fois avec une seule commande courte. C'est une fonctionnalité utile pour ceux qui utilisent déjà Claude Code.</p>
+      </div>
+      <p style="margin-top:14px;"><a href="services/skills.html" style="color:var(--rose); font-weight:500; font-size:0.85rem;">Voir les détails des compétences →</a></p>
+    </div>
+
+    <!-- 6. 拡張機能 -->
+    <div class="service-card">
+      <h3>🔌 Intégrations</h3>
+      <p>Une fonctionnalité qui permet à Claude de travailler avec d'autres services et outils. Chargez des fichiers depuis Google Drive ou utilisez les résultats de recherche sur le Web pour répondre à vos questions.</p>
+
+      <div class="service-info">
+        <div class="service-info-item" style="flex: 1 1 100%;">
+          <strong>Plateformes compatibles (varie selon le partenaire)</strong>
+          <ul class="integration-list" style="margin-top:8px;">
+            <li>
+              <span class="int-name">Intégration de Google Drive</span>
+              <span class="int-platform">🌐 Navigateur</span>
+            </li>
+            <li>
+              <span class="int-name">Recherche sur le Web</span>
+              <span class="int-platform">🌐 Navigateur / 📱 Application</span>
+            </li>
+            <li>
+              <span class="int-name">Extension Chrome</span>
+              <span class="int-platform">🌐 Navigateur Chrome uniquement</span>
+            </li>
+            <li>
+              <span class="int-name">Lien Excel/PowerPoint</span>
+              <span class="int-platform">🪟 Windows / 🖥️ Mac</span>
+            </li>
+            <li>
+              <span class="int-name">Intégration Slack</span>
+              <span class="int-platform">Sur Slack</span>
+            </li>
+            <li>
+              <span class="int-name">MCP (protocole de connexion d'outil externe)</span>
+              <span class="int-platform">Dans Claude Code (🖥️ Mac / 🪟 Windows / 🐧 Linux)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-info">
+        <div class="service-info-item plan-box" style="flex: 1 1 100%;">
+          <strong>Plan dont vous avez besoin</strong>
+          Varie en fonction de la fonction (beaucoup sont Pro ou supérieurs)
+        </div>
+      </div>
+
+      <div class="service-detail">
+        <p>Les choses que vous ne pouvez pas faire avec Claude seul peuvent être réalisées avec des extensions. Par exemple, si vous activez l'intégration de Google Drive, vous pourrez poser des questions à Claude sur le contenu de vos documents et feuilles de calcul dans Drive.</p>
+      </div>
+      <p style="margin-top:14px;"><a href="services/integrations.html" style="color:var(--rose); font-weight:500; font-size:0.85rem;">Afficher les détails de l'extension →</a></p>
+    </div>
+
+    <!-- 7. API -->
+    <div class="service-card">
+      <h3>🔧API</h3>
+      <p>Il s'agit d'un mécanisme permettant aux personnes qui créent leurs propres applications et services d'appeler les fonctions de Claude depuis leurs programmes.</p>
+
+      <div class="service-info">
+        <div class="service-info-item">
+          <strong>Plateformes prises en charge</strong>
+          Appel depuis le programme (quel que soit le système d'exploitation)
+        </div>
+        <div class="service-info-item plan-box">
+          <strong>Plan dont vous avez besoin</strong>
+          Pay-as-you-go (payez uniquement pour ce que vous utilisez)
+        </div>
+      </div>
+
+      <div class="service-detail">
+        <p>"API" est quelque chose comme une fenêtre d'échange de données entre applications. Par exemple, si vous souhaitez intégrer une « fonctionnalité de chat IA » sur votre site Web, vous pouvez utiliser l'API pour envoyer des questions à Claude et recevoir des réponses. Des connaissances en programmation sont requises et les frais sont basés sur le montant utilisé. Ce n'est pas destiné aux utilisateurs généraux, mais aux développeurs et aux ingénieurs.</p>
+      </div>
+      <p style="margin-top:14px;"><a href="services/api.html" style="color:var(--rose); font-weight:500; font-size:0.85rem;">Afficher les détails de l'API →</a></p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     比較テーブル
+     ══════════════════════════════════════════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">📊 Tableau comparatif des services</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Comparez les fonctionnalités de chaque service en un coup d'oeil</p>
+    </div>
+
+    <div class="comparison-table-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Nom du service</th>
+            <th>En un mot</th>
+            <th>Environnement compatible</th>
+            <th>Plan requis</th>
+            <th>Pour les gens comme ça</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>💬 Discutez</td>
+            <td>Parlez à l'IA</td>
+            <td>Navigateur / Application pour smartphone / Mac / Windows</td>
+            <td>gratuit~</td>
+            <td>Nouveaux utilisateurs de Claude</td>
+          </tr>
+          <tr>
+            <td>📁 Projets</td>
+            <td>Organisez les conversations par thème</td>
+            <td>Application pour navigateur/smartphone</td>
+            <td>gratuit ~</td>
+            <td>Les personnes qui souhaitent l'utiliser à des fins multiples</td>
+          </tr>
+          <tr>
+            <td>🖥️ Cotravail</td>
+            <td>Il effectue le travail automatiquement en coulisses.</td>
+            <td>Application de bureau Mac/Windows</td>
+            <td>Pro et supérieur</td>
+            <td>Ceux qui veulent automatiser le travail sur PC</td>
+          </tr>
+          <tr>
+            <td>💻Claude Code See More</td>
+            <td>programmation de l'IA</td>
+            <td>Mac/Windows/Linux (Terminal)</td>
+            <td>Facturation maximale/API</td>
+            <td>ingénieur programmeur</td>
+          </tr>
+          <tr>
+            <td>⚡Compétences</td>
+            <td>Raccourcis des procédures de travail</td>
+            <td>Dans Claude Code</td>
+            <td>Facturation maximale/API</td>
+            <td>Les personnes qui souhaitent rationaliser Claude Code</td>
+          </tr>
+          <tr>
+            <td>🔌 Rallonges</td>
+            <td>Coopération avec d'autres services</td>
+            <td>Navigateur/services</td>
+            <td>Dépend de la fonction</td>
+            <td>Les personnes qui souhaitent le combiner avec des outils externes</td>
+          </tr>
+          <tr>
+            <td>🔧 API</td>
+            <td>Intégrez l’IA à vos applications</td>
+            <td>appel depuis le programme</td>
+            <td>Paiement à l'utilisation</td>
+            <td>Développeur/Entreprise</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     どれを選べばいいの？
+     ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title-wrap">
+      <h2 class="section-title">🤔 Lequel dois-je choisir ?</h2>
+      <div class="title-line"></div>
+      <p class="section-sub">Comment choisir des recommandations en fonction de votre objectif</p>
+    </div>
+
+    <div class="decision-path">
+      <span class="dp-label">Je veux l'essayer pour l'instant</span>
+      <span class="dp-arrow">→</span>
+      <div class="dp-answer"><strong>Chat Claude (forfait gratuit)</strong>est recommandé. Visitez simplement claude.ai pour commencer. Commencez ici.</div>
+    </div>
+
+    <div class="decision-path">
+      <span class="dp-label">Je veux l'utiliser pour le travail et les loisirs</span>
+      <span class="dp-arrow">→</span>
+      <div class="dp-answer"><strong>Forfait Pro</strong>Effectuez la mise à niveau pour bénéficier de toute la puissance de Chat + Projets + extensions. Vous pouvez traiter de longs textes et répondre facilement à de nombreuses questions.</div>
+    </div>
+
+    <div class="decision-path">
+      <span class="dp-label">Je souhaite automatiser mon travail informatique</span>
+      <span class="dp-arrow">→</span>
+      <div class="dp-answer"><strong>Cotravail</strong>(Application de bureau + forfait Pro). Claude fera le travail pour vous en arrière-plan. Compatible avec Mac/Windows.</div>
+    </div>
+
+    <div class="decision-path">
+      <span class="dp-label">Je veux l'utiliser pour la programmation</span>
+      <span class="dp-arrow">→</span>
+      <div class="dp-answer"><strong>Claude Code</strong>(Plan Max) est le meilleur. L'IA prend en charge la génération, la modification et le débogage de code. Cela fonctionne dans le terminal, il est donc recommandé aux personnes ayant une expérience en programmation.</div>
+    </div>
+
+    <div class="decision-path">
+      <span class="dp-label">Je souhaite intégrer l'IA dans mes propres services</span>
+      <span class="dp-arrow">→</span>
+      <div class="dp-answer"><strong>API</strong>(pay-as-you-go) pour intégrer les fonctionnalités Claude dans vos applications et services. Pour les entreprises disposant d’équipes de développement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section-alt" style="text-align:center; padding:56px 0;">
+  <div class="container">
+    <h2 style="font-family:var(--font-jp); font-size:1.5rem; margin-bottom:16px;">Commencez avec Claude</h2>
+    <p style="color:var(--text-sub); font-size:0.9rem; margin-bottom:28px; font-weight:300;">Vous pouvez en profiter pleinement même avec le forfait gratuit. N'hésitez pas à me parler d'abord.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://claude.ai" target="_blank" rel="noopener" class="btn btn-primary">Ouvrir Claude ↗</a>
+      <a href="pricing.html" class="btn btn-outline">Voir les plans tarifaires</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="footer-inner">
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-wrap"><div class="logo-mark">C</div><div class="logo-text"><span class="l-main">Claude Guide</span><span class="l-sub">guide non officiel</span></div></div><p>🤖 Ce site a été créé par Claude.</p></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-meta"><span>© 2026 Claude Guide — Site d'information non officiel</span></div>
+    <div class="footer-disclaimer"><strong>⚠️ Site d'information non officiel :</strong>Ce site n'est pas le site officiel d'Anthropic ou de Claude. Les informations sont fournies à titre de référence uniquement et ne garantissent pas leur exactitude ou leur exhaustivité. Les dernières informations officielles sont <a href="https://www.anthropic.com" target="_blank" rel="noopener">anthropic.com</a> et <a href="https://docs.anthropic.com" target="_blank" rel="noopener">docs.anthropic.com</a> Vérifiez s'il vous plaît. "Claude" est une marque déposée d'Anthropic.</div>
+  </div>
+</div></footer>
+<button class="scroll-top" id="scroll-top" aria-label="トップに戻る">↑</button>
+<script src="mvc-model.js"></script>
+<script src="mvc-view.js"></script>
+<script src="mvc-controller.js"></script>
+
+</body></html>
